@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { db } from "@/lib/supabase";
+import { api } from "@/lib/apiClient";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -11,7 +11,6 @@ import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sh
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "sonner";
 import { Plus, Search, User, Pencil, Trash2, Scissors, MessageSquare, Eye, KeyRound, EyeIcon, EyeOff, Mail, Send } from "lucide-react";
-import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/contexts/AuthContext";
 import { format } from "date-fns";
 import type { Customer, Vehicle, Job, Message } from "@/types/database";
@@ -51,7 +50,7 @@ const Customers = () => {
   const [sendingEmail, setSendingEmail] = useState(false);
 
   const fetchCustomers = async () => {
-    const { data } = await db.from("customers").select("*").order("name");
+    const { data } = await api.from("customers").select("*").order("name");
     setCustomers((data as unknown as Customer[]) ?? []);
   };
 
@@ -70,7 +69,7 @@ const Customers = () => {
   const resetSecondsLeft = Math.max(0, Math.ceil((resetCooldownEnd - Date.now()) / 1000));
 
   const handleCreate = async () => {
-    const { error } = await db.from("customers").insert(createForm);
+    const { error } = await api.from("customers").insert(createForm);
     if (error) { toast.error(error.message); return; }
     toast.success("Customer created");
     setCreateOpen(false);
@@ -80,7 +79,7 @@ const Customers = () => {
 
   const handleEdit = async () => {
     if (!editCustomer) return;
-    const { error } = await db.from("customers").update(editForm).eq("id", editCustomer.id);
+    const { error } = await api.from("customers").update(editForm).eq("id", editCustomer.id);
     if (error) { toast.error(error.message); return; }
     toast.success("Customer updated");
     setEditCustomer(null);
@@ -91,7 +90,7 @@ const Customers = () => {
 
   const handleDelete = async () => {
     if (!deleteCustomerId) return;
-    const { error } = await db.from("customers").delete().eq("id", deleteCustomerId);
+    const { error } = await api.from("customers").delete().eq("id", deleteCustomerId);
     if (error) { toast.error(error.message); return; }
     setCustomers(prev => prev.filter(c => c.id !== deleteCustomerId));
     toast.success("Customer deleted");
@@ -112,9 +111,9 @@ const Customers = () => {
   const openCustomer360 = async (c: Customer) => {
     setSelected(c);
     const [v, j, m] = await Promise.all([
-      db.from("hair_profiles").select("*").eq("customer_id", c.id),
-      db.from("jobs").select("*, hair_profile:hair_profiles(preference, texture, goal)").eq("customer_id", c.id).order("created_at", { ascending: false }),
-      db.from("messages").select("*").eq("customer_id", c.id).order("created_at", { ascending: false }).limit(20),
+      api.from("hair_profiles").select("*").eq("customer_id", c.id),
+      api.from("jobs").select("*, hair_profile:hair_profiles(preference, texture, goal)").eq("customer_id", c.id).order("created_at", { ascending: false }),
+      api.from("messages").select("*").eq("customer_id", c.id).order("created_at", { ascending: false }).limit(20),
     ]);
     setCustVehicles((v.data as unknown as Vehicle[]) ?? []);
     setCustJobs((j.data as unknown as Job[]) ?? []);
@@ -123,7 +122,7 @@ const Customers = () => {
 
   const handleAddVehicle = async () => {
     if (!selected) return;
-    const { error } = await db.from("hair_profiles").insert({
+    const { error } = await api.from("hair_profiles").insert({
       customer_id: selected.id,
       preference: vehicleForm.preference,
       texture: vehicleForm.texture,
@@ -133,7 +132,7 @@ const Customers = () => {
     toast.success("Hair profile added");
     setAddVehicleOpen(false);
     setVehicleForm(emptyHairProfileForm);
-    const { data } = await db.from("hair_profiles").select("*").eq("customer_id", selected.id);
+    const { data } = await api.from("hair_profiles").select("*").eq("customer_id", selected.id);
     setCustVehicles((data as unknown as Vehicle[]) ?? []);
   };
 
@@ -143,9 +142,8 @@ const Customers = () => {
     }
     setResettingPassword(true);
     try {
-      const projectId = import.meta.env.VITE_SUPABASE_PROJECT_ID;
-      const session = (await db.auth.getSession()).data.session;
-      const res = await fetch(`https://${projectId}.supabase.co/functions/v1/admin-change-password`, {
+      const session = (await api.auth.getSession()).data.session;
+      const res = await fetch("/api/admin/users/password", {
         method: "POST",
         headers: { "Content-Type": "application/json", Authorization: `Bearer ${session?.access_token}` },
         body: JSON.stringify({ userId: selected.user_id, newPassword }),
@@ -353,7 +351,7 @@ const Customers = () => {
                           if (!selected) return;
                           setSendingEmail(true);
                           try {
-                            const { error: emailErr } = await supabase.functions.invoke("send-transactional-email", {
+                            const { error: emailErr } = await api.functions.invoke("send-transactional-email", {
                               body: {
                                 templateName: "admin-message",
                                 recipientEmail: selected.email,
@@ -362,7 +360,7 @@ const Customers = () => {
                               },
                             });
                             if (emailErr) throw emailErr;
-                            await db.from("messages").insert({
+                            await api.from("messages").insert({
                               customer_id: selected.id,
                               direction: "outbound",
                               content: `Subject: ${emailSubject}\n\n${emailBody}`,
@@ -370,7 +368,7 @@ const Customers = () => {
                             toast.success(`Email sent to ${selected.email}`);
                             setEmailSubject("");
                             setEmailBody("");
-                            const { data } = await db.from("messages").select("*").eq("customer_id", selected.id).order("created_at", { ascending: false });
+                            const { data } = await api.from("messages").select("*").eq("customer_id", selected.id).order("created_at", { ascending: false });
                             setCustMessages((data as Message[]) ?? []);
                           } catch (err: any) {
                             toast.error(err.message || "Failed to send email");
@@ -397,7 +395,7 @@ const Customers = () => {
                       <Button variant="outline" size="sm" disabled={sendingInvite || inviteSecondsLeft > 0} onClick={async () => {
                         setSendingInvite(true);
                         try {
-                          const { data, error } = await supabase.functions.invoke("send-portal-invite", {
+                          const { data, error } = await api.functions.invoke("send-portal-invite", {
                             body: { email: selected.email, name: selected.name, portalKind: "client", redirectTo: `${window.location.origin}/reset-password` },
                           });
                           if (error || data?.error) throw new Error(data?.error || error?.message);
@@ -413,7 +411,7 @@ const Customers = () => {
                       <Button variant="outline" size="sm" disabled={sendingReset || resetSecondsLeft > 0} onClick={async () => {
                         setSendingReset(true);
                         try {
-                          const { error } = await supabase.auth.resetPasswordForEmail(selected.email!, {
+                          const { error } = await api.auth.resetPasswordForEmail(selected.email!, {
                             redirectTo: `${window.location.origin}/reset-password`,
                           });
                           if (error) throw error;

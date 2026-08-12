@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { db } from "@/lib/supabase";
+import { api } from "@/lib/apiClient";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetDescription } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -57,9 +57,9 @@ export default function BookingEditPanel({ jobId, open, onOpenChange, onChanged,
     if (!open || !jobId) return;
     (async () => {
       const [{ data: j }, { data: svc }, { data: notes }] = await Promise.all([
-        db.from("jobs").select("*, customer:customers(*)").eq("id", jobId).single(),
-        db.from("service_catalog").select("id, name, duration_minutes").eq("is_active", true).order("name"),
-        db.from("job_notes").select("*").eq("job_id", jobId).order("created_at", { ascending: false }).limit(10),
+        api.from("jobs").select("*, customer:customers(*)").eq("id", jobId).single(),
+        api.from("service_catalog").select("id, name, duration_minutes").eq("is_active", true).order("name"),
+        api.from("job_notes").select("*").eq("job_id", jobId).order("created_at", { ascending: false }).limit(10),
       ]);
       setJob(j);
       setServices((svc as Service[]) ?? []);
@@ -78,7 +78,7 @@ export default function BookingEditPanel({ jobId, open, onOpenChange, onChanged,
 
   const reload = async () => {
     if (!jobId) return;
-    const { data } = await db.from("job_notes").select("*").eq("job_id", jobId).order("created_at", { ascending: false }).limit(10);
+    const { data } = await api.from("job_notes").select("*").eq("job_id", jobId).order("created_at", { ascending: false }).limit(10);
     setHistory(data ?? []);
     onChanged?.();
   };
@@ -123,7 +123,7 @@ export default function BookingEditPanel({ jobId, open, onOpenChange, onChanged,
 
   const deleteBooking = async () => {
     if (!jobId || !confirm("Delete this booking?")) return;
-    await db.from("jobs").delete().eq("id", jobId);
+    await api.from("jobs").delete().eq("id", jobId);
     toast.success("Booking deleted");
     onOpenChange(false);
     onChanged?.();

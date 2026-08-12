@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useAuth } from "@/contexts/AuthContext";
-import { db, supabase } from "@/lib/supabase";
+import { api } from "@/lib/apiClient";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -17,7 +17,7 @@ const PortalSettings = () => {
   useEffect(() => {
     if (!user) return;
     const load = async () => {
-      const { data: cust } = await db.from("customers").select("id, name, phone, email").eq("user_id", user.id).single();
+      const { data: cust } = await api.from("customers").select("id, name, phone, email").eq("user_id", user.id).single();
       if (cust) {
         setCustomerId(cust.id);
         setForm({ name: cust.name || "", phone: cust.phone || "", email: cust.email || "" });
@@ -29,7 +29,7 @@ const PortalSettings = () => {
   const saveProfile = async () => {
     if (!customerId) return;
     setSaving(true);
-    await db.from("customers").update({ name: form.name, phone: form.phone, email: form.email }).eq("id", customerId);
+    await api.from("customers").update({ name: form.name, phone: form.phone, email: form.email }).eq("id", customerId);
     toast.success("Profile updated");
     setSaving(false);
   };
@@ -37,7 +37,7 @@ const PortalSettings = () => {
   const changePassword = async () => {
     if (pwForm.newPw !== pwForm.confirm) { toast.error("Passwords don't match"); return; }
     if (pwForm.newPw.length < 8) { toast.error("Password must be at least 8 characters"); return; }
-    const { error } = await supabase.auth.updateUser({ password: pwForm.newPw });
+    const { error } = await api.auth.updateUser({ password: pwForm.newPw });
     if (error) { toast.error(error.message); return; }
     toast.success("Password updated");
     setPwForm({ current: "", newPw: "", confirm: "" });

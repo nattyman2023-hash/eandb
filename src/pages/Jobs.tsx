@@ -1,6 +1,5 @@
 import { useEffect, useState, useRef, useMemo } from "react";
-import { db } from "@/lib/supabase";
-import { supabase } from "@/integrations/supabase/client";
+import { api } from "@/lib/apiClient";
 import BoardHeader from "@/components/jobs/BoardHeader";
 import AppointmentCard from "@/components/jobs/AppointmentCard";
 import ColumnHeader from "@/components/jobs/ColumnHeader";
@@ -91,7 +90,7 @@ const Jobs = () => {
   const [dateFilter, setDateFilter] = useState("today");
 
   const fetchJobs = async () => {
-    const { data } = await db.from("jobs")
+    const { data } = await api.from("jobs")
       .select("*, customer:customers(name, email, phone), hair_profile:hair_profiles(preference, texture, goal), service_catalog:service_catalog_id(name, duration_minutes, base_price)")
       .order("scheduled_at", { ascending: true });
     setJobs((data as unknown as Job[]) ?? []);
@@ -99,12 +98,12 @@ const Jobs = () => {
 
   const fetchLookups = async () => {
     const [c, v, profilesRes, rolesRes, chairRes, svcRes] = await Promise.all([
-      db.from("customers").select("*").order("name"),
-      db.from("hair_profiles").select("*").order("texture"),
-      db.from("profiles").select("*").eq("is_active", true).eq("bookable", true).order("full_name"),
-      db.from("user_roles").select("user_id, role"),
-      db.from("chairs").select("*").eq("is_active", true).order("name"),
-      db.from("service_catalog").select("*").eq("is_active", true).order("name"),
+      api.from("customers").select("*").order("name"),
+      api.from("hair_profiles").select("*").order("texture"),
+      api.from("profiles").select("*").eq("is_active", true).eq("bookable", true).order("full_name"),
+      api.from("user_roles").select("user_id, role"),
+      api.from("chairs").select("*").eq("is_active", true).order("name"),
+      api.from("service_catalog").select("*").eq("is_active", true).order("name"),
     ]);
     setCustomers((c.data as unknown as Customer[]) ?? []);
     setVehicles((v.data as unknown as Vehicle[]) ?? []);
@@ -122,11 +121,11 @@ const Jobs = () => {
 
   // Realtime: keep board in sync when stylists move cards on other devices
   useEffect(() => {
-    const ch = supabase
+    const ch = api
       .channel("jobs-board")
       .on("postgres_changes", { event: "*", schema: "public", table: "jobs" }, () => fetchJobs())
       .subscribe();
-    return () => { supabase.removeChannel(ch); };
+    return () => { api.removeChannel(ch); };
   }, []);
 
   // KPIs for today
@@ -151,7 +150,7 @@ const Jobs = () => {
 
     // If new client, create first
     if (!custId && showNewClientFields && newClient.name.trim()) {
-      const { data: newCust, error: custErr } = await db.from("customers").insert({
+      const { data: newCust, error: custErr } = await api.from("customers").insert({
         name: newClient.name, phone: newClient.phone, email: newClient.email,
       }).select("id").single();
       if (custErr) { toast.error(custErr.message); return; }
@@ -161,7 +160,7 @@ const Jobs = () => {
 
     if (!custId) { toast.error("Please select or add a client"); return; }
 
-    const { error } = await db.from("jobs").insert({
+    const { error } = await api.from("jobs").insert({
       customer_id: custId, hair_profile_id: form.hair_profile_id || null, type: form.type,
       service_type: form.service_type, scheduled_at: form.scheduled_at || null, notes: form.notes,
       assigned_to: form.assigned_to || null, pay_type: form.pay_type,
@@ -183,7 +182,7 @@ const Jobs = () => {
 
   const handleEdit = async () => {
     if (!editJob) return;
-    const { error } = await db.from("jobs").update({
+    const { error } = await api.from("jobs").update({
       customer_id: form.customer_id, hair_profile_id: form.hair_profile_id || null, type: form.type,
       service_type: form.service_type, scheduled_at: form.scheduled_at || null, notes: form.notes,
       assigned_to: form.assigned_to || null, pay_type: form.pay_type,
@@ -196,7 +195,7 @@ const Jobs = () => {
 
   const handleDelete = async () => {
     if (!deleteJobId) return;
-    const { error } = await db.from("jobs").delete().eq("id", deleteJobId);
+    const { error } = await api.from("jobs").delete().eq("id", deleteJobId);
     if (error) { toast.error(error.message); return; }
     setJobs(prev => prev.filter(j => j.id !== deleteJobId));
     toast.success("Appointment deleted"); setDeleteJobId(null); fetchJobs();
@@ -206,7 +205,7 @@ const Jobs = () => {
     const updates: any = { status };
     if (status === "in_progress") updates.started_at = new Date().toISOString();
     if (status === "completed") updates.completed_at = new Date().toISOString();
-    const { error } = await db.from("jobs").update(updates).eq("id", id);
+    const { error } = await api.from("jobs").update(updates).eq("id", id);
     if (error) { toast.error(error.message); return; }
     fetchJobs();
   };
@@ -219,7 +218,7 @@ const Jobs = () => {
   const handleAssignSave = async () => {
     if (!assignJob) return;
     const isUnassign = assignForm.mechanic_id === "none" || assignForm.mechanic_id === "";
-    const { error } = await db.from("jobs").update({
+    const { error } = await api.from("jobs").update({
       assigned_to: isUnassign ? null : assignForm.mechanic_id,
       pay_type: isUnassign ? "hourly" : assignForm.pay_type,
       pay_amount: isUnassign ? null : (assignForm.pay_amount ? parseFloat(assignForm.pay_amount) : null),
@@ -243,7 +242,7 @@ const Jobs = () => {
     const updates: any = { status: newStatus };
     if (newStatus === "in_progress") updates.started_at = new Date().toISOString();
     if (newStatus === "completed") updates.completed_at = new Date().toISOString();
-    const { error } = await db.from("jobs").update(updates).eq("id", jobId);
+    const { error } = await api.from("jobs").update(updates).eq("id", jobId);
     if (error) {
       setJobs(prev);
       toast.error(error.message);
@@ -255,8 +254,8 @@ const Jobs = () => {
   const openDetail = async (job: Job) => {
     setDetailJob(job);
     const [notesRes, photosRes] = await Promise.all([
-      db.from("job_notes").select("*").eq("job_id", job.id).order("created_at", { ascending: false }),
-      db.from("job_photos").select("*").eq("job_id", job.id).order("created_at", { ascending: false }),
+      api.from("job_notes").select("*").eq("job_id", job.id).order("created_at", { ascending: false }),
+      api.from("job_photos").select("*").eq("job_id", job.id).order("created_at", { ascending: false }),
     ]);
     setJobNotes((notesRes.data as unknown as JobNote[]) ?? []);
     setJobPhotos((photosRes.data as unknown as JobPhoto[]) ?? []);
@@ -264,31 +263,31 @@ const Jobs = () => {
 
   const addNote = async () => {
     if (!detailJob || !newNote.trim()) return;
-    const { error } = await db.from("job_notes").insert({ job_id: detailJob.id, content: newNote });
+    const { error } = await api.from("job_notes").insert({ job_id: detailJob.id, content: newNote });
     if (error) { toast.error(error.message); return; }
     setNewNote("");
-    const { data } = await db.from("job_notes").select("*").eq("job_id", detailJob.id).order("created_at", { ascending: false });
+    const { data } = await api.from("job_notes").select("*").eq("job_id", detailJob.id).order("created_at", { ascending: false });
     setJobNotes((data as unknown as JobNote[]) ?? []);
   };
 
   const uploadPhoto = async (file: File, photoType: string) => {
     if (!detailJob) return;
     const path = `${detailJob.id}/${Date.now()}-${file.name}`;
-    const { error: upErr } = await db.storage.from("job-photos").upload(path, file);
+    const { error: upErr } = await api.storage.from("job-photos").upload(path, file);
     if (upErr) { toast.error(upErr.message); return; }
-    await db.from("job_photos").insert({ job_id: detailJob.id, storage_path: path, photo_type: photoType, uploaded_by: user?.id });
+    await api.from("job_photos").insert({ job_id: detailJob.id, storage_path: path, photo_type: photoType, uploaded_by: user?.id });
     toast.success("Photo uploaded");
-    const { data } = await db.from("job_photos").select("*").eq("job_id", detailJob.id).order("created_at", { ascending: false });
+    const { data } = await api.from("job_photos").select("*").eq("job_id", detailJob.id).order("created_at", { ascending: false });
     setJobPhotos((data as unknown as JobPhoto[]) ?? []);
   };
 
   const togglePhotoVisibility = async (photo: JobPhoto) => {
-    await db.from("job_photos").update({ visible_to_customer: !photo.visible_to_customer }).eq("id", photo.id);
+    await api.from("job_photos").update({ visible_to_customer: !photo.visible_to_customer }).eq("id", photo.id);
     setJobPhotos(prev => prev.map(p => p.id === photo.id ? { ...p, visible_to_customer: !p.visible_to_customer } : p));
   };
 
   const getPhotoUrl = (path: string) => {
-    const { data } = db.storage.from("job-photos").getPublicUrl(path);
+    const { data } = api.storage.from("job-photos").getPublicUrl(path);
     return data?.publicUrl ?? "";
   };
 
@@ -582,7 +581,7 @@ const Jobs = () => {
           <NewRequestsStrip
             pending={pendingJobs as any}
             onConfirm={async (id) => {
-              const { error } = await db.from("jobs").update({ status: "confirmed" }).eq("id", id);
+              const { error } = await api.from("jobs").update({ status: "confirmed" }).eq("id", id);
               if (error) toast.error(error.message);
               else { toast.success("Booking confirmed"); fetchJobs(); }
             }}
@@ -788,7 +787,7 @@ const Jobs = () => {
                         if (!email) { toast.error("No email on file for this client"); return; }
                         if (!detailJob.scheduled_at) { toast.error("Set a scheduled time first"); return; }
                         const reason = window.prompt("Optional note to include in the email:") ?? "";
-                        const { error } = await supabase.functions.invoke("send-transactional-email", {
+                        const { error } = await api.functions.invoke("send-transactional-email", {
                           body: {
                             templateName: "booking-rescheduled",
                             recipientEmail: email,

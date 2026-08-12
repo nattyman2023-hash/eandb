@@ -1,5 +1,5 @@
 import { useEffect, useState, useMemo } from "react";
-import { db } from "@/lib/supabase";
+import { api } from "@/lib/apiClient";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -26,11 +26,11 @@ const Reports = () => {
   useEffect(() => {
     const load = async () => {
       const [invRes, jobRes, profRes, svcRes, custRes] = await Promise.all([
-        db.from("invoices").select("*, job:jobs(*, customer:customers(name), hair_profile:hair_profiles(preference))").order("created_at", { ascending: false }),
-        db.from("jobs").select("*, customer:customers(name, id, created_at), hair_profile:hair_profiles(preference)").order("created_at", { ascending: false }),
-        db.from("profiles").select("*").eq("is_active", true),
-        db.from("service_catalog").select("*"),
-        db.from("customers").select("*").order("created_at", { ascending: false }),
+        api.from("invoices").select("*, job:jobs(*, customer:customers(name), hair_profile:hair_profiles(preference))").order("created_at", { ascending: false }),
+        api.from("jobs").select("*, customer:customers(name, id, created_at), hair_profile:hair_profiles(preference)").order("created_at", { ascending: false }),
+        api.from("profiles").select("*").eq("is_active", true),
+        api.from("service_catalog").select("*"),
+        api.from("customers").select("*").order("created_at", { ascending: false }),
       ]);
       setInvoices(invRes.data ?? []);
       setJobs(jobRes.data ?? []);

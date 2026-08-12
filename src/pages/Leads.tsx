@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { db } from "@/lib/supabase";
+import { api } from "@/lib/apiClient";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -88,7 +88,7 @@ const Leads = () => {
   const [quoteIncludeVat, setQuoteIncludeVat] = useState(false);
 
   const fetchLeads = async () => {
-    const { data } = await db.from("leads").select("*").order("created_at", { ascending: false });
+    const { data } = await api.from("leads").select("*").order("created_at", { ascending: false });
     setLeads((data as Lead[]) ?? []);
   };
 
@@ -99,8 +99,8 @@ const Leads = () => {
     setEditLead({ name: lead.name, phone: lead.phone || "", email: lead.email || "", service_requested: lead.service_requested || "", source: lead.source });
     setLeadDirty(false);
     const [intRes, qRes] = await Promise.all([
-      db.from("lead_interactions").select("*").eq("lead_id", lead.id).order("created_at", { ascending: false }),
-      db.from("quotes").select("*").eq("lead_id", lead.id).order("created_at", { ascending: false }),
+      api.from("lead_interactions").select("*").eq("lead_id", lead.id).order("created_at", { ascending: false }),
+      api.from("quotes").select("*").eq("lead_id", lead.id).order("created_at", { ascending: false }),
     ]);
     setInteractions((intRes.data as LeadInteraction[]) ?? []);
     setQuotes((qRes.data as Quote[]) ?? []);
@@ -108,7 +108,7 @@ const Leads = () => {
 
   const handleCreate = async () => {
     const { ai_score, priority } = scoreLead(form.service_requested, form.source, form.email, form.phone);
-    const { error } = await db.from("leads").insert({ ...form, ai_score, priority });
+    const { error } = await api.from("leads").insert({ ...form, ai_score, priority });
     if (error) { toast.error("Failed to create lead"); return; }
     toast.success("Lead created!");
     if (priority === "High") notifyUrgent(form.name);
@@ -118,21 +118,21 @@ const Leads = () => {
   };
 
   const updateStatus = async (id: string, status: LeadStatus) => {
-    await db.from("leads").update({ status }).eq("id", id);
+    await api.from("leads").update({ status }).eq("id", id);
     fetchLeads();
     if (selectedLead?.id === id) setSelectedLead({ ...selectedLead, status });
   };
 
   const addInteraction = async (type: string = "Note") => {
     if (!selectedLead || !newNote.trim()) return;
-    await db.from("lead_interactions").insert({ lead_id: selectedLead.id, type, content: newNote });
+    await api.from("lead_interactions").insert({ lead_id: selectedLead.id, type, content: newNote });
     setNewNote("");
     fetchLeadDetails(selectedLead);
   };
 
   const saveLeadChanges = async () => {
     if (!selectedLead) return;
-    const { error } = await db.from("leads").update({
+    const { error } = await api.from("leads").update({
       name: editLead.name,
       phone: editLead.phone,
       email: editLead.email,
@@ -153,13 +153,13 @@ const Leads = () => {
 
   const convertToJob = async () => {
     if (!selectedLead) return;
-    const { data: customer, error: custErr } = await db
+    const { data: customer, error: custErr } = await api
       .from("customers")
       .insert({ name: selectedLead.name, phone: selectedLead.phone, email: selectedLead.email })
       .select("id").single();
     if (custErr) { toast.error("Failed to create customer"); return; }
 
-    await db.from("jobs").insert({
+    await api.from("jobs").insert({
       customer_id: customer.id,
       notes: selectedLead.service_requested,
       source: `Lead - ${selectedLead.source}`,
@@ -172,8 +172,8 @@ const Leads = () => {
 
   const handleDeleteQuote = async () => {
     if (!deleteQuoteId) return;
-    await db.from("quote_items").delete().eq("quote_id", deleteQuoteId);
-    const { error } = await db.from("quotes").delete().eq("id", deleteQuoteId);
+    await api.from("quote_items").delete().eq("quote_id", deleteQuoteId);
+    const { error } = await api.from("quotes").delete().eq("id", deleteQuoteId);
     if (error) { toast.error(error.message); return; }
     toast.success("Quote deleted");
     setDeleteQuoteId(null);
@@ -200,7 +200,7 @@ const Leads = () => {
     const validUntil = new Date();
     validUntil.setDate(validUntil.getDate() + quoteValidDays);
 
-    const { data: quoteData, error } = await db.from("quotes").insert({
+    const { data: quoteData, error } = await api.from("quotes").insert({
       lead_id: selectedLead.id,
       estimated_price: quoteTotal,
       parts_cost_estimate: quotePartsTotal,
@@ -217,7 +217,7 @@ const Leads = () => {
       .map(i => ({ quote_id: quoteData.id, description: i.description, category: i.category, price: i.price }));
 
     if (itemInserts.length > 0) {
-      await db.from("quote_items").insert(itemInserts);
+      await api.from("quote_items").insert(itemInserts);
     }
 
     await updateStatus(selectedLead.id, "Quoted");

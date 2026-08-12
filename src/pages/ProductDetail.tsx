@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
-import { db } from "@/lib/supabase";
+import { api } from "@/lib/apiClient";
 import { useCart } from "@/contexts/CartContext";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -24,11 +24,11 @@ const ProductDetail = () => {
 
   useEffect(() => {
     if (!id) return;
-    db.from("products").select("*").eq("id", id).single().then(({ data }: any) => {
+    api.from("products").select("*").eq("id", id).single().then(({ data }: any) => {
       setProduct(data);
       setLoading(false);
       if (data?.category) {
-        db.from("products").select("*").eq("is_active", true).eq("category", data.category).neq("id", id).limit(4)
+        api.from("products").select("*").eq("is_active", true).eq("category", data.category).neq("id", id).limit(4)
           .then(({ data: r }: any) => setRelated(r || []));
       }
     });

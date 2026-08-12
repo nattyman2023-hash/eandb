@@ -1,4 +1,4 @@
-import { db } from "@/lib/supabase";
+import { api } from "@/lib/apiClient";
 
 export interface WaitlistPatch {
   client_name?: string;
@@ -12,16 +12,16 @@ export interface WaitlistPatch {
 }
 
 export async function updateWaitlist(id: string, patch: WaitlistPatch) {
-  const { error } = await db.from("waitlist").update(patch).eq("id", id);
+  const { error } = await api.from("waitlist").update(patch).eq("id", id);
   if (error) throw error;
 }
 
 export async function reorderWaitlist(orderedIds: string[]) {
   await Promise.all(
-    orderedIds.map((id, idx) => db.from("waitlist").update({ position: idx }).eq("id", id))
+    orderedIds.map((id, idx) => api.from("waitlist").update({ position: idx }).eq("id", id))
   );
 }
 
 export async function removeWaitlist(id: string) {
-  await db.from("waitlist").update({ status: "cancelled" }).eq("id", id);
+  await api.from("waitlist").update({ status: "cancelled" }).eq("id", id);
 }

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { db } from "@/lib/supabase";
+import { api } from "@/lib/apiClient";
 import { useCart } from "@/contexts/CartContext";
 import { Button } from "@/components/ui/button";
 import { ShoppingBag, Plus, Sparkles, ArrowRight, Check } from "lucide-react";
@@ -50,7 +50,7 @@ export default function BookingUpsell({ serviceId, serviceName }: Props) {
   useEffect(() => {
     const load = async () => {
       // 1. Curated upsell from service_catalog.upsell_product_id
-      const { data: svc } = await db
+      const { data: svc } = await api
         .from("service_catalog")
         .select("upsell_product_id")
         .eq("id", serviceId)
@@ -59,7 +59,7 @@ export default function BookingUpsell({ serviceId, serviceName }: Props) {
       const curatedId = (svc as any)?.upsell_product_id as string | null;
       let curated: Product | null = null;
       if (curatedId) {
-        const { data } = await db.from("products").select("*").eq("id", curatedId).maybeSingle();
+        const { data } = await api.from("products").select("*").eq("id", curatedId).maybeSingle();
         if (data) curated = data as any;
       }
 
@@ -72,7 +72,7 @@ export default function BookingUpsell({ serviceId, serviceName }: Props) {
 
       let matched: Product[] = [];
       if (keywords.size > 0) {
-        const { data: all } = await db
+        const { data: all } = await api
           .from("products")
           .select("*")
           .eq("is_active", true)
@@ -91,7 +91,7 @@ export default function BookingUpsell({ serviceId, serviceName }: Props) {
       }
       // Fill with featured if still too few
       if (final.length < 3) {
-        const { data: featured } = await db
+        const { data: featured } = await api
           .from("products")
           .select("*")
           .eq("is_active", true)

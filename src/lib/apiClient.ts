@@ -1,11 +1,21 @@
-// Drop-in replacement for the Supabase JS client, backed by the Express + MySQL
-// API (server/). Preserves the same call shape used across the app
-// (`db.from(table).select().eq() ...`, `supabase.auth.*`, `supabase.storage.*`,
-// `supabase.functions.invoke(...)`) so call sites don't need to change -
-// see src/integrations/supabase/client.ts and src/lib/supabase.ts.
+// Small browser API client backed by the Express + MySQL API.
+// It keeps existing screen data access stable while every request is sent to
+// the same-origin /api routes.
 
-const API_ROOT = (import.meta as any).env?.VITE_API_URL || 'http://localhost:3001';
+const API_ROOT = '';
 const SESSION_KEY = 'wubhair.auth.session';
+
+export type User = {
+  id: string;
+  email: string;
+  user_metadata: { full_name?: string; [key: string]: unknown };
+};
+
+export type Session = {
+  access_token: string;
+  refresh_token: string;
+  user: User;
+};
 
 type StoredSession = {
   accessToken: string;
@@ -16,7 +26,7 @@ type StoredSession = {
 type AuthListener = (event: string, session: any) => void;
 const listeners = new Set<AuthListener>();
 
-function toSupabaseSession(s: StoredSession | null) {
+function toSession(s: StoredSession | null): Session | null {
   if (!s) return null;
   return {
     access_token: s.accessToken,
@@ -40,8 +50,8 @@ function setStoredSession(session: StoredSession | null) {
 }
 
 function emit(event: string, session: StoredSession | null) {
-  const supaSession = toSupabaseSession(session);
-  listeners.forEach((cb) => cb(event, supaSession));
+  const sessionValue = toSession(session);
+  listeners.forEach((cb) => cb(event, sessionValue));
 }
 
 async function tryRefresh(): Promise<boolean> {
@@ -85,15 +95,22 @@ async function apiFetch(path: string, options: RequestInit = {}, allowRetry = tr
   return res;
 }
 
+export async function apiRequest<T = any>(path: string, options: RequestInit = {}): Promise<T> {
+  const response = await apiFetch(path, options);
+  const body = await response.json().catch(() => ({ data: null, error: 'Invalid server response' }));
+  if (!response.ok) {
+    throw new Error(body?.error?.message || body?.error || `Request failed (${response.status})`);
+  }
+  return body as T;
+}
+
 function toError(message: string) {
   return { message };
 }
 
 // ---------------------------------------------------------------------------
-// Query builder - mirrors the subset of the Supabase JS query builder actually
-// used across this codebase (see server/src/routes/query.js for the matching
-// server-side interpreter and server/AUTHZ_REFERENCE.md for the access rules
-// it enforces).
+// Temporary query compatibility for existing screens. It still talks only to
+// the Express /api/query route and can be replaced screen-by-screen later.
 // ---------------------------------------------------------------------------
 
 type Filter = { col: string; op: string; val: any };
@@ -220,13 +237,13 @@ const auth = {
       const session: StoredSession = { accessToken: body.data.accessToken, refreshToken: body.data.refreshToken, user: body.data.user };
       setStoredSession(session);
       emit('SIGNED_IN', session);
-      return { data: { user: toSupabaseSession(session)!.user, session: toSupabaseSession(session) }, error: null };
+      return { data: { user: toSession(session)!.user, session: toSession(session) }, error: null };
     } catch (err: any) {
       return { data: { user: null, session: null }, error: toError(err.message) };
     }
   },
 
-  async signUp({ email, password, options }: { email: string; password: string; options?: { data?: { full_name?: string } } }) {
+  async signUp({ email, password, options }: { email: string; password: string; options?: { data?: { full_name?: string }; emailRedirectTo?: string } }) {
     try {
       const res = await fetch(`${API_ROOT}/api/auth/signup`, {
         method: 'POST',
@@ -236,7 +253,7 @@ const auth = {
       const body = await res.json();
       if (!res.ok) return { data: { user: null, session: null }, error: toError(body.error || 'Sign up failed') };
       // Intentionally not auto-storing a session here: the UI sends the user to
-      // the login tab after signup, matching the pre-migration Supabase flow.
+      // the login tab, matching the existing application flow.
       return { data: { user: { id: body.data.user.id, email: body.data.user.email }, session: null }, error: null };
     } catch (err: any) {
       return { data: { user: null, session: null }, error: toError(err.message) };
@@ -262,13 +279,13 @@ const auth = {
   },
 
   async getSession() {
-    return { data: { session: toSupabaseSession(getStoredSession()) } };
+    return { data: { session: toSession(getStoredSession()) } };
   },
 
   onAuthStateChange(callback: AuthListener) {
     listeners.add(callback);
-    setTimeout(() => callback('INITIAL_SESSION', toSupabaseSession(getStoredSession())), 0);
-    return { data: { subscription: { unsubscribe: () => listeners.delete(callback) } } };
+    setTimeout(() => callback('INITIAL_SESSION', toSession(getStoredSession())), 0);
+    return { data: { subscription: { unsubscribe: () => { listeners.delete(callback); } } } };
   },
 
   async updateUser({ password }: { password: string }) {
@@ -276,13 +293,13 @@ const auth = {
       const res = await apiFetch('/api/auth/update-password', { method: 'POST', body: JSON.stringify({ password }) });
       const body = await res.json();
       if (!res.ok) return { data: { user: null }, error: toError(body.error || 'Could not update password') };
-      return { data: { user: toSupabaseSession(getStoredSession())?.user }, error: null };
+      return { data: { user: toSession(getStoredSession())?.user }, error: null };
     } catch (err: any) {
       return { data: { user: null }, error: toError(err.message) };
     }
   },
 
-  async resetPasswordForEmail(email: string) {
+  async resetPasswordForEmail(email: string, _options?: { redirectTo?: string }) {
     try {
       const res = await fetch(`${API_ROOT}/api/auth/reset-password-request`, {
         method: 'POST',
@@ -297,10 +314,11 @@ const auth = {
     }
   },
 
-  // Not part of the Supabase API - used by ResetPassword.tsx, which needs a
-  // dedicated call for the one-time emailed token (see server/src/routes/auth.js
-  // POST /api/auth/reset-password). Supabase's own magic-link recovery flow
-  // (session-in-URL-hash + updateUser) doesn't apply once auth is self-hosted.
+  async getUser() {
+    return { data: { user: toSession(getStoredSession())?.user || null }, error: null };
+  },
+
+  // Dedicated call for the one-time emailed reset token.
   async confirmPasswordReset(token: string, password: string) {
     try {
       const res = await fetch(`${API_ROOT}/api/auth/reset-password`, {
@@ -320,13 +338,8 @@ const auth = {
 // ---------------------------------------------------------------------------
 // Realtime -> polling shim
 // ---------------------------------------------------------------------------
-// Every current usage of supabase.channel(...).on('postgres_changes', ...) in
-// this app is a simple "any change on this table -> refetch" pattern (see the
-// migration survey - Calendar/Dashboard/Jobs/Messages/Waitlist/StaffSchedule).
-// Rather than standing up a WebSocket/SSE server, this polls on the same
-// interval a real-time push would settle to visually. Call sites are
-// unchanged: `db.channel(name).on(event, filter, cb).subscribe()` /
-// `db.removeChannel(channel)`.
+// Existing live-refresh call sites use a lightweight polling channel. This
+// preserves the current UI behavior without adding a new push dependency.
 
 const POLL_INTERVAL_MS = 20000;
 
@@ -364,7 +377,7 @@ function removeChannel(ch: PollingChannel) {
 
 function storageFrom(bucket: string) {
   return {
-    async upload(path: string, file: File | Blob) {
+    async upload(path: string, file: File | Blob, _options?: { upsert?: boolean }) {
       try {
         const form = new FormData();
         form.append('file', file);
@@ -393,7 +406,7 @@ function storageFrom(bucket: string) {
         return { data: null, error: toError(err.message) };
       }
     },
-    async list(path: string = '') {
+    async list(path: string = '', _options?: { limit?: number }) {
       try {
         const res = await apiFetch(`/api/storage/${bucket}/list?path=${encodeURIComponent(path)}`);
         const body = await res.json();
@@ -417,7 +430,7 @@ function storageFrom(bucket: string) {
 }
 
 // ---------------------------------------------------------------------------
-// Edge-function equivalents
+// Server action routes
 // ---------------------------------------------------------------------------
 
 const functions = {
@@ -445,3 +458,5 @@ export const apiClient = {
   channel,
   removeChannel,
 };
+
+export const api = apiClient;

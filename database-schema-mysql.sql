@@ -744,7 +744,7 @@ CREATE TABLE IF NOT EXISTS email_dispatch_log (
 --                       ORDER BY id LIMIT batch_size FOR UPDATE, then UPDATE visible_until/attempts
 --   delete_email     -> DELETE (or UPDATE status='done')
 --   move_to_dlq      -> INSERT INTO email_queue (queue_name='<name>_dlq', ...) + DELETE original row
-CREATE TABLE email_queue (
+CREATE TABLE IF NOT EXISTS email_queue (
   id BIGINT AUTO_INCREMENT PRIMARY KEY,
   queue_name VARCHAR(64) NOT NULL,
   payload JSON NOT NULL,

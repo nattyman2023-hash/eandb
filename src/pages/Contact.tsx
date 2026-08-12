@@ -8,7 +8,7 @@ import { toast } from "sonner";
 import { BUSINESS, IMAGES } from "@/lib/siteContent";
 import SEOHead from "@/components/SEOHead";
 import { Phone, MessageCircle, Mail, MapPin, Send } from "lucide-react";
-import { db } from "@/lib/supabase";
+import { apiRequest } from "@/lib/apiClient";
 import { useSiteImages } from "@/hooks/useSiteImages";
 import { z } from "zod";
 
@@ -36,20 +36,9 @@ const Contact = () => {
 
     setSubmitting(true);
     try {
-      // Create customer record in CRM
-      const { data: customer, error: custErr } = await db
-        .from("customers")
-        .insert({ name: form.name, email: form.email, phone: form.phone })
-        .select("id")
-        .single();
-
-      if (custErr) throw custErr;
-
-      // Create inbound message for CRM visibility
-      await db.from("messages").insert({
-        customer_id: customer.id,
-        direction: "inbound",
-        content: `[Website Contact Form] ${form.message}`,
+      await apiRequest("/api/contact", {
+        method: "POST",
+        body: JSON.stringify(form),
       });
 
       setSubmitted(true);

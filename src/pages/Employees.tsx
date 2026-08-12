@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
-import { db } from "@/lib/supabase";
-import { supabase } from "@/integrations/supabase/client";
+import { api } from "@/lib/apiClient";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -43,14 +42,14 @@ const Employees = () => {
   const [declineReason, setDeclineReason] = useState("");
 
   const fetchEmployees = async () => {
-    let profilesQuery = db.from("profiles").select("*").order("full_name");
+    let profilesQuery = api.from("profiles").select("*").order("full_name");
     if (!showInactive) profilesQuery = profilesQuery.eq("is_active", true);
 
     const [profilesRes, rolesRes, jobsRes, timeRes] = await Promise.all([
       profilesQuery,
-      db.from("user_roles").select("*"),
-      db.from("jobs").select("assigned_to, status"),
-      db.from("time_entries").select("mechanic_id, duration_seconds"),
+      api.from("user_roles").select("*"),
+      api.from("jobs").select("assigned_to, status"),
+      api.from("time_entries").select("mechanic_id, duration_seconds"),
     ]);
     const profiles = (profilesRes.data as unknown as Profile[]) ?? [];
     const allRoles = (rolesRes.data as any[]) ?? [];
@@ -86,11 +85,11 @@ const Employees = () => {
   };
 
   const fetchLeaveRequests = async () => {
-    const { data } = await db.from("leave_requests").select("*").order("created_at", { ascending: false });
+    const { data } = await api.from("leave_requests").select("*").order("created_at", { ascending: false });
     if (!data) return;
     // Enrich with profile names
     const staffIds = [...new Set((data as any[]).map(lr => lr.staff_id))];
-    const { data: profiles } = await db.from("profiles").select("user_id, full_name, email").in("user_id", staffIds);
+    const { data: profiles } = await api.from("profiles").select("user_id, full_name, email").in("user_id", staffIds);
     const profileMap: Record<string, any> = {};
     (profiles ?? []).forEach((p: any) => { profileMap[p.user_id] = p; });
     setLeaveRequests((data as any[]).map(lr => ({ ...lr, profile: profileMap[lr.staff_id] })));
@@ -105,7 +104,7 @@ const Employees = () => {
 
   const handleSave = async () => {
     if (!editEmployee) return;
-    const { error } = await db.from("profiles").update({
+    const { error } = await api.from("profiles").update({
       full_name: editForm.full_name, pay_rate: editForm.pay_rate, is_active: editForm.is_active, phone: editForm.phone,
       skills: editForm.skills.split(",").map((s: string) => s.trim()).filter(Boolean),
       postcode: editForm.postcode,
@@ -117,7 +116,7 @@ const Employees = () => {
   const handleCreate = async () => {
     if (!createForm.full_name || !createForm.email) return;
     setCreateLoading(true);
-    const { data, error } = await supabase.functions.invoke("invite-employee", {
+    const { data, error } = await api.functions.invoke("invite-employee", {
       body: { email: createForm.email, full_name: createForm.full_name, phone: createForm.phone, pay_rate: createForm.pay_rate, role: createForm.role },
     });
     setCreateLoading(false);
@@ -131,17 +130,17 @@ const Employees = () => {
     if (!deleteEmployeeId) return;
     const emp = employees.find(e => e.id === deleteEmployeeId);
     if (!emp) return;
-    await db.from("profiles").update({ is_active: false }).eq("id", emp.id);
-    await db.from("user_roles").delete().eq("user_id", emp.user_id);
+    await api.from("profiles").update({ is_active: false }).eq("id", emp.id);
+    await api.from("user_roles").delete().eq("user_id", emp.user_id);
     toast.success("Employee deactivated"); setDeleteEmployeeId(null); fetchEmployees();
   };
 
   const toggleRole = async (emp: EmployeeProfile, role: string) => {
     const hasRole = emp.roles?.some(r => r.role === role);
     if (hasRole) {
-      await db.from("user_roles").delete().eq("user_id", emp.user_id).eq("role", role);
+      await api.from("user_roles").delete().eq("user_id", emp.user_id).eq("role", role);
     } else {
-      await db.from("user_roles").insert({ user_id: emp.user_id, role });
+      await api.from("user_roles").insert({ user_id: emp.user_id, role });
     }
     toast.success(`Role ${hasRole ? "removed" : "added"}`); fetchEmployees();
   };
@@ -153,7 +152,7 @@ const Employees = () => {
       toast.info("Staff portal preview coming soon");
     } else {
       // Find customer record by user_id
-      db.from("customers").select("id").eq("user_id", emp.user_id).single().then(({ data }) => {
+      api.from("customers").select("id").eq("user_id", emp.user_id).single().then(({ data }) => {
         if (data) {
           navigate(`/portal?preview=${data.id}`);
         } else {
@@ -166,7 +165,7 @@ const Employees = () => {
   const handleLeaveAction = async (id: string, status: "approved" | "declined", reason?: string) => {
     const update: any = { status };
     if (reason) update.decline_reason = reason;
-    const { error } = await db.from("leave_requests").update(update).eq("id", id);
+    const { error } = await api.from("leave_requests").update(update).eq("id", id);
     if (error) { toast.error(error.message); return; }
     toast.success(`Request ${status}`);
     setDeclineOpen(null);
@@ -274,7 +273,7 @@ const Employees = () => {
                         <Button variant="ghost" size="icon" title="View Portal" onClick={() => viewPortal(emp)}><Eye className="h-4 w-4" /></Button>
                         <Button variant="ghost" size="icon" title="Send Staff Portal Invite" onClick={async () => {
                           if (!emp.email) { toast.error("No email on file"); return; }
-                          const { data, error } = await supabase.functions.invoke("send-portal-invite", {
+                          const { data, error } = await api.functions.invoke("send-portal-invite", {
                             body: { email: emp.email, name: emp.full_name, portalKind: "staff", redirectTo: `${window.location.origin}/reset-password` },
                           });
                           if (error || data?.error) toast.error(data?.error || error?.message || "Failed");

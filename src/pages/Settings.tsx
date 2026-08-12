@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import { supabase } from "@/integrations/supabase/client";
+import { api, apiRequest } from "@/lib/apiClient";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -26,7 +26,7 @@ const Settings = () => {
       return;
     }
     setLoading(true);
-    const { error } = await supabase.auth.updateUser({ password: newPassword });
+    const { error } = await api.auth.updateUser({ password: newPassword });
     setLoading(false);
     if (error) {
       toast.error(error.message);
@@ -182,7 +182,7 @@ function PaymentsCard() {
   const [testResult, setTestResult] = useState<{ ok: boolean; accountName?: string; livemode?: boolean; error?: string } | null>(null);
 
   const refresh = async () => {
-    const { data } = await supabase.functions.invoke("stripe-keys-status");
+    const { data } = await apiRequest<{ data: { secretConfigured: boolean; publishableConfigured: boolean; secretMode: string | null } }>("/api/payments/status");
     setStatus(data ?? null);
   };
   useEffect(() => { refresh(); }, []);
@@ -190,9 +190,15 @@ function PaymentsCard() {
   const handleTest = async () => {
     setTesting(true);
     setTestResult(null);
-    const { data, error } = await supabase.functions.invoke("stripe-test-connection");
+    let data;
+    try {
+      ({ data } = await apiRequest<{ data: { ok: boolean; accountName?: string; livemode?: boolean; error?: string } }>("/api/payments/test", { method: "POST" }));
+    } catch (error: any) {
+      setTesting(false);
+      toast.error(error.message || "Connection failed");
+      return;
+    }
     setTesting(false);
-    if (error) { toast.error(error.message); return; }
     setTestResult(data);
     if (data?.ok) toast.success(`Connected as ${data.accountName}`);
     else toast.error(data?.error || "Connection failed");
@@ -241,13 +247,13 @@ function PaymentsCard() {
             <div className="flex flex-wrap gap-2">
               <Button
                 variant="outline"
-                onClick={() => toast.info("Open the chat and ask Lovable to set STRIPE_SECRET_KEY — it will open a secure form.")}
+                onClick={() => toast.info("Configure STRIPE_SECRET_KEY in the server environment, then refresh this status.")}
               >
                 {status.secretConfigured ? "Update secret key" : "Add secret key"}
               </Button>
               <Button
                 variant="outline"
-                onClick={() => toast.info("Open the chat and ask Lovable to set STRIPE_PUBLISHABLE_KEY — it will open a secure form.")}
+                onClick={() => toast.info("Configure STRIPE_PUBLISHABLE_KEY in the server environment, then refresh this status.")}
               >
                 {status.publishableConfigured ? "Update publishable key" : "Add publishable key"}
               </Button>

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { db } from "@/lib/supabase";
+import { api } from "@/lib/apiClient";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -24,8 +24,8 @@ export default function HairProfiles() {
 
   const load = async () => {
     const [r, c] = await Promise.all([
-      db.from("hair_profiles").select("*, customer:customers(name, phone, email)").order("created_at", { ascending: false }),
-      db.from("customers").select("*").order("name"),
+      api.from("hair_profiles").select("*, customer:customers(name, phone, email)").order("created_at", { ascending: false }),
+      api.from("customers").select("*").order("name"),
     ]);
     setRows((r.data as any) ?? []);
     setCustomers((c.data as Customer[]) ?? []);
@@ -34,11 +34,11 @@ export default function HairProfiles() {
 
   const submit = async () => {
     if (editing) {
-      const { error } = await db.from("hair_profiles").update(form).eq("id", editing.id);
+      const { error } = await api.from("hair_profiles").update(form).eq("id", editing.id);
       if (error) { toast.error(error.message); return; }
       toast.success("Profile updated");
     } else {
-      const { error } = await db.from("hair_profiles").insert(form);
+      const { error } = await api.from("hair_profiles").insert(form);
       if (error) { toast.error(error.message); return; }
       toast.success("Profile added");
     }
@@ -52,7 +52,7 @@ export default function HairProfiles() {
   };
   const onDelete = async () => {
     if (!deleteId) return;
-    const { error } = await db.from("hair_profiles").delete().eq("id", deleteId);
+    const { error } = await api.from("hair_profiles").delete().eq("id", deleteId);
     if (error) { toast.error(error.message); return; }
     toast.success("Deleted"); setDeleteId(null); load();
   };

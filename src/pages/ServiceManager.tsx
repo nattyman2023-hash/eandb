@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { db } from "@/lib/supabase";
+import { api } from "@/lib/apiClient";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Switch } from "@/components/ui/switch";
@@ -47,8 +47,8 @@ const ServiceManager = () => {
 
   const fetchItems = async () => {
     const [svcRes, invRes] = await Promise.all([
-      db.from("service_catalog").select("*").order("category, name"),
-      db.from("inventory").select("id, name, category").order("name"),
+      api.from("service_catalog").select("*").order("category, name"),
+      api.from("inventory").select("id, name, category").order("name"),
     ]);
     setItems((svcRes.data as ServiceItem[]) ?? []);
     setInventory(invRes.data ?? []);
@@ -90,9 +90,9 @@ const ServiceManager = () => {
       upsell_product_id: form.upsell_product_id || null,
     };
     if (editItem) {
-      await db.from("service_catalog").update(payload).eq("id", editItem.id);
+      await api.from("service_catalog").update(payload).eq("id", editItem.id);
     } else {
-      await db.from("service_catalog").insert(payload);
+      await api.from("service_catalog").insert(payload);
     }
     setOpen(false); setEditItem(null); resetForm(); fetchItems();
     toast.success(editItem ? "Service updated" : "Service added");
@@ -105,12 +105,12 @@ const ServiceManager = () => {
   });
 
   const toggleActive = async (id: string, active: boolean) => {
-    await db.from("service_catalog").update({ is_active: active }).eq("id", id);
+    await api.from("service_catalog").update({ is_active: active }).eq("id", id);
     setItems(prev => prev.map(i => i.id === id ? { ...i, is_active: active } : i));
   };
 
   const handleDelete = async (id: string) => {
-    await db.from("service_catalog").delete().eq("id", id);
+    await api.from("service_catalog").delete().eq("id", id);
     setItems(prev => prev.filter(i => i.id !== id));
     toast.success("Service removed");
   };
@@ -149,13 +149,13 @@ const ServiceManager = () => {
     const ids = [...selected];
     if (ids.length === 0) return;
     if (bulkAction === "enable") {
-      for (const id of ids) await db.from("service_catalog").update({ is_active: true }).eq("id", id);
+      for (const id of ids) await api.from("service_catalog").update({ is_active: true }).eq("id", id);
       toast.success(`${ids.length} services enabled`);
     } else if (bulkAction === "disable") {
-      for (const id of ids) await db.from("service_catalog").update({ is_active: false }).eq("id", id);
+      for (const id of ids) await api.from("service_catalog").update({ is_active: false }).eq("id", id);
       toast.success(`${ids.length} services disabled`);
     } else {
-      for (const id of ids) await db.from("service_catalog").delete().eq("id", id);
+      for (const id of ids) await api.from("service_catalog").delete().eq("id", id);
       toast.success(`${ids.length} services deleted`);
     }
     setSelected(new Set()); setBulkOpen(false); fetchItems();
@@ -167,7 +167,7 @@ const ServiceManager = () => {
     const catItems = items.filter(i => i.category === multiplierCat);
     for (const item of catItems) {
       const newPrice = Math.round(item.base_price * (1 + pct));
-      await db.from("service_catalog").update({ base_price: newPrice }).eq("id", item.id);
+      await api.from("service_catalog").update({ base_price: newPrice }).eq("id", item.id);
     }
     toast.success(`Updated ${catItems.length} services in "${multiplierCat}" by ${multiplierPercent}%`);
     setMultiplierOpen(false); fetchItems();
@@ -265,9 +265,9 @@ const ServiceManager = () => {
                           if (!file) return;
                           const slug = (form.name || "service").toLowerCase().replace(/[^a-z0-9]+/g, "-");
                           const path = `services/${slug}/${Date.now()}-${file.name.replace(/[^a-z0-9.\-_]/gi, "_")}`;
-                          const { error: upErr } = await db.storage.from("site-images").upload(path, file, { upsert: true });
+                          const { error: upErr } = await api.storage.from("site-images").upload(path, file, { upsert: true });
                           if (upErr) { toast.error(upErr.message); return; }
-                          const { data: urlData } = db.storage.from("site-images").getPublicUrl(path);
+                          const { data: urlData } = api.storage.from("site-images").getPublicUrl(path);
                           setForm({ ...form, image_url: urlData?.publicUrl || "" });
                           toast.success("Image uploaded");
                         }}

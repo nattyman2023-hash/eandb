@@ -1,5 +1,5 @@
 import { useEffect, useState, useCallback } from "react";
-import { db, supabase } from "@/lib/supabase";
+import { api } from "@/lib/apiClient";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
@@ -25,8 +25,8 @@ const Dashboard = () => {
 
   const fetchApprovals = useCallback(async () => {
     const [quotesRes, invoicesRes] = await Promise.all([
-      db.from("quotes").select("*, lead:leads(name)").eq("status", "Accepted").order("created_at", { ascending: false }).limit(5),
-      db.from("invoices").select("*, job:jobs(*, customer:customers(name), hair_profile:hair_profiles(preference))").not("signature", "is", null).order("updated_at", { ascending: false }).limit(5),
+      api.from("quotes").select("*, lead:leads(name)").eq("status", "Accepted").order("created_at", { ascending: false }).limit(5),
+      api.from("invoices").select("*, job:jobs(*, customer:customers(name), hair_profile:hair_profiles(preference))").not("signature", "is", null).order("updated_at", { ascending: false }).limit(5),
     ]);
     const items: ApprovalItem[] = [];
     ((quotesRes.data as any[]) ?? []).forEach((q: any) => {
@@ -47,14 +47,14 @@ const Dashboard = () => {
       const weekAgo = new Date(today.getTime() - 7 * 86400000).toISOString();
 
       const [custCount, invCount, todayRes, recentRes, chairRes, waitRes, newClients, paidInvoices] = await Promise.all([
-        db.from("customers").select("id", { count: "exact", head: true }),
-        db.from("invoices").select("id", { count: "exact", head: true }).in("status", ["draft", "sent"]),
-        db.from("jobs").select("*, customer:customers(name), hair_profile:hair_profiles(preference, texture, goal)").gte("scheduled_at", startOfDay).lte("scheduled_at", endOfDay).order("scheduled_at"),
-        db.from("jobs").select("*, customer:customers(name)").order("created_at", { ascending: false }).limit(5),
-        db.from("chairs").select("id, name, zone, is_active").order("created_at"),
-        db.from("waitlist").select("*").eq("status", "waiting").order("created_at"),
-        db.from("customers").select("id", { count: "exact", head: true }).gte("created_at", weekAgo),
-        db.from("invoices").select("total").eq("status", "paid").gte("created_at", startOfDay),
+        api.from("customers").select("id", { count: "exact", head: true }),
+        api.from("invoices").select("id", { count: "exact", head: true }).in("status", ["draft", "sent"]),
+        api.from("jobs").select("*, customer:customers(name), hair_profile:hair_profiles(preference, texture, goal)").gte("scheduled_at", startOfDay).lte("scheduled_at", endOfDay).order("scheduled_at"),
+        api.from("jobs").select("*, customer:customers(name)").order("created_at", { ascending: false }).limit(5),
+        api.from("chairs").select("id, name, zone, is_active").order("created_at"),
+        api.from("waitlist").select("*").eq("status", "waiting").order("created_at"),
+        api.from("customers").select("id", { count: "exact", head: true }).gte("created_at", weekAgo),
+        api.from("invoices").select("total").eq("status", "paid").gte("created_at", startOfDay),
       ]);
 
       const todayRevenue = ((paidInvoices.data as any[]) ?? []).reduce((sum: number, i: any) => sum + (Number(i.total) || 0), 0);
@@ -77,7 +77,7 @@ const Dashboard = () => {
         const d = new Date(today.getTime() - i * 86400000);
         const dayStart = new Date(d.getFullYear(), d.getMonth(), d.getDate()).toISOString();
         const dayEnd = new Date(d.getFullYear(), d.getMonth(), d.getDate(), 23, 59, 59).toISOString();
-        const { data: dayInv } = await db.from("invoices").select("total").eq("status", "paid").gte("created_at", dayStart).lte("created_at", dayEnd);
+        const { data: dayInv } = await api.from("invoices").select("total").eq("status", "paid").gte("created_at", dayStart).lte("created_at", dayEnd);
         const rev = ((dayInv as any[]) ?? []).reduce((s: number, inv: any) => s + (Number(inv.total) || 0), 0);
         days.push({ day: format(d, "EEE"), revenue: rev });
       }
@@ -88,17 +88,17 @@ const Dashboard = () => {
   }, [fetchApprovals]);
 
   useEffect(() => {
-    const channel = supabase
+    const channel = api
       .channel("dashboard-activity")
       .on("postgres_changes", { event: "*", schema: "public", table: "quotes" }, () => fetchApprovals())
       .on("postgres_changes", { event: "*", schema: "public", table: "invoices" }, () => fetchApprovals())
       .subscribe();
-    return () => { supabase.removeChannel(channel); };
+    return () => { api.removeChannel(channel); };
   }, [fetchApprovals]);
 
   const handleConvertQuote = async (quoteId: string) => {
     try {
-      const { error } = await supabase.functions.invoke("accept-quote", { body: { quote_id: quoteId } });
+      const { error } = await api.functions.invoke("accept-quote", { body: { quote_id: quoteId } });
       if (error) throw error;
       toast.success("Quote converted to job & customer created");
       fetchApprovals();

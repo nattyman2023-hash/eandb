@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef } from "react";
-import { db } from "@/lib/supabase";
+import { api } from "@/lib/apiClient";
 import { useAuth } from "@/contexts/AuthContext";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -37,13 +37,13 @@ const StaffPortal = () => {
     const today = new Date();
     const start = new Date(today.getFullYear(), today.getMonth(), today.getDate()).toISOString();
     const end = new Date(today.getFullYear(), today.getMonth(), today.getDate(), 23, 59, 59).toISOString();
-    const { data } = await db.from("jobs").select("*, customer:customers(*), hair_profile:hair_profiles(preference, texture, goal)").gte("scheduled_at", start).lte("scheduled_at", end).order("scheduled_at");
+    const { data } = await api.from("jobs").select("*, customer:customers(*), hair_profile:hair_profiles(preference, texture, goal)").gte("scheduled_at", start).lte("scheduled_at", end).order("scheduled_at");
     setJobs((data as unknown as Job[]) ?? []);
   };
 
   const fetchActiveTimers = async () => {
     if (!user) return;
-    const { data } = await db.from("time_entries").select("*").eq("mechanic_id", user.id).is("end_time", null);
+    const { data } = await api.from("time_entries").select("*").eq("mechanic_id", user.id).is("end_time", null);
     const timers: Record<string, TimeEntry> = {};
     (data ?? []).forEach((e: any) => { timers[e.job_id] = e as TimeEntry; });
     setActiveTimers(timers);
@@ -53,8 +53,8 @@ const StaffPortal = () => {
     if (!user) return;
     const weekStart = startOfWeek(new Date(), { weekStartsOn: 1 }).toISOString();
     const [entriesRes, profileRes] = await Promise.all([
-      db.from("time_entries").select("duration_seconds").eq("mechanic_id", user.id).gte("start_time", weekStart).not("end_time", "is", null),
-      db.from("profiles").select("pay_rate").eq("user_id", user.id).single(),
+      api.from("time_entries").select("duration_seconds").eq("mechanic_id", user.id).gte("start_time", weekStart).not("end_time", "is", null),
+      api.from("profiles").select("pay_rate").eq("user_id", user.id).single(),
     ]);
     const totalSecs = (entriesRes.data ?? []).reduce((s: number, e: any) => s + (e.duration_seconds || 0), 0);
     const rate = profileRes.data?.pay_rate ?? 0;
@@ -63,7 +63,7 @@ const StaffPortal = () => {
 
   const fetchLeaveRequests = async () => {
     if (!user) return;
-    const { data } = await db.from("leave_requests").select("*").eq("staff_id", user.id).order("created_at", { ascending: false });
+    const { data } = await api.from("leave_requests").select("*").eq("staff_id", user.id).order("created_at", { ascending: false });
     setLeaveRequests((data as unknown as LeaveRequest[]) ?? []);
   };
 
@@ -83,7 +83,7 @@ const StaffPortal = () => {
 
   const startTimer = async (jobId: string) => {
     if (!user) return;
-    const { data, error } = await db.from("time_entries").insert({ job_id: jobId, mechanic_id: user.id }).select().single();
+    const { data, error } = await api.from("time_entries").insert({ job_id: jobId, mechanic_id: user.id }).select().single();
     if (error) { toast.error(error.message); return; }
     setActiveTimers(prev => ({ ...prev, [jobId]: data as TimeEntry }));
     toast.success("Timer started");
@@ -93,40 +93,40 @@ const StaffPortal = () => {
     const entry = activeTimers[jobId];
     if (!entry) return;
     const duration = Math.floor((Date.now() - new Date(entry.start_time).getTime()) / 1000);
-    await db.from("time_entries").update({ end_time: new Date().toISOString(), duration_seconds: duration }).eq("id", entry.id);
+    await api.from("time_entries").update({ end_time: new Date().toISOString(), duration_seconds: duration }).eq("id", entry.id);
     setActiveTimers(prev => { const n = { ...prev }; delete n[jobId]; return n; });
     toast.success(`Timer stopped — ${Math.floor(duration / 60)} minutes logged`);
     fetchEarnings();
   };
 
   const startJob = async (job: Job) => {
-    await db.from("jobs").update({ status: "in_progress", started_at: new Date().toISOString() }).eq("id", job.id);
+    await api.from("jobs").update({ status: "in_progress", started_at: new Date().toISOString() }).eq("id", job.id);
     toast.success("Service started"); fetchTodayJobs();
   };
 
   const completeJob = async (job: Job) => {
     if (activeTimers[job.id]) await stopTimer(job.id);
-    await db.from("jobs").update({ status: "completed", completed_at: new Date().toISOString() }).eq("id", job.id);
+    await api.from("jobs").update({ status: "completed", completed_at: new Date().toISOString() }).eq("id", job.id);
     toast.success("Service completed"); fetchTodayJobs();
   };
 
   const uploadPhoto = async (jobId: string, file: File) => {
     const path = `${jobId}/${Date.now()}-${file.name}`;
-    const { error: uploadError } = await db.storage.from("job-photos").upload(path, file);
+    const { error: uploadError } = await api.storage.from("job-photos").upload(path, file);
     if (uploadError) { toast.error(uploadError.message); return; }
-    await db.from("job_photos").insert({ job_id: jobId, storage_path: path, uploaded_by: user?.id });
+    await api.from("job_photos").insert({ job_id: jobId, storage_path: path, uploaded_by: user?.id });
     toast.success("Photo uploaded");
   };
 
   const requestSwap = async (jobId: string) => {
     if (!user || !swapReason.trim()) return;
-    await db.from("swap_requests").insert({ job_id: jobId, from_mechanic_id: user.id, reason: swapReason });
+    await api.from("swap_requests").insert({ job_id: jobId, from_mechanic_id: user.id, reason: swapReason });
     toast.success("Swap request sent"); setSwapOpen(null); setSwapReason("");
   };
 
   const submitLeaveRequest = async () => {
     if (!user || !leaveForm.startDate || !leaveForm.endDate) return;
-    const { error } = await db.from("leave_requests").insert({
+    const { error } = await api.from("leave_requests").insert({
       staff_id: user.id,
       start_date: format(leaveForm.startDate, "yyyy-MM-dd"),
       end_date: format(leaveForm.endDate, "yyyy-MM-dd"),

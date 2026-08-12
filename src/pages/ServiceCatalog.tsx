@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { db } from "@/lib/supabase";
+import { api } from "@/lib/apiClient";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -17,7 +17,7 @@ const ServiceCatalog = () => {
   const [form, setForm] = useState({ name: "", base_price: 0, estimated_hours: 1, category: "general" });
 
   const fetch = async () => {
-    const { data } = await db.from("service_catalog").select("*").order("category").order("name");
+    const { data } = await api.from("service_catalog").select("*").order("category").order("name");
     setItems((data as unknown as ServiceCatalogItem[]) ?? []);
   };
 
@@ -25,11 +25,11 @@ const ServiceCatalog = () => {
 
   const handleSave = async () => {
     if (editItem) {
-      const { error } = await db.from("service_catalog").update(form).eq("id", editItem.id);
+      const { error } = await api.from("service_catalog").update(form).eq("id", editItem.id);
       if (error) { toast.error(error.message); return; }
       toast.success("Service updated");
     } else {
-      const { error } = await db.from("service_catalog").insert(form);
+      const { error } = await api.from("service_catalog").insert(form);
       if (error) { toast.error(error.message); return; }
       toast.success("Service added");
     }
@@ -40,7 +40,7 @@ const ServiceCatalog = () => {
   };
 
   const handleDelete = async (id: string) => {
-    const { error } = await db.from("service_catalog").delete().eq("id", id);
+    const { error } = await api.from("service_catalog").delete().eq("id", id);
     if (error) { toast.error(error.message); return; }
     setItems(prev => prev.filter(i => i.id !== id));
     toast.success("Service deleted");

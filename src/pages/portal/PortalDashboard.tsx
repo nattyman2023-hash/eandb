@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useAuth } from "@/contexts/AuthContext";
-import { db } from "@/lib/supabase";
+import { api } from "@/lib/apiClient";
 import { Link } from "react-router-dom";
 import { CalendarIcon, Star, Gift, ArrowRight, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -18,11 +18,11 @@ const PortalDashboard = () => {
   useEffect(() => {
     if (!user) return;
     const load = async () => {
-      const { data: cust } = await db.from("customers").select("id, name").eq("user_id", user.id).single();
+      const { data: cust } = await api.from("customers").select("id, name").eq("user_id", user.id).single();
       if (!cust) return;
       setCustomerName(cust.name || profile?.full_name || "");
 
-      const { data: upcoming } = await db.from("jobs")
+      const { data: upcoming } = await api.from("jobs")
         .select("*")
         .eq("customer_id", cust.id)
         .gte("scheduled_at", new Date().toISOString())
@@ -32,13 +32,13 @@ const PortalDashboard = () => {
         .limit(1);
       if (upcoming?.[0]) setNextJob(upcoming[0] as unknown as Job);
 
-      const { count } = await db.from("jobs")
+      const { count } = await api.from("jobs")
         .select("*", { count: "exact", head: true })
         .eq("customer_id", cust.id)
         .in("status", ["completed", "paid"]);
       setCompletedCount(count ?? 0);
 
-      const { data: last } = await db.from("jobs")
+      const { data: last } = await api.from("jobs")
         .select("notes, service_type")
         .eq("customer_id", cust.id)
         .in("status", ["completed", "paid"])

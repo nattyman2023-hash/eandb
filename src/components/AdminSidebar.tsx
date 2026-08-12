@@ -3,7 +3,7 @@ import {
   LayoutDashboard, CalendarDays, Armchair, Users, UserCog, DollarSign, 
   BarChart3, Settings, LogOut, Scissors, Package, ClipboardList, 
   MessageSquare, FileText, Target, Receipt, ClipboardCheck, BookOpen, ShoppingBag, HardDrive } from "lucide-react";
-import { db } from "@/lib/supabase";
+import { api } from "@/lib/apiClient";
 import { NavLink } from "@/components/NavLink";
 import { useAuth } from "@/contexts/AuthContext";
 import {
@@ -69,7 +69,7 @@ export function AdminSidebar() {
   const [pendingLeave, setPendingLeave] = useState(0);
 
   useEffect(() => {
-    db.from("leave_requests").select("id", { count: "exact", head: true }).eq("status", "pending").then(({ count }) => {
+    api.from("leave_requests").select("id", { count: "exact", head: true }).eq("status", "pending").then(({ count }) => {
       setPendingLeave(count ?? 0);
     });
   }, []);

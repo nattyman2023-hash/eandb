@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useAuth } from "@/contexts/AuthContext";
-import { db } from "@/lib/supabase";
+import { api } from "@/lib/apiClient";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
@@ -36,9 +36,9 @@ const PortalBookings = () => {
   useEffect(() => {
     if (!user) return;
     const load = async () => {
-      const { data: cust } = await db.from("customers").select("id").eq("user_id", user.id).single();
+      const { data: cust } = await api.from("customers").select("id").eq("user_id", user.id).single();
       if (!cust) return;
-      const { data } = await db.from("jobs")
+      const { data } = await api.from("jobs")
         .select("*, service_catalog:service_catalog_id(name, base_price, duration_minutes)")
         .eq("customer_id", cust.id)
         .order("scheduled_at", { ascending: false });
@@ -47,7 +47,7 @@ const PortalBookings = () => {
       // Fetch stylist notes visible to client
       const jobIds = (data ?? []).map((j: any) => j.id);
       if (jobIds.length > 0) {
-        const { data: notes } = await db.from("job_notes").select("job_id, content").in("job_id", jobIds).order("created_at", { ascending: false });
+        const { data: notes } = await api.from("job_notes").select("job_id, content").in("job_id", jobIds).order("created_at", { ascending: false });
         const grouped: Record<string, string[]> = {};
         (notes ?? []).forEach((n: any) => {
           if (!grouped[n.job_id]) grouped[n.job_id] = [];
@@ -74,23 +74,23 @@ const PortalBookings = () => {
     const [h, m] = newTime.split(":").map(Number);
     const dt = new Date(newDate);
     dt.setHours(h, m, 0, 0);
-    await db.from("jobs").update({ scheduled_at: dt.toISOString() }).eq("id", rescheduleJob.id);
+    await api.from("jobs").update({ scheduled_at: dt.toISOString() }).eq("id", rescheduleJob.id);
     toast.success(`Appointment moved to ${format(dt, "PPP 'at' h:mm a")}`);
     setRescheduleJob(null);
     setNewDate(undefined);
     setNewTime("");
     setSaving(false);
     // Reload
-    const { data: cust } = await db.from("customers").select("id").eq("user_id", user!.id).single();
+    const { data: cust } = await api.from("customers").select("id").eq("user_id", user!.id).single();
     if (cust) {
-      const { data } = await db.from("jobs").select("*").eq("customer_id", cust.id).order("scheduled_at", { ascending: false });
+      const { data } = await api.from("jobs").select("*").eq("customer_id", cust.id).order("scheduled_at", { ascending: false });
       setJobs((data as unknown as Job[]) ?? []);
     }
   };
 
   const handleCancel = async (job: Job) => {
     if (!confirm("Are you sure you want to cancel this appointment?")) return;
-    await db.from("jobs").update({ status: "completed", notes: (job.notes || "") + " [Cancelled by client]" }).eq("id", job.id);
+    await api.from("jobs").update({ status: "completed", notes: (job.notes || "") + " [Cancelled by client]" }).eq("id", job.id);
     toast.success("Appointment cancelled");
     setJobs(prev => prev.map(j => j.id === job.id ? { ...j, status: "completed" as any } : j));
   };

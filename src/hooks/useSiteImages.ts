@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
-import { supabase } from "@/integrations/supabase/client";
+import { api } from "@/lib/apiClient";
 import { IMAGES, BOROUGHS, SERVICES } from "@/lib/siteContent";
 import { toast } from "sonner";
 
@@ -43,7 +43,7 @@ export function useSiteImages() {
   // Fetch all image.* settings
   useEffect(() => {
     const fetch = async () => {
-      const { data } = await supabase
+      const { data } = await api
         .from("settings")
         .select("key, value")
         .like("key", "image.%");
@@ -76,13 +76,13 @@ export function useSiteImages() {
         const ext = file.name.split(".").pop();
         const path = `${key.replace(/\./g, "/")}/${Date.now()}.${ext}`;
 
-        const { error: uploadError } = await supabase.storage
+        const { error: uploadError } = await api.storage
           .from("site-images")
           .upload(path, file, { upsert: true });
 
         if (uploadError) throw uploadError;
 
-        const { data: urlData } = supabase.storage
+        const { data: urlData } = api.storage
           .from("site-images")
           .getPublicUrl(path);
 
@@ -90,7 +90,7 @@ export function useSiteImages() {
         const settingsKey = `image.${key}`;
 
         // Upsert into settings
-        const { error: upsertError } = await supabase
+        const { error: upsertError } = await api
           .from("settings")
           .upsert({ key: settingsKey, value: publicUrl }, { onConflict: "key" });
 

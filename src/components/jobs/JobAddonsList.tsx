@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { db } from "@/lib/supabase";
+import { api } from "@/lib/apiClient";
 import { Sparkles, Clock } from "lucide-react";
 
 interface AddonRow {
@@ -26,14 +26,14 @@ export default function JobAddonsList({ jobId, basePrice, baseDuration, baseName
     let cancelled = false;
     (async () => {
       setLoading(true);
-      const { data } = await db
+      const { data } = await api
         .from("job_addons")
         .select("id, addon_service_id, price_snapshot, duration_minutes_snapshot")
         .eq("job_id", jobId);
       const addonRows = (data as AddonRow[]) || [];
       if (addonRows.length) {
         const ids = addonRows.map(r => r.addon_service_id);
-        const { data: services } = await db.from("service_catalog").select("id, name").in("id", ids);
+        const { data: services } = await api.from("service_catalog").select("id, name").in("id", ids);
         const byId = new Map<string, string>((services || []).map((s: any) => [s.id, s.name]));
         addonRows.forEach(r => { r.name = byId.get(r.addon_service_id) || "Add-on"; });
       }

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { db } from "@/lib/supabase";
+import { api } from "@/lib/apiClient";
 import { Sparkles, Plus, Check, Clock } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -28,7 +28,7 @@ export default function ServiceAddonsPicker({ serviceId, selectedIds, onChange, 
     let cancelled = false;
     (async () => {
       setLoading(true);
-      const { data } = await db
+      const { data } = await api
         .from("service_addons")
         .select("addon_id, sort_order, discount_pct, service_catalog!service_addons_addon_id_fkey:service_catalog!inner(id,name,base_price,duration_minutes,category,description,is_active)")
         .eq("service_id", serviceId)
@@ -37,14 +37,14 @@ export default function ServiceAddonsPicker({ serviceId, selectedIds, onChange, 
       // Fallback to manual join if PostgREST hint fails
       let rows = (data as any[]) || [];
       if (!rows.length) {
-        const { data: links } = await db
+        const { data: links } = await api
           .from("service_addons")
           .select("addon_id, sort_order, discount_pct")
           .eq("service_id", serviceId)
           .order("sort_order");
         const ids = (links || []).map((l: any) => l.addon_id);
         if (ids.length) {
-          const { data: services } = await db
+          const { data: services } = await api
             .from("service_catalog")
             .select("id,name,base_price,duration_minutes,category,description,is_active")
             .in("id", ids);

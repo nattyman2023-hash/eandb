@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { db } from "@/lib/supabase";
+import { api } from "@/lib/apiClient";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -21,25 +21,25 @@ const Messages = () => {
   const [searchTerm, setSearchTerm] = useState("");
 
   const fetchMessages = async () => {
-    const { data } = await db.from("messages").select("*, customer:customers(name)").order("created_at", { ascending: false }).limit(500);
+    const { data } = await api.from("messages").select("*, customer:customers(name)").order("created_at", { ascending: false }).limit(500);
     setMessages((data as unknown as Message[]) ?? []);
   };
 
   const fetchCustomers = async () => {
-    const { data } = await db.from("customers").select("*").order("name");
+    const { data } = await api.from("customers").select("*").order("name");
     setCustomers((data as unknown as Customer[]) ?? []);
   };
 
   useEffect(() => { fetchMessages(); fetchCustomers(); }, []);
 
   useEffect(() => {
-    const channel = db.channel("messages-realtime").on("postgres_changes", { event: "*", schema: "public", table: "messages" }, () => fetchMessages()).subscribe();
-    return () => { db.removeChannel(channel); };
+    const channel = api.channel("messages-realtime").on("postgres_changes", { event: "*", schema: "public", table: "messages" }, () => fetchMessages()).subscribe();
+    return () => { api.removeChannel(channel); };
   }, []);
 
   const handleSend = async () => {
     if (!selectedCustomerId || !content.trim()) return;
-    const { error } = await db.from("messages").insert({ customer_id: selectedCustomerId, content: content.trim(), direction });
+    const { error } = await api.from("messages").insert({ customer_id: selectedCustomerId, content: content.trim(), direction });
     if (error) { toast.error(error.message); return; }
     toast.success("Message logged");
     setContent("");

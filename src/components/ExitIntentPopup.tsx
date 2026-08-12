@@ -6,7 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { BUSINESS } from "@/lib/siteContent";
 import { CalendarCheck, PhoneCall, MessageCircle, Phone } from "lucide-react";
-import { db } from "@/lib/supabase";
+import { api } from "@/lib/apiClient";
 import { toast } from "sonner";
 import { useAuth } from "@/contexts/AuthContext";
 
@@ -38,14 +38,14 @@ const ExitIntentPopup = () => {
     try {
       if (user) {
         // Authenticated user — find their customer record and create a job
-        const { data: customer } = await db
+        const { data: customer } = await api
           .from("customers")
           .select("id")
           .eq("user_id", user.id)
           .single();
 
         if (customer) {
-          await db.from("jobs").insert({
+          await api.from("jobs").insert({
             customer_id: customer.id,
             status: "pending",
             notes: "Client requested callback via exit intent.",
@@ -54,7 +54,7 @@ const ExitIntentPopup = () => {
         }
       } else {
         // Anonymous user — create a lead
-        await db.from("leads").insert({
+        await api.from("leads").insert({
           name: cbForm.name.trim(),
           phone: cbForm.phone.trim(),
           source: "Exit Intent Callback",

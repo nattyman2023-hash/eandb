@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { db, supabase } from "@/lib/supabase";
+import { api } from "@/lib/apiClient";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
@@ -39,9 +39,9 @@ const WaitlistPage = () => {
 
   const fetchAll = async () => {
     const [wRes, cRes, sRes] = await Promise.all([
-      db.from("waitlist").select("*").in("status", ["waiting", "assigned"]).order("position").order("created_at"),
-      db.from("chairs").select("*").eq("is_active", true).order("created_at"),
-      db.from("service_catalog").select("id, name, duration_minutes").eq("is_active", true).order("name"),
+      api.from("waitlist").select("*").in("status", ["waiting", "assigned"]).order("position").order("created_at"),
+      api.from("chairs").select("*").eq("is_active", true).order("created_at"),
+      api.from("service_catalog").select("id, name, duration_minutes").eq("is_active", true).order("name"),
     ]);
     setItems((wRes.data as WaitlistItem[]) ?? []);
     setChairs((cRes.data as Chair[]) ?? []);
@@ -51,25 +51,25 @@ const WaitlistPage = () => {
 
   // Realtime
   useEffect(() => {
-    const ch = supabase.channel("waitlist-live")
+    const ch = api.channel("waitlist-live")
       .on("postgres_changes", { event: "*", schema: "public", table: "waitlist" }, () => fetchAll())
       .subscribe();
-    return () => { supabase.removeChannel(ch); };
+    return () => { api.removeChannel(ch); };
   }, []);
 
   const handleAdd = async () => {
     if (!form.name.trim()) { toast.error("Name is required"); return; }
     let customerId: string | null = null;
     if (form.phone) {
-      const { data: existing } = await db.from("customers").select("id").eq("phone", form.phone).limit(1).maybeSingle();
+      const { data: existing } = await api.from("customers").select("id").eq("phone", form.phone).limit(1).maybeSingle();
       if (existing) customerId = existing.id;
       else {
-        const { data: c } = await db.from("customers").insert({ name: form.name, phone: form.phone }).select("id").single();
+        const { data: c } = await api.from("customers").insert({ name: form.name, phone: form.phone }).select("id").single();
         customerId = c?.id ?? null;
       }
     }
     const nextPos = items.length;
-    await db.from("waitlist").insert({
+    await api.from("waitlist").insert({
       client_name: form.name, phone: form.phone || null, notes: form.notes || null,
       customer_id: customerId, service_catalog_id: form.service_catalog_id || null,
       estimated_wait_minutes: Number(form.estimated_wait_minutes) || 15,
@@ -113,18 +113,18 @@ const WaitlistPage = () => {
   };
 
   const assignChair = async (waitlistId: string, chairId: string) => {
-    await db.from("waitlist").update({ assigned_chair_id: chairId, status: "assigned" }).eq("id", waitlistId);
+    await api.from("waitlist").update({ assigned_chair_id: chairId, status: "assigned" }).eq("id", waitlistId);
     toast.success("Assigned to chair"); fetchAll();
   };
 
   const markDone = async (id: string) => {
-    await db.from("waitlist").update({ status: "completed" }).eq("id", id);
+    await api.from("waitlist").update({ status: "completed" }).eq("id", id);
     toast.success("Removed from queue"); fetchAll();
   };
 
   const startConvert = (item: WaitlistItem) => setConvertItem(item);
   const onConverted = async () => {
-    if (convertItem) await db.from("waitlist").update({ status: "completed" }).eq("id", convertItem.id);
+    if (convertItem) await api.from("waitlist").update({ status: "completed" }).eq("id", convertItem.id);
     setConvertItem(null);
     fetchAll();
   };

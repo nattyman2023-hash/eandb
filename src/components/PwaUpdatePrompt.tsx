@@ -27,8 +27,7 @@ export function shouldDisablePwaRegistration() {
     host === "localhost" ||
     host === "127.0.0.1" ||
     host === "::1" ||
-    host.startsWith("id-preview--") ||
-    host.includes(".lovableproject.com");
+    host.startsWith("id-preview--");
 
   let isEmbedded = false;
   try {

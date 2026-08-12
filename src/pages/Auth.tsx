@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { useNavigate, useSearchParams, Link } from "react-router-dom";
-import { supabase } from "@/integrations/supabase/client";
-import { db } from "@/lib/supabase";
+import { api } from "@/lib/apiClient";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -59,7 +58,7 @@ const Auth = () => {
   const [signupName, setSignupName] = useState("");
 
   const redirectByRole = async (userId: string) => {
-    const { data: roles } = await db.from("user_roles").select("role").eq("user_id", userId);
+    const { data: roles } = await api.from("user_roles").select("role").eq("user_id", userId);
     const roleList = (roles ?? []).map((r: any) => r.role);
     if (role === "admin" && (roleList.includes("super_admin") || roleList.includes("admin"))) {
       navigate("/dashboard");
@@ -77,7 +76,7 @@ const Auth = () => {
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    const { data, error } = await supabase.auth.signInWithPassword({
+    const { data, error } = await api.auth.signInWithPassword({
       email: loginEmail,
       password: loginPassword,
     });
@@ -92,7 +91,7 @@ const Auth = () => {
   const handleSignup = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    const { error } = await supabase.auth.signUp({
+    const { error } = await api.auth.signUp({
       email: signupEmail,
       password: signupPassword,
       options: { data: { full_name: signupName }, emailRedirectTo: window.location.origin },
@@ -111,7 +110,7 @@ const Auth = () => {
   const handleForgotPassword = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    const { error } = await supabase.auth.resetPasswordForEmail(forgotEmail, {
+    const { error } = await api.auth.resetPasswordForEmail(forgotEmail, {
       redirectTo: `${window.location.origin}/reset-password`,
     });
     setLoading(false);

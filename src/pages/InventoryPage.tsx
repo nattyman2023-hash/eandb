@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { db } from "@/lib/supabase";
+import { api } from "@/lib/apiClient";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
@@ -23,7 +23,7 @@ const InventoryPage = () => {
   const [addQty, setAddQty] = useState("");
 
   const fetchItems = async () => {
-    const { data } = await db.from("inventory").select("*").order("category, name");
+    const { data } = await api.from("inventory").select("*").order("category, name");
     setItems((data as InventoryItem[]) ?? []);
   };
   useEffect(() => { fetchItems(); }, []);
@@ -39,9 +39,9 @@ const InventoryPage = () => {
       low_stock_threshold: Number(form.low_stock_threshold) || 5,
     };
     if (editItem) {
-      await db.from("inventory").update(payload).eq("id", editItem.id);
+      await api.from("inventory").update(payload).eq("id", editItem.id);
     } else {
-      await db.from("inventory").insert(payload);
+      await api.from("inventory").insert(payload);
     }
     setOpen(false); setEditItem(null); resetForm(); fetchItems();
     toast.success(editItem ? "Updated" : "Product added");
@@ -53,13 +53,13 @@ const InventoryPage = () => {
     if (!addStockId || !addQty) return;
     const item = items.find(i => i.id === addStockId);
     if (!item) return;
-    await db.from("inventory").update({ quantity: item.quantity + Number(addQty) }).eq("id", addStockId);
+    await api.from("inventory").update({ quantity: item.quantity + Number(addQty) }).eq("id", addStockId);
     setAddStockId(null); setAddQty("");
     fetchItems(); toast.success("Stock updated");
   };
 
   const handleDelete = async (id: string) => {
-    await db.from("inventory").delete().eq("id", id);
+    await api.from("inventory").delete().eq("id", id);
     setItems(prev => prev.filter(i => i.id !== id));
     toast.success("Product removed");
   };

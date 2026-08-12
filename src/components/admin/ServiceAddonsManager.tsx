@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { db } from "@/lib/supabase";
+import { api } from "@/lib/apiClient";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -31,11 +31,11 @@ export default function ServiceAddonsManager({ serviceId, serviceName }: Props) 
   const load = async () => {
     setLoading(true);
     const [{ data: addonRows }, { data: svcRows }] = await Promise.all([
-      db.from("service_addons")
+      api.from("service_addons")
         .select("id, addon_id, discount_pct, sort_order")
         .eq("service_id", serviceId)
         .order("sort_order"),
-      db.from("service_catalog")
+      api.from("service_catalog")
         .select("id, name, category, base_price")
         .eq("is_active", true)
         .order("category, name"),
@@ -52,7 +52,7 @@ export default function ServiceAddonsManager({ serviceId, serviceName }: Props) 
     if (pickId === serviceId) { toast.error("Can't add a service as its own add-on"); return; }
     if (rows.some(r => r.addon_id === pickId)) { toast.error("Already added"); return; }
     const sortOrder = rows.length;
-    const { error } = await db.from("service_addons").insert({
+    const { error } = await api.from("service_addons").insert({
       service_id: serviceId,
       addon_id: pickId,
       discount_pct: Number(pickDiscount) || 0,
@@ -64,14 +64,14 @@ export default function ServiceAddonsManager({ serviceId, serviceName }: Props) 
   };
 
   const removeRow = async (id: string) => {
-    await db.from("service_addons").delete().eq("id", id);
+    await api.from("service_addons").delete().eq("id", id);
     load();
   };
 
   const updateDiscount = async (id: string, value: string) => {
     const v = Number(value) || 0;
     setRows(prev => prev.map(r => r.id === id ? { ...r, discount_pct: v } : r));
-    await db.from("service_addons").update({ discount_pct: v } as any).eq("id", id);
+    await api.from("service_addons").update({ discount_pct: v } as any).eq("id", id);
   };
 
   const byId = new Map(services.map(s => [s.id, s]));

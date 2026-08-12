@@ -1,6 +1,5 @@
 import { useEffect, useState, useRef } from "react";
-import { db } from "@/lib/supabase";
-import { supabase } from "@/integrations/supabase/client";
+import { api } from "@/lib/apiClient";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
@@ -59,16 +58,16 @@ const ServicesDirectory = () => {
 
   useEffect(() => {
     const load = async () => {
-      const { data } = await db.from("service_catalog").select("*").eq("is_active", true).order("category, name");
+      const { data } = await api.from("service_catalog").select("*").eq("is_active", true).order("category, name");
       setItems((data as CatalogItem[]) ?? []);
 
-      const { data: files } = await supabase.storage.from("site-images").list("services", { limit: 500 });
+      const { data: files } = await api.storage.from("site-images").list("services", { limit: 500 });
       if (files) {
         const photoMap: Record<string, string[]> = {};
         for (const file of files) {
           const slug = file.name.split("_")[0]?.toLowerCase();
           if (!slug) continue;
-          const { data: urlData } = supabase.storage.from("site-images").getPublicUrl(`services/${file.name}`);
+          const { data: urlData } = api.storage.from("site-images").getPublicUrl(`services/${file.name}`);
           if (!photoMap[slug]) photoMap[slug] = [];
           photoMap[slug].push(urlData.publicUrl);
         }

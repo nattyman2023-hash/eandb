@@ -7,7 +7,7 @@ import {
 import { MoreVertical, User, Clock, StickyNote, Trash2, Scissors, Armchair, Sparkles, Hourglass, CheckCircle2, Gauge } from "lucide-react";
 import { format, differenceInMinutes } from "date-fns";
 import { cn } from "@/lib/utils";
-import { db } from "@/lib/supabase";
+import { api } from "@/lib/apiClient";
 import { toast } from "sonner";
 import { computeEfficiency, efficiencyClasses } from "@/lib/efficiency";
 import QuickReschedulePopover from "./QuickReschedulePopover";
@@ -166,7 +166,7 @@ export default function AppointmentCard({
                       patch.status = "completed";
                       patch.completed_at = new Date().toISOString();
                     }
-                    const { error } = await db.from("jobs").update(patch).eq("id", job.id);
+                    const { error } = await api.from("jobs").update(patch).eq("id", job.id);
                     if (error) toast.error(error.message);
                     else toast.success(`Marked ${label.toLowerCase()}`);
                     onRescheduled?.();

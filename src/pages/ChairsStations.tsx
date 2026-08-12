@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { db } from "@/lib/supabase";
+import { api } from "@/lib/apiClient";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Switch } from "@/components/ui/switch";
@@ -36,7 +36,7 @@ const ChairsStations = () => {
   const [form, setForm] = useState(emptyForm);
 
   const fetchChairs = async () => {
-    const { data } = await db.from("chairs").select("*").order("created_at");
+    const { data } = await api.from("chairs").select("*").order("created_at");
     setChairs(((data as any[]) ?? []).map(c => ({ ...c, zones: c.zones?.length ? c.zones : [c.zone].filter(Boolean) })));
   };
   useEffect(() => { fetchChairs(); }, []);
@@ -55,21 +55,21 @@ const ChairsStations = () => {
     if (form.zones.length === 0) { toast.error("Pick at least one zone"); return; }
     const payload = { name: form.name, zone: form.zones[0], zones: form.zones, notes: form.notes || null };
     if (editChair) {
-      await db.from("chairs").update(payload).eq("id", editChair.id);
+      await api.from("chairs").update(payload).eq("id", editChair.id);
     } else {
-      await db.from("chairs").insert(payload);
+      await api.from("chairs").insert(payload);
     }
     setOpen(false); setEditChair(null); setForm(emptyForm);
     fetchChairs(); toast.success(editChair ? "Chair updated" : "Chair added");
   };
 
   const toggleActive = async (id: string, active: boolean) => {
-    await db.from("chairs").update({ is_active: active }).eq("id", id);
+    await api.from("chairs").update({ is_active: active }).eq("id", id);
     setChairs(prev => prev.map(c => c.id === id ? { ...c, is_active: active } : c));
   };
 
   const handleDelete = async (id: string) => {
-    await db.from("chairs").delete().eq("id", id);
+    await api.from("chairs").delete().eq("id", id);
     setChairs(prev => prev.filter(c => c.id !== id));
     toast.success("Chair removed");
   };

@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
-import { db } from "@/lib/supabase";
-import { supabase } from "@/integrations/supabase/client";
+import { api } from "@/lib/apiClient";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -47,8 +46,8 @@ const Expenses = () => {
 
   const fetchData = async () => {
     const [expRes, empRes] = await Promise.all([
-      db.from("expenses").select("*").gte("date", from).lte("date", to).order("date", { ascending: false }),
-      db.from("profiles").select("*").eq("is_active", true).order("full_name"),
+      api.from("expenses").select("*").gte("date", from).lte("date", to).order("date", { ascending: false }),
+      api.from("profiles").select("*").eq("is_active", true).order("full_name"),
     ]);
     setExpenses((expRes.data as unknown as Expense[]) ?? []);
     setEmployees((empRes.data as unknown as Profile[]) ?? []);
@@ -70,7 +69,7 @@ const Expenses = () => {
   };
 
   const openReceipt = async (path: string) => {
-    const { data, error } = await supabase.storage.from("expense-receipts").createSignedUrl(path, 60);
+    const { data, error } = await api.storage.from("expense-receipts").createSignedUrl(path, 60);
     if (error || !data?.signedUrl) { toast.error("Could not open receipt"); return; }
     window.open(data.signedUrl, "_blank", "noopener,noreferrer");
   };
@@ -83,12 +82,12 @@ const Expenses = () => {
     let receiptPath: string | null = null;
     if (receiptFile) {
       const path = `${addForm.employee_id}/${Date.now()}-${receiptFile.name}`;
-      const { error: upErr } = await supabase.storage.from("expense-receipts").upload(path, receiptFile);
+      const { error: upErr } = await api.storage.from("expense-receipts").upload(path, receiptFile);
       if (upErr) { toast.error("Receipt upload failed: " + upErr.message); setAddLoading(false); return; }
       receiptPath = path;
     }
 
-    const { error } = await db.from("expenses").insert({
+    const { error } = await api.from("expenses").insert({
       employee_id: addForm.employee_id,
       description: addForm.description,
       amount,
@@ -108,7 +107,7 @@ const Expenses = () => {
   const handleEdit = async () => {
     if (!editExpense) return;
     const amount = parseFloat(editForm.amount);
-    const { error } = await db.from("expenses").update({
+    const { error } = await api.from("expenses").update({
       description: editForm.description, amount,
       category: editForm.category, date: editForm.date,
     }).eq("id", editExpense.id);
@@ -117,7 +116,7 @@ const Expenses = () => {
   };
 
   const handleDelete = async (id: string) => {
-    const { error } = await db.from("expenses").delete().eq("id", id);
+    const { error } = await api.from("expenses").delete().eq("id", id);
     if (error) { toast.error(error.message); return; }
     setExpenses(prev => prev.filter(e => e.id !== id));
     toast.success("Expense deleted"); fetchData();

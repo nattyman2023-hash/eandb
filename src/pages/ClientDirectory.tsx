@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { db } from "@/lib/supabase";
+import { api } from "@/lib/apiClient";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
@@ -36,7 +36,7 @@ const ClientDirectory = () => {
   const [addForm, setAddForm] = useState({ name: "", phone: "", email: "", postcode: "" });
 
   const load = async () => {
-    const { data } = await db.from("customers").select("*").order("name");
+    const { data } = await api.from("customers").select("*").order("name");
     const all = (data as Client[]) ?? [];
     setClients(all);
     const monthStart = new Date();
@@ -48,13 +48,13 @@ const ClientDirectory = () => {
 
   const openProfile = async (client: Client) => {
     setSelectedClient(client);
-    const { data } = await db.from("jobs").select("id, service_type, notes, status, scheduled_at, created_at").eq("customer_id", client.id).order("created_at", { ascending: false }).limit(20);
+    const { data } = await api.from("jobs").select("id, service_type, notes, status, scheduled_at, created_at").eq("customer_id", client.id).order("created_at", { ascending: false }).limit(20);
     setClientJobs((data as ClientJob[]) ?? []);
   };
 
   const handleAddClient = async () => {
     if (!addForm.name.trim()) { toast.error("Name is required"); return; }
-    const { error } = await db.from("customers").insert({
+    const { error } = await api.from("customers").insert({
       name: addForm.name, phone: addForm.phone || null, email: addForm.email || null, postcode: addForm.postcode || null,
     });
     if (error) { toast.error(error.message); return; }

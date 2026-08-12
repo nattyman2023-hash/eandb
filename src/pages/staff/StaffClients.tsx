@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { db } from "@/lib/supabase";
+import { api } from "@/lib/apiClient";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet";
@@ -17,8 +17,8 @@ export default function StaffClients() {
 
   useEffect(() => {
     const t = setTimeout(async () => {
-      let req = db.from("customers").select("id, name, phone, email, postcode").order("created_at", { ascending: false }).limit(40);
-      if (q.trim()) req = db.from("customers").select("id, name, phone, email, postcode").or(`name.ilike.%${q}%,phone.ilike.%${q}%,email.ilike.%${q}%`).limit(40);
+      let req = api.from("customers").select("id, name, phone, email, postcode").order("created_at", { ascending: false }).limit(40);
+      if (q.trim()) req = api.from("customers").select("id, name, phone, email, postcode").or(`name.ilike.%${q}%,phone.ilike.%${q}%,email.ilike.%${q}%`).limit(40);
       const { data } = await req;
       setList(data ?? []);
     }, 200);
@@ -28,8 +28,8 @@ export default function StaffClients() {
   const openClient = async (c: Customer) => {
     setActive(c);
     const [j, v] = await Promise.all([
-      db.from("jobs").select("id, scheduled_at, status, notes").eq("customer_id", c.id).order("scheduled_at", { ascending: false }).limit(20),
-      db.from("hair_profiles").select("preference, texture, goal").eq("customer_id", c.id).order("updated_at", { ascending: false }).limit(1).maybeSingle(),
+      api.from("jobs").select("id, scheduled_at, status, notes").eq("customer_id", c.id).order("scheduled_at", { ascending: false }).limit(20),
+      api.from("hair_profiles").select("preference, texture, goal").eq("customer_id", c.id).order("updated_at", { ascending: false }).limit(1).maybeSingle(),
     ]);
     setHistory(j.data ?? []);
     setProfile(v.data ?? null);

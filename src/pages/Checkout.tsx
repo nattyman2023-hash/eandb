@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { useCart } from "@/contexts/CartContext";
 import { useAuth } from "@/contexts/AuthContext";
-import { db } from "@/lib/supabase";
+import { api } from "@/lib/apiClient";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -66,7 +66,7 @@ const Checkout = () => {
     }
     setSubmitting(true);
     try {
-      const { data: order, error } = await db.from("orders").insert({
+      const { data: order, error } = await api.from("orders").insert({
         user_id: user?.id ?? null,
         total: productTotal,
         status: "pending",
@@ -83,7 +83,7 @@ const Checkout = () => {
         quantity: i.quantity,
         unit_price: i.price,
       }));
-      const { error: itemErr } = await db.from("order_items").insert(items);
+      const { error: itemErr } = await api.from("order_items").insert(items);
       if (itemErr) throw itemErr;
 
       clearCart();

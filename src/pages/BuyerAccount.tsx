@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useAuth } from "@/contexts/AuthContext";
-import { db } from "@/lib/supabase";
+import { api } from "@/lib/apiClient";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -20,11 +20,11 @@ const BuyerAccount = () => {
   useEffect(() => {
     if (!user) return;
     const load = async () => {
-      const { data: cust } = await db.from("customers").select("id, name, phone").eq("user_id", user.id).limit(1).single();
+      const { data: cust } = await api.from("customers").select("id, name, phone").eq("user_id", user.id).limit(1).single();
       if (cust) {
         setCustomerId(cust.id);
         setForm({ name: cust.name, phone: cust.phone || "" });
-        const { data: j } = await db.from("jobs").select("*, customer:customers(name)").eq("customer_id", cust.id).order("created_at", { ascending: false });
+        const { data: j } = await api.from("jobs").select("*, customer:customers(name)").eq("customer_id", cust.id).order("created_at", { ascending: false });
         setJobs((j as unknown as Job[]) ?? []);
       }
     };
@@ -33,7 +33,7 @@ const BuyerAccount = () => {
 
   const updateProfile = async () => {
     if (!customerId) return;
-    await db.from("customers").update({ name: form.name, phone: form.phone }).eq("id", customerId);
+    await api.from("customers").update({ name: form.name, phone: form.phone }).eq("id", customerId);
     toast.success("Profile updated");
   };
 

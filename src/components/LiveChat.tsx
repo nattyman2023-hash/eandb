@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { MessageSquare, X, Send, ArrowRight, ExternalLink } from "lucide-react";
-import { supabase } from "@/integrations/supabase/client";
+import { api } from "@/lib/apiClient";
 import { BUSINESS } from "@/lib/siteContent";
 import chatAvatar from "@/assets/chat-avatar.png";
 
@@ -53,7 +53,7 @@ const LiveChat = () => {
     setSending(true);
 
     try {
-      const { data, error } = await supabase.functions.invoke("chat-assistant", {
+      const { data, error } = await api.functions.invoke("chat-assistant", {
         body: { messages: next.map(m => ({ role: m.role, content: m.content })) },
       });
       if (error) throw error;

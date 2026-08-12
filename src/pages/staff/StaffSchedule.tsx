@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { db, supabase } from "@/lib/supabase";
+import { api } from "@/lib/apiClient";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { format, addDays, startOfDay } from "date-fns";
@@ -31,17 +31,17 @@ export default function StaffSchedule() {
     const start = new Date(day); start.setHours(0,0,0,0);
     const end = new Date(day); end.setHours(23,59,59,999);
     const [j, s] = await Promise.all([
-      db.from("jobs").select("*, customer:customers(name)").gte("scheduled_at", start.toISOString()).lte("scheduled_at", end.toISOString()).order("scheduled_at"),
-      db.from("profiles").select("user_id, full_name").eq("is_active", true).order("full_name"),
+      api.from("jobs").select("*, customer:customers(name)").gte("scheduled_at", start.toISOString()).lte("scheduled_at", end.toISOString()).order("scheduled_at"),
+      api.from("profiles").select("user_id, full_name").eq("is_active", true).order("full_name"),
     ]);
     setJobs(j.data ?? []); setStylists((s.data as Stylist[]) ?? []);
   };
   useEffect(() => { load(); /* eslint-disable-next-line */ }, [day]);
   useEffect(() => {
-    const ch = supabase.channel("staff-sched")
+    const ch = api.channel("staff-sched")
       .on("postgres_changes", { event: "*", schema: "public", table: "jobs" }, load)
       .subscribe();
-    return () => { supabase.removeChannel(ch); };
+    return () => { api.removeChannel(ch); };
   // eslint-disable-next-line
   }, []);
 

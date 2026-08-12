@@ -5,7 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Clock } from "lucide-react";
 import { format } from "date-fns";
-import { db } from "@/lib/supabase";
+import { api } from "@/lib/apiClient";
 import { toast } from "sonner";
 
 interface Props {
@@ -24,7 +24,7 @@ export default function QuickReschedulePopover({ jobId, scheduledAt, onSaved }: 
   const save = async () => {
     setSaving(true);
     const iso = new Date(`${date}T${time}:00`).toISOString();
-    const { error } = await db.from("jobs").update({ scheduled_at: iso }).eq("id", jobId);
+    const { error } = await api.from("jobs").update({ scheduled_at: iso }).eq("id", jobId);
     setSaving(false);
     if (error) { toast.error(error.message); return; }
     toast.success("Rescheduled");

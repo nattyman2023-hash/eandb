@@ -8,8 +8,7 @@ const isPreviewOrDevHost = () => {
     host === "localhost" ||
     host === "127.0.0.1" ||
     host === "::1" ||
-    host.startsWith("id-preview--") ||
-    host.includes(".lovableproject.com")
+    host.startsWith("id-preview--")
   );
 };
 
@@ -24,12 +23,12 @@ const isEmbeddedPreview = () => {
 const cleanPreviewUrl = () => {
   const { pathname, search, hash } = window.location;
   const params = new URLSearchParams(search);
-  const hasAuthParams = ["code", "access_token", "refresh_token", "token", "type", "__lovable_token", "__lovable_sha"].some((key) =>
+  const hasAuthParams = ["code", "access_token", "refresh_token", "token", "type"].some((key) =>
     params.has(key),
   );
   const hasHashToken = /access_token|refresh_token|token|type=/.test(hash);
   const hasTokenLikeQuery = Array.from(params.entries()).some(
-    ([key, value]) => key.startsWith("__lovable_") || key.length > 80 || value.length > 80,
+    ([key, value]) => key.length > 80 || value.length > 80,
   );
 
   if (hasAuthParams || hasHashToken || hasTokenLikeQuery) {

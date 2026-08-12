@@ -1,7 +1,6 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
-import { supabase } from "@/integrations/supabase/client";
-import { db } from "@/lib/supabase";
-import type { User, Session } from "@supabase/supabase-js";
+import { api } from "@/lib/apiClient";
+import type { User, Session } from "@/lib/apiClient";
 import type { AppRole, Profile } from "@/types/database";
 
 interface AuthContextType {
@@ -35,15 +34,15 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
   const fetchProfileAndRoles = async (userId: string) => {
     const [profileRes, rolesRes] = await Promise.all([
-      db.from("profiles").select("*").eq("user_id", userId).single(),
-      db.from("user_roles").select("role").eq("user_id", userId),
+      api.from("profiles").select("*").eq("user_id", userId).single(),
+      api.from("user_roles").select("role").eq("user_id", userId),
     ]);
     if (profileRes.data) setProfile(profileRes.data as Profile);
     if (rolesRes.data) setRoles((rolesRes.data as { role: AppRole }[]).map((r) => r.role));
   };
 
   useEffect(() => {
-    const { data: { subscription } } = supabase.auth.onAuthStateChange(
+    const { data: { subscription } } = api.auth.onAuthStateChange(
       async (_event, session) => {
         setSession(session);
         setUser(session?.user ?? null);
@@ -57,7 +56,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       }
     );
 
-    supabase.auth.getSession().then(({ data: { session } }) => {
+    api.auth.getSession().then(({ data: { session } }) => {
       setSession(session);
       setUser(session?.user ?? null);
       if (session?.user) {
@@ -70,7 +69,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   }, []);
 
   const signOut = async () => {
-    await supabase.auth.signOut();
+    await api.auth.signOut();
     setUser(null);
     setSession(null);
     setProfile(null);

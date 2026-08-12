@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { db } from "@/lib/supabase";
+import { api } from "@/lib/apiClient";
 import { productPrice, productOriginal, servicePrice, serviceOriginal, discountPercent } from "@/lib/pricing";
 import { Sparkles } from "lucide-react";
 
@@ -20,8 +20,8 @@ const PromoBar = () => {
   useEffect(() => {
     const load = async () => {
       const [svcRes, prodRes] = await Promise.all([
-        db.from("service_catalog").select("id,name,base_price,sale_price,is_on_promo").eq("is_on_promo", true).eq("is_active", true).limit(20),
-        db.from("products").select("id,name,price,compare_at_price,sale_price,is_on_promo").or("is_on_promo.eq.true,and(compare_at_price.gt.0)").eq("is_active", true).limit(20),
+        api.from("service_catalog").select("id,name,base_price,sale_price,is_on_promo").eq("is_on_promo", true).eq("is_active", true).limit(20),
+        api.from("products").select("id,name,price,compare_at_price,sale_price,is_on_promo").or("is_on_promo.eq.true,and(compare_at_price.gt.0)").eq("is_active", true).limit(20),
       ]);
       const svcs: PromoItem[] = (svcRes.data ?? []).map((s: any) => {
         const current = servicePrice(s);

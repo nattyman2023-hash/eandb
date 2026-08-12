@@ -7,16 +7,21 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
-node_modules
-dist
+node_modules/
+dist/
 dist-ssr
 *.local
 
 # Secrets - never commit real credentials
-server/.env
-api/.env
+.env
 .env.local
 .env.production
+.env.*
+!.env.example
+server/.env
+server/.env.*
+!.env.example
+api/.env
 push-database.cjs
 
 # Uploaded user content (job photos, receipts, site images)

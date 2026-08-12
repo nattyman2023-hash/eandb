@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { db } from "@/lib/supabase";
+import { api } from "@/lib/apiClient";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -78,8 +78,8 @@ export default function NewAppointmentDialog({
 
     (async () => {
       const [s, p] = await Promise.all([
-        db.from("service_catalog").select("id, name, base_price, duration_minutes, category").eq("is_active", true).order("name"),
-        db.from("profiles").select("user_id, full_name").eq("is_active", true).eq("bookable", true).order("full_name"),
+        api.from("service_catalog").select("id, name, base_price, duration_minutes, category").eq("is_active", true).order("name"),
+        api.from("profiles").select("user_id, full_name").eq("is_active", true).eq("bookable", true).order("full_name"),
       ]);
       setServices((s.data as Service[]) ?? []);
       setStylists((p.data as Stylist[]) ?? []);
@@ -123,7 +123,7 @@ export default function NewAppointmentDialog({
       scheduled.setHours(h, m, 0, 0);
 
       const svc = services.find(s => s.id === serviceId);
-      await db.from("jobs").insert({
+      await api.from("jobs").insert({
         customer_id: customer.id,
         scheduled_at: scheduled.toISOString(),
         type: "garage",

@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { db } from "@/lib/supabase";
+import { api } from "@/lib/apiClient";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -32,7 +32,7 @@ const AdminProducts = () => {
   const [uploading, setUploading] = useState(false);
 
   const load = () => {
-    db.from("products").select("*").order("created_at", { ascending: false }).then(({ data }: any) => setProducts(data || []));
+    api.from("products").select("*").order("created_at", { ascending: false }).then(({ data }: any) => setProducts(data || []));
   };
 
   useEffect(load, []);
@@ -45,9 +45,9 @@ const AdminProducts = () => {
     if (!file || !editing) return;
     setUploading(true);
     const path = `products/${Date.now()}-${file.name}`;
-    const { error } = await db.storage.from("site-images").upload(path, file);
+    const { error } = await api.storage.from("site-images").upload(path, file);
     if (error) { toast({ title: "Upload failed", variant: "destructive" }); setUploading(false); return; }
-    const { data: { publicUrl } } = db.storage.from("site-images").getPublicUrl(path);
+    const { data: { publicUrl } } = api.storage.from("site-images").getPublicUrl(path);
     setEditing({ ...editing, image_url: publicUrl });
     setUploading(false);
   };
@@ -65,10 +65,10 @@ const AdminProducts = () => {
     };
 
     if (editing.id) {
-      await db.from("products").update(payload).eq("id", editing.id);
+      await api.from("products").update(payload).eq("id", editing.id);
       toast({ title: "Product updated" });
     } else {
-      await db.from("products").insert(payload);
+      await api.from("products").insert(payload);
       toast({ title: "Product created" });
     }
     setEditing(null);
@@ -77,7 +77,7 @@ const AdminProducts = () => {
 
   const remove = async (id: string) => {
     if (!confirm("Delete this product?")) return;
-    await db.from("products").delete().eq("id", id);
+    await api.from("products").delete().eq("id", id);
     toast({ title: "Product deleted" });
     load();
   };

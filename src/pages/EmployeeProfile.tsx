@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { db } from "@/lib/supabase";
+import { api } from "@/lib/apiClient";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -33,14 +33,14 @@ const EmployeeProfile = () => {
   useEffect(() => {
     if (!id) return;
     const load = async () => {
-      const { data: prof } = await db.from("profiles").select("*").eq("id", id).single();
+      const { data: prof } = await api.from("profiles").select("*").eq("id", id).single();
       if (!prof) { setLoading(false); return; }
       setProfile(prof as unknown as Profile);
 
       const [rolesRes, jobsRes, timeRes] = await Promise.all([
-        db.from("user_roles").select("role").eq("user_id", prof.user_id),
-        db.from("jobs").select("*, customer:customers(name, phone, email), hair_profile:hair_profiles(preference, texture, goal)").eq("assigned_to", prof.user_id).order("created_at", { ascending: false }),
-        db.from("time_entries").select("*").eq("mechanic_id", prof.user_id).order("start_time", { ascending: false }),
+        api.from("user_roles").select("role").eq("user_id", prof.user_id),
+        api.from("jobs").select("*, customer:customers(name, phone, email), hair_profile:hair_profiles(preference, texture, goal)").eq("assigned_to", prof.user_id).order("created_at", { ascending: false }),
+        api.from("time_entries").select("*").eq("mechanic_id", prof.user_id).order("start_time", { ascending: false }),
       ]);
 
       setRoles((rolesRes.data ?? []).map((r: any) => r.role));

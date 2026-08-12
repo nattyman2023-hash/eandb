@@ -1,7 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { useSearchParams } from "react-router-dom";
-import { db } from "@/lib/supabase";
-import { supabase } from "@/integrations/supabase/client";
+import { api, apiRequest } from "@/lib/apiClient";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -96,9 +95,9 @@ const Booking = () => {
         last_seen_at: new Date().toISOString(),
       };
       if (draftId) {
-        await supabase.from("booking_drafts").update(payload).eq("id", draftId);
+        await api.from("booking_drafts").update(payload).eq("id", draftId);
       } else {
-        const { data } = await supabase.from("booking_drafts").insert(payload).select("id").single();
+        const { data } = await api.from("booking_drafts").insert(payload).select("id").single();
         if (data?.id) setDraftId(data.id);
       }
     }, 800);
@@ -106,7 +105,7 @@ const Booking = () => {
   }, [customerForm.email, customerForm.name, selectedService?.id, selectedDate, selectedTime, step, draftId]);
 
   useEffect(() => {
-    db.from("service_catalog")
+    api.from("service_catalog")
       .select("*").eq("is_active", true).order("category, name")
       .then(({ data }) => {
         const list = (data as CatalogItem[]) ?? [];
@@ -124,7 +123,7 @@ const Booking = () => {
     setSlotsLoading(true);
     const dayStart = startOfDay(selectedDate).toISOString();
     const dayEnd = endOfDay(selectedDate).toISOString();
-    db.from("jobs")
+    api.from("jobs")
       .select("scheduled_at, service_catalog(duration_minutes)")
       .gte("scheduled_at", dayStart).lt("scheduled_at", dayEnd)
       .neq("status", "cancelled")
@@ -220,10 +219,10 @@ const Booking = () => {
         })),
         fulfillment: { method: "garage" },
       };
-      const { data, error } = await supabase.functions.invoke("create-booking", { body: payload });
-      if (error) throw new Error(error.message || "Booking failed");
-      if (data?.error) throw new Error(data.error);
-
+      const { data } = await apiRequest<{ data: { customer_id: string; hair_profile_id?: string; job_id: string } }>("/api/bookings", {
+        method: "POST",
+        body: JSON.stringify(payload),
+      });
       const jobId = data?.job_id;
 
       // Upload reference photos (if any) to job-photos bucket and link to the job
@@ -231,9 +230,9 @@ const Booking = () => {
         for (const file of referencePhotos) {
           try {
             const path = `bookings/${jobId}/reference/${Date.now()}-${file.name.replace(/[^a-z0-9.\-_]/gi, "_")}`;
-            const { error: upErr } = await supabase.storage.from("job-photos").upload(path, file, { upsert: false });
+            const { error: upErr } = await api.storage.from("job-photos").upload(path, file, { upsert: false });
             if (upErr) { console.error("ref upload", upErr); continue; }
-            await supabase.from("job_photos").insert({
+            await api.from("job_photos").insert({
               job_id: jobId,
               storage_path: path,
               photo_type: "reference",
@@ -246,7 +245,7 @@ const Booking = () => {
 
 
       setDone(true);
-      if (draftId) await supabase.from("booking_drafts").update({ completed: true }).eq("id", draftId);
+      if (draftId) await api.from("booking_drafts").update({ completed: true }).eq("id", draftId);
       toast.success("Booking confirmed!");
     } catch (err: any) {
       toast.error(err.message || "Something went wrong");

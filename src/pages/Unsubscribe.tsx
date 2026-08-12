@@ -2,10 +2,7 @@ import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { supabase } from "@/integrations/supabase/client";
-
-const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL;
-const ANON = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY;
+import { apiRequest } from "@/lib/apiClient";
 
 export default function Unsubscribe() {
   const [params] = useSearchParams();
@@ -17,7 +14,7 @@ export default function Unsubscribe() {
     (async () => {
       if (!token) return setState("invalid");
       try {
-        const r = await fetch(`${SUPABASE_URL}/functions/v1/handle-email-unsubscribe?token=${encodeURIComponent(token)}`, { headers: { apikey: ANON } });
+        const r = await fetch(`/api/email/unsubscribe?token=${encodeURIComponent(token)}`);
         const j = await r.json();
         if (j.valid) setState("valid");
         else if (j.reason === "already_unsubscribed") setState("already");
@@ -29,9 +26,12 @@ export default function Unsubscribe() {
   const confirm = async () => {
     if (!token) return;
     setBusy(true);
-    const { data, error } = await supabase.functions.invoke("handle-email-unsubscribe", { body: { token } });
+    const { data } = await apiRequest<{ data: { success: boolean; reason?: string } }>("/api/email/unsubscribe", {
+      method: "POST",
+      body: JSON.stringify({ token }),
+    });
     setBusy(false);
-    if (error || !data?.success) setState(data?.reason === "already_unsubscribed" ? "already" : "error");
+    if (!data?.success) setState(data?.reason === "already_unsubscribed" ? "already" : "error");
     else setState("done");
   };
 

@@ -1,8 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useCart } from "@/contexts/CartContext";
-import { db } from "@/lib/supabase";
-import { supabase } from "@/integrations/supabase/client";
+import { api } from "@/lib/apiClient";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Minus, Plus, Trash2, ShoppingBag, ArrowLeft, ArrowRight, Scissors, Mail, Check } from "lucide-react";
@@ -22,7 +21,7 @@ const Cart = () => {
   const [saved, setSaved] = useState(false);
 
   useEffect(() => {
-    db.from("products").select("*").eq("is_active", true).eq("is_featured", true).limit(4)
+    api.from("products").select("*").eq("is_active", true).eq("is_featured", true).limit(4)
       .then(({ data }: any) => setRecommended(data || []));
   }, []);
 
@@ -31,13 +30,13 @@ const Cart = () => {
     if (!email.includes("@")) { toast.error("Enter a valid email"); return; }
     const sessionId = getSessionId();
     // mirror current service items into cart_items so the scheduler can find them
-    await supabase.from("cart_items").delete().eq("session_id", sessionId);
+    await api.from("cart_items").delete().eq("session_id", sessionId);
     if (serviceItems.length) {
-      await supabase.from("cart_items").insert(
+      await api.from("cart_items").insert(
         serviceItems.map((s: any) => ({ session_id: sessionId, service_catalog_id: s.id, quantity: s.quantity ?? 1 }))
       );
     }
-    await supabase.from("cart_sessions").upsert(
+    await api.from("cart_sessions").upsert(
       { session_id: sessionId, email, updated_at: new Date().toISOString(), reminder_sent_at: null },
       { onConflict: "session_id" }
     );

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { db } from "@/lib/supabase";
+import { api } from "@/lib/apiClient";
 import { useCart } from "@/contexts/CartContext";
 import { toast } from "@/hooks/use-toast";
 import { Button } from "@/components/ui/button";
@@ -40,7 +40,7 @@ const HomePage = () => {
   const { addProductToCart } = useCart();
 
   useEffect(() => {
-    db.from("products").select("*").eq("is_active", true).eq("is_featured", true).limit(4)
+    api.from("products").select("*").eq("is_active", true).eq("is_featured", true).limit(4)
       .then(({ data }: any) => setFeaturedProducts(data || []));
   }, []);
 

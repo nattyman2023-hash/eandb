@@ -1,5 +1,5 @@
 import { useEffect, useState, useMemo, useCallback } from "react";
-import { db, supabase } from "@/lib/supabase";
+import { api } from "@/lib/apiClient";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
@@ -55,12 +55,12 @@ const CalendarPage = () => {
     const end = new Date(currentDate); end.setHours(23, 59, 59, 999);
 
     const [jobsRes, staffRes] = await Promise.all([
-      db.from("jobs")
+      api.from("jobs")
         .select("*, customer:customers(name)")
         .gte("scheduled_at", start.toISOString())
         .lte("scheduled_at", end.toISOString())
         .order("scheduled_at"),
-      db.from("profiles").select("user_id, full_name").eq("is_active", true).order("full_name"),
+      api.from("profiles").select("user_id, full_name").eq("is_active", true).order("full_name"),
     ]);
     setJobs((jobsRes.data as unknown as JobWithJoin[]) ?? []);
     setStylists((staffRes.data as Stylist[]) ?? []);
@@ -70,11 +70,11 @@ const CalendarPage = () => {
 
   // Realtime — listen for job changes
   useEffect(() => {
-    const ch = supabase
+    const ch = api
       .channel("calendar-jobs")
       .on("postgres_changes", { event: "*", schema: "public", table: "jobs" }, () => load())
       .subscribe();
-    return () => { supabase.removeChannel(ch); };
+    return () => { api.removeChannel(ch); };
   }, [load]);
 
   // Build columns (stylists with bookings today + every active stylist + Unassigned)

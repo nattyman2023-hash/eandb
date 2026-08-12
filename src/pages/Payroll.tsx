@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { db } from "@/lib/supabase";
+import { api } from "@/lib/apiClient";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -38,9 +38,9 @@ const Payroll = () => {
 
   const fetchData = async () => {
     const [mechRes, entryRes, jobRes] = await Promise.all([
-      db.from("profiles").select("*").eq("is_active", true).order("full_name"),
-      db.from("time_entries").select("*").gte("start_time", `${from}T00:00:00`).lte("start_time", `${to}T23:59:59`),
-      db.from("jobs").select("*, customer:customers(name)").order("created_at", { ascending: false }).limit(100),
+      api.from("profiles").select("*").eq("is_active", true).order("full_name"),
+      api.from("time_entries").select("*").gte("start_time", `${from}T00:00:00`).lte("start_time", `${to}T23:59:59`),
+      api.from("jobs").select("*, customer:customers(name)").order("created_at", { ascending: false }).limit(100),
     ]);
     if (mechRes.error) console.error("profiles fetch error:", mechRes.error);
     if (entryRes.error) console.error("time_entries fetch error:", entryRes.error);
@@ -93,7 +93,7 @@ const Payroll = () => {
 
     const jobId = addForm.job_id === "none" || addForm.job_id === "" ? null : addForm.job_id;
 
-    const { data, error } = await db.from("time_entries").insert({
+    const { data, error } = await api.from("time_entries").insert({
       mechanic_id: addForm.mechanic_id,
       job_id: jobId,
       start_time: toTimestampTz(addForm.start_time),
@@ -117,7 +117,7 @@ const Payroll = () => {
     const duration = differenceInSeconds(end, start);
     if (duration <= 0) { toast.error("End time must be after start time"); return; }
 
-    const { data, error } = await db.from("time_entries").update({
+    const { data, error } = await api.from("time_entries").update({
       start_time: toTimestampTz(editForm.start_time),
       end_time: toTimestampTz(editForm.end_time),
       duration_seconds: duration,
@@ -133,14 +133,14 @@ const Payroll = () => {
 
   const handleDeleteEntry = async () => {
     if (!deleteEntryId) return;
-    const { error } = await db.from("time_entries").delete().eq("id", deleteEntryId);
+    const { error } = await api.from("time_entries").delete().eq("id", deleteEntryId);
     if (error) { console.error("Delete error:", error); toast.error(error.message); return; }
     setEntries(prev => prev.filter(e => e.id !== deleteEntryId));
     toast.success("Time entry deleted"); setDeleteEntryId(null); fetchData();
   };
 
   const handleArchiveEntry = async (entryId: string, archive: boolean) => {
-    const { error } = await db.from("time_entries").update({ archived: archive }).eq("id", entryId);
+    const { error } = await api.from("time_entries").update({ archived: archive }).eq("id", entryId);
     if (error) { console.error("Archive error:", error); toast.error(error.message); return; }
     toast.success(archive ? "Entry archived" : "Entry restored");
     fetchData();

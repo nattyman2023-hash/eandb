@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { db } from "@/lib/supabase";
+import { api } from "@/lib/apiClient";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
@@ -22,12 +22,12 @@ const AdminOrders = () => {
   const [orders, setOrders] = useState<Order[]>([]);
 
   const load = () => {
-    db.from("orders").select("*").order("created_at", { ascending: false }).then(({ data }: any) => setOrders(data || []));
+    api.from("orders").select("*").order("created_at", { ascending: false }).then(({ data }: any) => setOrders(data || []));
   };
   useEffect(load, []);
 
   const updateStatus = async (id: string, status: string) => {
-    await db.from("orders").update({ status }).eq("id", id);
+    await api.from("orders").update({ status }).eq("id", id);
     toast({ title: `Order marked ${status}` });
     load();
   };

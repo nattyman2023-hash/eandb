@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { db } from "@/lib/supabase";
+import { api } from "@/lib/apiClient";
 import { useCart } from "@/contexts/CartContext";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -35,7 +35,7 @@ const Shop = () => {
   const { addProductToCart } = useCart();
 
   useEffect(() => {
-    db.from("products").select("*").eq("is_active", true).order("is_featured", { ascending: false }).then(({ data }: any) => {
+    api.from("products").select("*").eq("is_active", true).order("is_featured", { ascending: false }).then(({ data }: any) => {
       setProducts(data || []);
       setLoading(false);
     });

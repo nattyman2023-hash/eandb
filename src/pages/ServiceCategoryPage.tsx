@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams, Link, Navigate, useNavigate } from "react-router-dom";
-import { db } from "@/lib/supabase";
+import { api } from "@/lib/apiClient";
 import { Button } from "@/components/ui/button";
 import { Clock, Scissors } from "lucide-react";
 import SEOHead from "@/components/SEOHead";
@@ -44,7 +44,7 @@ const ServiceCategoryPage = () => {
   useEffect(() => {
     if (!config) return;
     const fetch = async () => {
-      const { data } = await db.from("service_catalog").select("*").eq("is_active", true).ilike("category", `%${config.dbCategory}%`).order("base_price");
+      const { data } = await api.from("service_catalog").select("*").eq("is_active", true).ilike("category", `%${config.dbCategory}%`).order("base_price");
       setItems((data as CatalogItem[]) ?? []);
     };
     fetch();

@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { useAuth } from "@/contexts/AuthContext";
-import { db } from "@/lib/supabase";
-import { supabase } from "@/integrations/supabase/client";
+import { api } from "@/lib/apiClient";
 import { Heart, Camera } from "lucide-react";
 import type { JobPhoto } from "@/types/database";
 
@@ -13,26 +12,26 @@ const PortalStyleDiary = () => {
   useEffect(() => {
     if (!user) return;
     const load = async () => {
-      const { data: cust } = await db.from("customers").select("id").eq("user_id", user.id).single();
+      const { data: cust } = await api.from("customers").select("id").eq("user_id", user.id).single();
       if (!cust) { setLoading(false); return; }
 
-      const { data: jobIds } = await db.from("jobs").select("id").eq("customer_id", cust.id);
+      const { data: jobIds } = await api.from("jobs").select("id").eq("customer_id", cust.id);
       if (!jobIds?.length) { setLoading(false); return; }
 
       const ids = jobIds.map((j: any) => j.id);
-      const { data: photoData } = await db.from("job_photos")
+      const { data: photoData } = await api.from("job_photos")
         .select("*")
         .in("job_id", ids)
         .eq("visible_to_customer", true)
         .order("created_at", { ascending: false });
 
       // Fetch latest note per job for "stylist notes"
-      const { data: notes } = await db.from("job_notes").select("job_id, content").in("job_id", ids).order("created_at", { ascending: false });
+      const { data: notes } = await api.from("job_notes").select("job_id, content").in("job_id", ids).order("created_at", { ascending: false });
       const noteMap: Record<string, string> = {};
       (notes ?? []).forEach((n: any) => { if (!noteMap[n.job_id]) noteMap[n.job_id] = n.content; });
 
       const enriched = (photoData ?? []).map((p: any) => {
-        const { data: urlData } = supabase.storage.from("job-photos").getPublicUrl(p.storage_path);
+        const { data: urlData } = api.storage.from("job-photos").getPublicUrl(p.storage_path);
         return { ...p, url: urlData?.publicUrl || "", jobNote: noteMap[p.job_id] };
       });
       setPhotos(enriched as any);
