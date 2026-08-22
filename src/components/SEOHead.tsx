@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 
-const DOMAIN = "https://eandb.co.uk";
+const DOMAIN = "https://eandbhair.co.uk";
 
 interface SEOHeadProps {
   title: string;

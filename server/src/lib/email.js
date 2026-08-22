@@ -19,7 +19,7 @@ async function sendEmail({ to, subject, html }) {
   }
   try {
     await resend.emails.send({
-      from: process.env.EMAIL_FROM || 'E and B <notifications@eandb.co.uk>',
+      from: process.env.EMAIL_FROM || 'E and B <notifications@eandbhair.co.uk>',
       to,
       subject,
       html,

@@ -10,7 +10,7 @@ export const BUSINESS = {
   phone: "07472 397993",
   phoneHref: "tel:+447472397993",
   whatsapp: "https://wa.me/447472397993",
-  email: "hello@eandb.co.uk",
+  email: "hello@eandbhair.co.uk",
   address: "174 Claremont Road, Manchester M14 4TT",
   tagline: "Bold Cuts. Sharp Style. Manchester's Charcoal-and-Ember Salon.",
 };

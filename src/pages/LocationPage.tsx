@@ -35,7 +35,7 @@ const LocationPage = () => {
             name: `${BUSINESS.name} — ${borough.name}`,
             telephone: BUSINESS.phone,
             image: borough.image,
-            url: `https://eandb.co.uk/areas/${borough.slug}`,
+            url: `https://eandbhair.co.uk/areas/${borough.slug}`,
             openingHoursSpecification: [
               { "@type": "OpeningHoursSpecification", dayOfWeek: ["Monday","Tuesday","Wednesday","Thursday","Friday"], opens: "09:00", closes: "19:00" },
               { "@type": "OpeningHoursSpecification", dayOfWeek: "Saturday", opens: "09:00", closes: "18:00" },
@@ -60,9 +60,9 @@ const LocationPage = () => {
             "@context": "https://schema.org",
             "@type": "BreadcrumbList",
             itemListElement: [
-              { "@type": "ListItem", position: 1, name: "Home", item: "https://eandb.co.uk/" },
-              { "@type": "ListItem", position: 2, name: "Areas We Serve", item: "https://eandb.co.uk/" },
-              { "@type": "ListItem", position: 3, name: borough.name, item: `https://eandb.co.uk/areas/${borough.slug}` },
+              { "@type": "ListItem", position: 1, name: "Home", item: "https://eandbhair.co.uk/" },
+              { "@type": "ListItem", position: 2, name: "Areas We Serve", item: "https://eandbhair.co.uk/" },
+              { "@type": "ListItem", position: 3, name: borough.name, item: `https://eandbhair.co.uk/areas/${borough.slug}` },
             ],
           }),
         }}

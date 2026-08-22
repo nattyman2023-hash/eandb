@@ -270,7 +270,7 @@ router.post('/create-booking', optionalAuth, async (req, res) => {
                   timeZone: 'Europe/London',
                 })
               : undefined,
-            manageUrl: `${process.env.FRONTEND_URL || 'https://eandb.co.uk'}/portal/appointments`,
+            manageUrl: `${process.env.FRONTEND_URL || 'https://eandbhair.co.uk'}/portal/appointments`,
           },
         });
       } catch (e) {
