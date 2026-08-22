@@ -27,28 +27,28 @@ export default defineConfig(({ mode }) => ({
   plugins: [
     react(),
     VitePWA({
-      filename: "wub-app-sw.js",
+      filename: "eandb-app-sw.js",
       registerType: "prompt",
       injectRegister: false,
       devOptions: { enabled: false },
-      includeAssets: ["placeholder.svg", "favicon.ico", "wubhair-logo.png"],
+      includeAssets: ["placeholder.svg", "favicon.svg", "eandb-logo.svg", "eandb-mark.svg"],
       manifest: {
-        name: "Wub Hair",
-        short_name: "Wub Hair",
-        description: "Wub Hair — Manchester's premier salon for braiding, barbering and treatments.",
-        theme_color: "#C4654A",
+        name: "E and B",
+        short_name: "E and B",
+        description: "E and B — Manchester's salon for braiding, barbering and treatments.",
+        theme_color: "#211F1C",
         background_color: "#FBF4EE",
         display: "standalone",
         start_url: "/",
         icons: [
-          { src: "/pwa-192x192.png", sizes: "192x192", type: "image/png", purpose: "any" },
-          { src: "/pwa-512x512.png", sizes: "512x512", type: "image/png", purpose: "any" },
-          { src: "/pwa-512x512.png", sizes: "512x512", type: "image/png", purpose: "maskable" },
+          { src: "/eandb-mark.svg", sizes: "any", type: "image/svg+xml", purpose: "any" },
+          { src: "/eandb-mark.svg", sizes: "any", type: "image/svg+xml", purpose: "maskable" },
         ],
       },
       workbox: {
         navigateFallbackDenylist: [/^\/~oauth/, /^\/api/, /^\/auth/],
         globPatterns: ["**/*.{js,css,html,ico,png,svg,webp,woff2}"],
+        globIgnores: ["*hair-logo.png", "favicon.ico", "pwa-*.png"],
         maximumFileSizeToCacheInBytes: 5 * 1024 * 1024,
         cleanupOutdatedCaches: true,
         runtimeCaching: [
@@ -57,7 +57,7 @@ export default defineConfig(({ mode }) => ({
             urlPattern: ({ request }) => request.mode === "navigate",
             handler: "NetworkFirst",
             options: {
-              cacheName: "wub-html",
+              cacheName: "eandb-html",
               networkTimeoutSeconds: 3,
               expiration: { maxEntries: 32, maxAgeSeconds: 60 * 60 * 24 },
             },
@@ -65,13 +65,13 @@ export default defineConfig(({ mode }) => ({
           {
             urlPattern: ({ request }) => ["style", "script", "worker"].includes(request.destination),
             handler: "StaleWhileRevalidate",
-            options: { cacheName: "wub-assets" },
+            options: { cacheName: "eandb-assets" },
           },
           {
             urlPattern: ({ request }) => request.destination === "image",
             handler: "CacheFirst",
             options: {
-              cacheName: "wub-images",
+              cacheName: "eandb-images",
               expiration: { maxEntries: 80, maxAgeSeconds: 60 * 60 * 24 * 14 },
             },
           },

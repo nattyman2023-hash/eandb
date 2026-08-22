@@ -58,7 +58,7 @@ const Install = () => {
     <div className="min-h-screen bg-background flex items-center justify-center p-4">
       <Card className="max-w-md w-full">
         <CardHeader className="text-center">
-          <img src="/pwa-192x192.png" alt="Wub Hair" className="w-20 h-20 rounded-2xl mx-auto mb-4" />
+          <img src="/eandb-mark.svg" alt="E and B" className="w-20 h-20 rounded-2xl mx-auto mb-4" width="64" height="64" />
           <CardTitle className="text-2xl">Install Our App</CardTitle>
           <p className="text-muted-foreground text-sm mt-2">
             Get quick access to {BUSINESS.name} right from your home screen — no app store needed.

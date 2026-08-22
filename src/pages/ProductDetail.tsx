@@ -48,7 +48,7 @@ const ProductDetail = () => {
 
   return (
     <>
-      <SEOHead title={`${product.name} — Wub Hair`} description={product.description || product.name} />
+      <SEOHead title={`${product.name} — E and B`} description={product.description || product.name} />
       <div className="min-h-screen bg-background">
         <div className="container py-8">
           <Link to="/shop" className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-primary mb-6">

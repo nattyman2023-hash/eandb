@@ -63,7 +63,7 @@ const ExitIntentPopup = () => {
         });
       }
 
-      toast.success("Got it! A stylist from Wub Hair will be in touch shortly.");
+      toast.success("Got it! A stylist from E and B will be in touch shortly.");
       setOpen(false);
     } catch (err) {
       console.error(err);

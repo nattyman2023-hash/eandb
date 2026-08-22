@@ -28,11 +28,11 @@ function button(url, label) {
 
 const TEMPLATES = {
   'booking-confirmation': {
-    subject: 'Your Wub Hair booking is confirmed',
+    subject: 'Your E and B booking is confirmed',
     render: ({ name, scheduledAt, manageUrl } = {}) =>
       wrap(`
         <h1 style="font-size:20px;">Booking confirmed${name ? `, ${name}` : ''}!</h1>
-        <p>Thanks for booking with Wub Hair.</p>
+        <p>Thanks for booking with E and B.</p>
         ${scheduledAt ? `<p>Your appointment is scheduled for <strong>${scheduledAt}</strong>.</p>` : ''}
         ${button(manageUrl, 'Manage your appointment')}
         <p>See you soon!</p>
@@ -40,18 +40,18 @@ const TEMPLATES = {
   },
 
   'portal-invite': {
-    subject: 'You’re invited to the Wub Hair portal',
+    subject: 'You’re invited to the E and B portal',
     render: ({ name, portalKind, inviteUrl } = {}) =>
       wrap(`
         <h1 style="font-size:20px;">Welcome${name ? `, ${name}` : ''}!</h1>
-        <p>You've been invited to the Wub Hair ${portalKind === 'staff' ? 'staff' : 'client'} portal.</p>
+        <p>You've been invited to the E and B ${portalKind === 'staff' ? 'staff' : 'client'} portal.</p>
         ${button(inviteUrl, 'Set your password')}
         <p>This link will expire in 1 hour. If you didn't expect this invite, you can ignore this email.</p>
       `),
   },
 
   'admin-message': {
-    subject: (data = {}) => data.subject || 'A message from Wub Hair',
+    subject: (data = {}) => data.subject || 'A message from E and B',
     render: ({ name, subject, body, unsubscribeToken } = {}) =>
       wrap(`
         <h1 style="font-size:20px;">${subject || 'A message for you'}</h1>
@@ -62,7 +62,7 @@ const TEMPLATES = {
   },
 
   'booking-rescheduled': {
-    subject: 'Your Wub Hair appointment has been rescheduled',
+    subject: 'Your E and B appointment has been rescheduled',
     render: ({ name, serviceName, scheduledAt, reason, manageUrl, unsubscribeToken } = {}) =>
       wrap(`
         <h1 style="font-size:20px;">Appointment rescheduled</h1>

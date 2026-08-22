@@ -1,4 +1,4 @@
-# Wub Hair
+# E and B
 
 React/Vite frontend with a Node.js + Express API and Hostinger MySQL target.
 

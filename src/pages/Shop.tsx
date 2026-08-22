@@ -54,7 +54,7 @@ const Shop = () => {
 
   return (
     <>
-      <SEOHead title="Shop Hair Products — Wub Hair" description="Premium wigs, hair care products, tools and accessories." />
+      <SEOHead title="Shop Hair Products — E and B" description="Premium wigs, hair care products, tools and accessories." />
       <div className="min-h-screen bg-background">
         {/* Hero */}
         <section className="bg-secondary py-16 text-center">

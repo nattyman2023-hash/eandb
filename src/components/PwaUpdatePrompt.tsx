@@ -3,13 +3,13 @@ import { useRegisterSW } from "virtual:pwa-register/react";
 import { Button } from "@/components/ui/button";
 import { RefreshCw, X } from "lucide-react";
 
-const CACHE_PREF_KEY = "wub-cache-mode"; // "fresh" | "normal"
+const CACHE_PREF_KEY = "eandb-cache-mode"; // "fresh" | "normal"
 
 function logCacheEvent(event: string) {
   try {
-    const log = JSON.parse(localStorage.getItem("wub-cache-events") || "[]");
+    const log = JSON.parse(localStorage.getItem("eandb-cache-events") || "[]");
     log.unshift({ event, at: new Date().toISOString() });
-    localStorage.setItem("wub-cache-events", JSON.stringify(log.slice(0, 50)));
+    localStorage.setItem("eandb-cache-events", JSON.stringify(log.slice(0, 50)));
   } catch {
     /* noop */
   }

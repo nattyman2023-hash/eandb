@@ -47,7 +47,7 @@ const Cart = () => {
 
   return (
     <>
-      <SEOHead title="Your Bag — Wub Hair" description="Review the products in your bag" />
+      <SEOHead title="Your Bag — E and B" description="Review the products in your bag" />
       <div className="min-h-screen bg-background">
         <div className="max-w-4xl mx-auto px-4 py-12">
           <div className="flex items-baseline justify-between mb-8">

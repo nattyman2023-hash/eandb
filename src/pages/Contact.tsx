@@ -54,8 +54,8 @@ const Contact = () => {
   return (
     <>
       <SEOHead
-        title="Contact Us | Wub Hair"
-        description="Get in touch with Wub Hair. Call, email, WhatsApp or fill in our contact form. We respond within hours."
+        title="Contact Us | E and B"
+        description="Get in touch with E and B. Call, email, WhatsApp or fill in our contact form. We respond within hours."
         canonical="/contact"
         image={IMAGES.heroBooking}
       />
@@ -67,7 +67,7 @@ const Contact = () => {
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "ContactPage",
-            name: "Contact Wub Hair",
+            name: "Contact E and B",
             url: `${window.location.origin}/contact`,
             mainEntity: {
               "@type": "HairSalon",
@@ -207,7 +207,7 @@ const Contact = () => {
             allowFullScreen
             loading="lazy"
             referrerPolicy="no-referrer-when-downgrade"
-            title="Wub Hair Salon Location"
+            title="E and B Salon Location"
           />
         </div>
       </section>

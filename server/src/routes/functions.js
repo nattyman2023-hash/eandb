@@ -29,8 +29,8 @@ const router = express.Router();
 // ---------------------------------------------------------------------------
 
 // Copied verbatim from supabase/functions/chat-assistant/index.ts - specific
-// to Wub Hair (Selam Unisex Salon), must not be genericized.
-const CHAT_SYSTEM_PROMPT = `You are Selam, a warm and concise virtual receptionist for Wub Hair (Selam Unisex Salon) at 174 Claremont Road, Manchester M14 4TT.
+// to E and B (Selam Unisex Salon), must not be genericized.
+const CHAT_SYSTEM_PROMPT = `You are Selam, a warm and concise virtual receptionist for E and B (Selam Unisex Salon) at 174 Claremont Road, Manchester M14 4TT.
 
 You help with: services (barbering, hairdressing, braiding, treatments), pricing ranges, booking guidance, opening hours (Mon–Sat ~9am–7pm), location/parking, and product/aftercare advice.
 
@@ -270,7 +270,7 @@ router.post('/create-booking', optionalAuth, async (req, res) => {
                   timeZone: 'Europe/London',
                 })
               : undefined,
-            manageUrl: `${process.env.FRONTEND_URL || 'https://www.wubhair.com'}/portal/appointments`,
+            manageUrl: `${process.env.FRONTEND_URL || 'https://eandb.co.uk'}/portal/appointments`,
           },
         });
       } catch (e) {

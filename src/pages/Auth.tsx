@@ -9,7 +9,6 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { toast } from "sonner";
 import { ArrowLeft, ShieldCheck, Scissors, Heart, Download } from "lucide-react";
 import { BUSINESS } from "@/lib/siteContent";
-import logo from "@/assets/wubhair-logo.png";
 import tileAdmin from "@/assets/portal-tile-admin.jpg";
 import tileStaff from "@/assets/portal-tile-staff.jpg";
 // customer tile retired — customers reach login via header/footer "Sign in" link
@@ -256,11 +255,11 @@ const Auth = () => {
         {/* RIGHT — brand panel with logo */}
         <aside className="order-1 lg:order-2 flex flex-col items-center gap-4 rounded-2xl border border-border bg-card p-6 text-center shadow-sm">
           <img
-            src={logo}
+            src="/eandb-logo.svg"
             alt={`${BUSINESS.name} logo`}
-            className="h-40 w-40 rounded-full object-contain"
-            width={320}
-            height={320}
+            className="h-24 w-full max-w-[240px] object-contain"
+            width={240}
+            height={64}
           />
           <div>
             <h1 className="text-2xl font-bold">{BUSINESS.name}</h1>

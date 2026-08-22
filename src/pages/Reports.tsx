@@ -160,7 +160,7 @@ const Reports = () => {
       <div className="flex items-center justify-between flex-wrap gap-3">
         <div>
           <h1 className="text-2xl font-bold">Reports & Analysis</h1>
-          <p className="text-muted-foreground">Business performance insights for Wub Hair</p>
+          <p className="text-muted-foreground">Business performance insights for E and B</p>
         </div>
         <div className="flex gap-2 items-center">
           <Select value={dateRange} onValueChange={(v: DateRange) => setDateRange(v)}>

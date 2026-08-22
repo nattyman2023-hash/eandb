@@ -98,7 +98,7 @@ const Checkout = () => {
 
   return (
     <>
-      <SEOHead title="Checkout — Wub Hair" description="Complete your product order" />
+      <SEOHead title="Checkout — E and B" description="Complete your product order" />
       <div className="min-h-screen bg-background">
         <div className="max-w-3xl mx-auto px-4 py-10">
           <h1 className="text-3xl font-serif text-foreground mb-6">Checkout</h1>

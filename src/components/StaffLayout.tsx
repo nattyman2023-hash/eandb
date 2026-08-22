@@ -26,7 +26,7 @@ export default function StaffLayout({ children }: { children?: ReactNode }) {
       {/* Top bar */}
       <header className="sticky top-0 z-30 bg-background/95 backdrop-blur border-b border-border px-4 py-3 flex items-center justify-between">
         <div>
-          <h1 className="font-serif text-lg leading-none">Wub Hair · Staff</h1>
+          <h1 className="font-serif text-lg leading-none">E and B · Staff</h1>
           {profile?.full_name && <p className="text-[11px] text-muted-foreground mt-0.5">Hi {profile.full_name.split(" ")[0]}</p>}
         </div>
         <Button variant="ghost" size="icon" onClick={handleSignOut} aria-label="Sign out"><LogOut className="h-4 w-4" /></Button>

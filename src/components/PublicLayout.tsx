@@ -12,7 +12,6 @@ import ExitIntentPopup from "@/components/ExitIntentPopup";
 import LiveChat from "@/components/LiveChat";
 import PwaInstallBanner from "@/components/PwaInstallBanner";
 import PromoBar from "@/components/PromoBar";
-import wubhairLogo from "@/assets/wubhair-logo.png";
 import { useAuth } from "@/contexts/AuthContext";
 import {
   DropdownMenu,
@@ -100,7 +99,7 @@ const PublicLayout = ({ children }: { children: React.ReactNode }) => {
 
           {/* Centered logo */}
           <Link to="/" className="flex items-center justify-center select-none flex-shrink-0" aria-label={BUSINESS.name}>
-            <img src={wubhairLogo} alt={BUSINESS.name} className="h-14 md:h-16 w-auto" />
+            <img src="/eandb-logo.svg" alt={BUSINESS.name} className="h-14 md:h-16 w-auto" width="240" height="64" />
           </Link>
 
           {/* Right utilities */}
@@ -209,7 +208,7 @@ const PublicLayout = ({ children }: { children: React.ReactNode }) => {
           {/* Brand + statement */}
           <div className="grid gap-10 md:grid-cols-12 pb-12">
             <div className="md:col-span-5">
-              <img src={wubhairLogo} alt={BUSINESS.name} className="h-20 md:h-24 w-auto" />
+              <img src="/eandb-logo.svg" alt={BUSINESS.name} className="h-20 md:h-24 w-auto" width="240" height="64" loading="lazy" />
               <p className="image-caption max-w-md mt-6 not-italic">
                 A salon for considered hair, in the heart of Manchester. Hairdressing and protective styling, by appointment or walk-in.
               </p>

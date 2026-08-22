@@ -397,8 +397,8 @@ const Booking = () => {
   return (
     <>
       <SEOHead
-        title="Reservations | Wub Hair"
-        description="Reserve a chair at Wub Hair in Manchester. Hairdressing and protective styling."
+        title="Reservations | E and B"
+        description="Reserve a chair at E and B in Manchester. Hairdressing and protective styling."
         canonical="/book"
         image={IMAGES.heroBooking}
       />

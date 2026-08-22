@@ -175,12 +175,10 @@ const StaffPortal = () => {
     <div className="min-h-screen bg-background p-4 max-w-lg mx-auto pwa-safe-area">
       {/* Header */}
       <div className="flex items-center justify-between mb-6">
-        <div className="flex items-center gap-3">
-          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary">
-            <Scissors className="h-5 w-5 text-primary-foreground" />
-          </div>
+          <div className="flex items-center gap-3">
+          <img src="/eandb-mark.svg" alt="" className="h-10 w-10" width="64" height="64" />
           <div>
-            <h1 className="text-lg font-bold">Wub Hair</h1>
+            <h1 className="text-lg font-bold">E and B</h1>
             <p className="text-xs text-muted-foreground">Staff Portal — {profile?.full_name}</p>
           </div>
         </div>

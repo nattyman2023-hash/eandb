@@ -10,7 +10,7 @@ import chatAvatar from "@/assets/chat-avatar.png";
 type Role = "user" | "assistant";
 interface Message { role: Role; content: string; }
 
-const WELCOME = "Hi, I'm Selam — your virtual receptionist at Wub Hair. ✂️ Ask me about services, prices, or booking.";
+const WELCOME = "Hi, I'm Selam — your virtual receptionist at E and B. ✂️ Ask me about services, prices, or booking.";
 
 const QUICK_REPLIES = ["Book an appointment", "What do braids cost?", "Opening hours", "Where are you?"];
 
@@ -87,7 +87,7 @@ const LiveChat = () => {
             <img src={chatAvatar} alt="Selam" className="h-9 w-9 rounded-full bg-white/10 object-cover" />
             <div className="flex-1 min-w-0">
               <p className="font-semibold text-sm leading-tight">Selam</p>
-              <p className="text-[11px] opacity-90">Wub Hair · usually replies in seconds</p>
+              <p className="text-[11px] opacity-90">E and B · usually replies in seconds</p>
             </div>
             <a
               href={whatsappHref}

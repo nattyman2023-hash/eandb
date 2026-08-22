@@ -800,7 +800,7 @@ const Jobs = () => {
                                 hour: "2-digit", minute: "2-digit", timeZone: "Europe/London",
                               }),
                               reason,
-                              manageUrl: `https://www.wubhair.com/portal/appointments`,
+                              manageUrl: `https://eandb.co.uk/portal/appointments`,
                             },
                           },
                         });

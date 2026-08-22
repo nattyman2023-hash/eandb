@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import {
   LayoutDashboard, CalendarDays, Armchair, Users, UserCog, DollarSign, 
-  BarChart3, Settings, LogOut, Scissors, Package, ClipboardList, 
+  BarChart3, Settings, LogOut, Package, ClipboardList,
   MessageSquare, FileText, Target, Receipt, ClipboardCheck, BookOpen, ShoppingBag, HardDrive } from "lucide-react";
 import { api } from "@/lib/apiClient";
 import { NavLink } from "@/components/NavLink";
@@ -78,12 +78,10 @@ export function AdminSidebar() {
     <Sidebar collapsible="icon">
       <SidebarHeader className="border-b border-sidebar-border p-4">
         <div className="flex items-center gap-3">
-          <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-sidebar-primary">
-            <Scissors className="h-5 w-5 text-sidebar-primary-foreground" />
-          </div>
+          <img src="/eandb-mark.svg" alt="" className="h-9 w-9 shrink-0" width="64" height="64" />
           {!collapsed && (
             <div className="flex flex-col">
-              <span className="text-sm font-bold text-primary font-serif">Wub Hair</span>
+              <span className="text-sm font-bold text-primary font-serif">E and B</span>
               <span className="text-xs text-sidebar-foreground/60">Salon CRM</span>
             </div>
           )}

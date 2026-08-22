@@ -175,7 +175,7 @@ Routes are defined in `src/App.tsx`. The existing route surface that must be pre
 - `db.functions.invoke(...)`
 - `db.channel(...)` / `removeChannel(...)`
 
-It uses `VITE_API_URL` or an absolute localhost fallback, stores JWT session material in `localStorage` under `wubhair.auth.session`, and sends API requests to `/api/query`, `/api/auth`, `/api/storage`, and `/api/functions` under that base URL.
+It uses `VITE_API_URL` or an absolute localhost fallback, stores JWT session material in `localStorage` under `eandb.auth.session`, and sends API requests to `/api/query`, `/api/auth`, `/api/storage`, and `/api/functions` under that base URL.
 
 The current channel implementation is polling, not Supabase Realtime: `src/lib/apiClient.ts` uses a 20-second polling interval. This means the application does not currently require a WebSocket migration for the existing behavior, although its call sites still use Supabase Realtime names.
 
@@ -569,7 +569,7 @@ Files and metadata requiring migration include object path, bucket, MIME/type, s
 | `supabase/functions/handle-email-suppression/index.ts` | Imports `npm:@lovable.dev/webhooks-js` and verifies Lovable API-key HMAC | Active if deployed/invoked | Node/provider webhook verification | Suppression/log state |
 | `supabase/functions/invite-employee/index.ts` | Builds a fallback origin ending in `.lovable.app` | Active if function is deployed/invoked | Use configured frontend origin only | User invite/reset state |
 | `supabase/functions/send-transactional-email/index.ts` | Comments require a subdomain delegated to Lovable nameservers | Documentation/configuration assumption | Use the approved Node email domain/provider and DNS arrangement | Email delivery history may need reconciliation |
-| `public/sw.js` | Clears caches and unregisters itself; related to stale PWA cleanup | Public asset may be requested directly; generated `wub-app-sw.js` is the configured worker | Consolidate worker ownership after approval | No |
+| `public/sw.js` | Clears caches and unregisters itself; related to stale PWA cleanup | Public asset may be requested directly; generated `eandb-app-sw.js` is the configured worker | Consolidate worker ownership after approval | No |
 | `public/service-worker.js` | Imports `/sw.js` | Public legacy worker wrapper; no current registration was found | Remove/consolidate only after service-worker audit | No |
 
 Lovable references also occur in comments and historical explanatory text. These are not all runtime dependencies, but they should be removed from the final operational documentation and user-facing UI after the corresponding behavior is replaced.

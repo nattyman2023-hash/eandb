@@ -1,5 +1,5 @@
 #!/bin/bash
-# Wub Hair — Hostinger Node.js Web App build helper
+# E and B — Hostinger Node.js Web App build helper
 #
 # Hostinger runs the Express server, which serves both the Vite build and
 # /api routes. This script intentionally only installs and builds; it does not
@@ -10,7 +10,7 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 cd "$SCRIPT_DIR"
 
 echo "============================================"
-echo " Wub Hair — Hostinger Node.js Build"
+echo " E and B — Hostinger Node.js Build"
 echo "============================================"
 echo ""
 

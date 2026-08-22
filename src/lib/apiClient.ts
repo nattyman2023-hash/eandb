@@ -3,7 +3,7 @@
 // the same-origin /api routes.
 
 const API_ROOT = '';
-const SESSION_KEY = 'wubhair.auth.session';
+const SESSION_KEY = 'eandb.auth.session';
 
 export type User = {
   id: string;

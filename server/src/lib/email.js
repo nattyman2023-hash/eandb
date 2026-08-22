@@ -19,7 +19,7 @@ async function sendEmail({ to, subject, html }) {
   }
   try {
     await resend.emails.send({
-      from: process.env.EMAIL_FROM || 'Wub Hair <notifications@wubhair.com>',
+      from: process.env.EMAIL_FROM || 'E and B <notifications@eandb.co.uk>',
       to,
       subject,
       html,
@@ -35,7 +35,7 @@ async function sendPasswordResetEmail(email, token) {
   const resetUrl = `${process.env.FRONTEND_URL || 'http://localhost:5173'}/reset-password?token=${token}`;
   return sendEmail({
     to: email,
-    subject: 'Reset your Wub Hair password',
+    subject: 'Reset your E and B password',
     html: `<p>We received a request to reset your password.</p><p><a href="${resetUrl}">Click here to reset your password</a>. This link expires in 1 hour.</p><p>If you didn't request this, you can safely ignore this email.</p>`,
   });
 }

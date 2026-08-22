@@ -21,7 +21,7 @@ const CacheDiagnostics = () => {
   const [freshMode, setFreshMode] = useState(false);
 
   const refreshState = async () => {
-    setEvents(JSON.parse(localStorage.getItem("wub-cache-events") || "[]"));
+    setEvents(JSON.parse(localStorage.getItem("eandb-cache-events") || "[]"));
     setFreshMode(localStorage.getItem(CACHE_PREF_KEY) === "fresh");
     if (!("serviceWorker" in navigator)) {
       setSwStatus("unsupported");
