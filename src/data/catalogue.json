@@ -1,10 +1,10 @@
 {
   "source": "https://booking.eandbhair.co.uk/api/v1/book/eandb/catalogue",
-  "fetchedAt": "2026-09-27T19:13:36.489Z",
+  "fetchedAt": "2026-09-27T20:07:34.999Z",
   "business": {
     "name": "E & B Hair",
     "email": "contact@eandbhair.co.uk",
-    "website": "https://www.eandbhair.co.uk"
+    "website": "https://eandbhair.co.uk"
   },
   "location": {
     "addressLine1": "171 Princess Rd",
@@ -12,7 +12,7 @@
     "city": "Manchester",
     "region": null,
     "postcode": "M14 4RL",
-    "phone": null,
+    "phone": "+447472397993",
     "email": "contact@eandbhair.co.uk"
   },
   "categories": [
@@ -418,7 +418,7 @@
     },
     {
       "slug": "dentagling",
-      "name": "Dentagling",
+      "name": "Detangling",
       "category": "add-ons",
       "categoryName": "Add-ons",
       "description": "It starts from £15.00 and it entirely depends on the condition of the hair and we will decide with accuracy how much it will cost upon your arrival.",
