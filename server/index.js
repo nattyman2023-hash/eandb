@@ -4,13 +4,11 @@ const fs = require('fs');
 const path = require('path');
 const express = require('express');
 
-const { pool } = require('./db');
 const { fetchCatalogue } = require('./catalogue');
 
-// E & B marketing site. Serves the prerendered pages, a cached copy of the WubSync
-// public catalogue and the enquiry form. Booking, payments, accounts and the salon
-// CRM all live in WubSync; the old local booking/CRM API (server/src) is no longer
-// mounted.
+// E & B marketing site. Serves the prerendered pages and a cached copy of the
+// WubSync public catalogue. It has no database: booking, payments, accounts and the
+// salon CRM all live in WubSync, and enquiries go by email, WhatsApp or phone.
 
 const PORT = process.env.PORT || 3000;
 const BOOKING_URL = 'https://booking.eandbhair.co.uk/book/eandb';
@@ -53,8 +51,6 @@ app.use((req, res, next) => {
   const match = RETIRED_ROUTES.find(([pattern]) => pattern.test(req.path));
   return match ? res.redirect(301, match[1]) : next();
 });
-
-app.use(express.json({ limit: '32kb' }));
 
 // ---------------------------------------------------------------------------
 // Catalogue: WubSync is the source of truth. Refreshed at most every 5 minutes;
@@ -101,48 +97,6 @@ api.get('/catalogue', async (req, res) => {
   if (!current) return res.status(503).json({ error: 'Catalogue unavailable' });
   res.set('Cache-Control', 'public, max-age=60');
   return res.json({ catalogue: current.catalogue, stale: current.stale });
-});
-
-// Enquiries only (questions, not appointments).
-const requestWindows = new Map();
-function isRateLimited(address) {
-  const now = Date.now();
-  const current = requestWindows.get(address);
-  if (!current || now - current.startedAt > 15 * 60 * 1000) {
-    requestWindows.set(address, { startedAt: now, count: 1 });
-    return false;
-  }
-  current.count += 1;
-  return current.count > 5;
-}
-
-function clean(value, maximumLength) {
-  return typeof value === 'string' ? value.trim().slice(0, maximumLength) : '';
-}
-
-api.post('/contact', async (req, res, next) => {
-  try {
-    const enquiry = {
-      name: clean(req.body?.name, 100),
-      email: clean(req.body?.email, 320).toLowerCase(),
-      phone: clean(req.body?.phone, 40),
-      message: clean(req.body?.message, 2000),
-      website: clean(req.body?.website, 200),
-    };
-    if (enquiry.website) return res.status(400).json({ error: 'Unable to process this request.' });
-    if (!enquiry.name || !enquiry.message) return res.status(400).json({ error: 'Name and message are required.' });
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(enquiry.email)) return res.status(400).json({ error: 'A valid email address is required.' });
-    if (!pool) return res.status(503).json({ error: 'Contact service is not configured.' });
-    if (isRateLimited(req.ip || 'unknown')) return res.status(429).json({ error: 'Too many requests. Please try again later.' });
-
-    await pool.execute(
-      'INSERT INTO contact_messages (name, email, phone, message) VALUES (?, ?, ?, ?)',
-      [enquiry.name, enquiry.email, enquiry.phone || null, enquiry.message],
-    );
-    return res.status(201).json({ ok: true });
-  } catch (error) {
-    return next(error);
-  }
 });
 
 app.use('/api', api);

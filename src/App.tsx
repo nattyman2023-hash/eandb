@@ -1,5 +1,4 @@
 import { Route, Routes } from "react-router-dom";
-import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import PublicLayout from "@/components/PublicLayout";
 import ScrollToTop from "@/components/ScrollToTop";
@@ -16,7 +15,6 @@ import NotFound from "@/pages/NotFound";
 // server (server/index.js).
 const App = () => (
   <TooltipProvider>
-    <Sonner />
     <ScrollToTop />
     <PublicLayout>
       <Routes>

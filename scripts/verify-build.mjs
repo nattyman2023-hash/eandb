@@ -61,6 +61,8 @@ for (const page of pages) {
     if (pattern.test(page.text)) failures.push(`${page.route}: forbidden wording ${pattern}`);
   }
   if (/Claremont/i.test(page.html)) failures.push(`${page.route}: shows WUB's Claremont Road address`);
+  // The site has nothing to receive a form submission; enquiries go by email/WhatsApp/phone.
+  if (/<form[\s>]/i.test(page.html)) failures.push(`${page.route}: contains a <form> with no working backend`);
   const bookingHrefs = [...page.html.matchAll(/href="(https:\/\/booking\.eandbhair\.co\.uk[^"]*)"/g)].map((match) => match[1]);
   const wrong = bookingHrefs.filter((href) => href !== BOOKING_URL);
   if (wrong.length) failures.push(`${page.route}: booking links not pointing at ${BOOKING_URL}: ${[...new Set(wrong)].join(', ')}`);
@@ -94,7 +96,7 @@ const assetDirectory = path.join(distributionDirectory, 'assets');
 const bundles = (await fs.readdir(assetDirectory)).filter((name) => name.endsWith('.js'));
 for (const name of bundles) {
   const code = await fs.readFile(path.join(assetDirectory, name), 'utf8');
-  for (const marker of ['/api/bookings', '/api/payments', 'create-booking', '/api/query', 'service_catalog', 'addProductToCart', 'stripe']) {
+  for (const marker of ['/api/bookings', '/api/payments', '/api/contact', 'create-booking', '/api/query', 'service_catalog', 'addProductToCart', 'stripe']) {
     if (code.includes(marker)) failures.push(`assets/${name}: contains retired "${marker}"`);
   }
 }

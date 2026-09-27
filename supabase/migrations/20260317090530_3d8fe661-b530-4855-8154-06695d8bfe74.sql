@@ -1,1 +1,0 @@
-ALTER TABLE public.time_entries ADD COLUMN archived boolean NOT NULL DEFAULT false;

@@ -15,8 +15,8 @@ const city = crm.location.city || "Manchester";
 const postcode = crm.location.postcode || "";
 
 // Address and email come from the E & B business/location records in WubSync. The
-// CRM has no phone number for E & B, so the number below is the one this site has
-// always published for E & B (it is not WUB's).
+// CRM has no phone number for E & B; the number below was confirmed by the owner as
+// E & B's own phone and WhatsApp number (it is not WUB's).
 const phoneDisplay = "07472 397993";
 const phoneE164 = "+447472397993";
 

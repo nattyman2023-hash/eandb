@@ -1,1 +1,0 @@
-UPDATE public.products SET image_url='/product-placeholder.jpg' WHERE image_url='/src/assets/product-placeholder.jpg';

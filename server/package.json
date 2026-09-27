@@ -1,24 +1,6 @@
 {
-  "name": "eandb-api",
-  "version": "1.0.0",
-  "description": "Express + MySQL API for E and B",
-  "main": "src/index.js",
-  "scripts": {
-    "start": "node src/index.js",
-    "dev": "node --watch src/index.js"
-  },
-  "type": "commonjs",
-  "dependencies": {
-    "bcryptjs": "^2.4.3",
-    "cors": "^2.8.6",
-    "dotenv": "^17.4.2",
-    "express": "^5.2.1",
-    "jsonwebtoken": "^9.0.2",
-    "mysql2": "^3.22.5",
-    "multer": "^2.2.0",
-    "node-cron": "^3.0.3",
-    "resend": "^4.0.1",
-    "stripe": "^17.4.0",
-    "uuid": "^9.0.1"
-  }
+  "name": "eandb-site-server",
+  "private": true,
+  "description": "Serves the prerendered E & B Hair marketing site and a cached copy of the WubSync public catalogue. Dependencies are installed from the root package.json.",
+  "type": "commonjs"
 }
