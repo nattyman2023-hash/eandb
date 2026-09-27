@@ -1,34 +1,31 @@
 import { useState } from "react";
-import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { toast } from "sonner";
-import { BUSINESS, IMAGES } from "@/lib/siteContent";
-import SEOHead from "@/components/SEOHead";
-import { Phone, MessageCircle, Mail, MapPin, Send } from "lucide-react";
-import { apiRequest } from "@/lib/apiClient";
-import { useSiteImages } from "@/hooks/useSiteImages";
+import { Phone, MessageCircle, Mail, MapPin, Send, CalendarCheck } from "lucide-react";
 import { z } from "zod";
+import SEOHead from "@/components/SEOHead";
+import BookNow from "@/components/BookNow";
+import { BUSINESS, whatsappLink } from "@/lib/siteContent";
+import { breadcrumbJsonLd, BUSINESS_ID } from "@/lib/seo";
 
-const contactSchema = z.object({
-  name: z.string().trim().min(1, "Name is required").max(100),
-  email: z.string().trim().email("Invalid email address").max(255),
-  phone: z.string().trim().min(1, "Phone number is required").max(20),
-  message: z.string().trim().min(1, "Message is required").max(2000),
+const enquirySchema = z.object({
+  name: z.string().trim().min(1, "Please tell us your name").max(100),
+  email: z.string().trim().email("Please enter a valid email address").max(255),
+  phone: z.string().trim().max(40),
+  message: z.string().trim().min(1, "Please write your question").max(2000),
 });
 
+// Enquiries only. Appointments are booked in WubSync, never through this form.
 const Contact = () => {
-  const [form, setForm] = useState({ name: "", email: "", phone: "", message: "" });
+  const [form, setForm] = useState({ name: "", email: "", phone: "", message: "", website: "" });
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
-  const siteImages = useSiteImages();
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-
-    const parsed = contactSchema.safeParse(form);
+  const handleSubmit = async (event: React.FormEvent) => {
+    event.preventDefault();
+    const parsed = enquirySchema.safeParse(form);
     if (!parsed.success) {
       toast.error(parsed.error.errors[0].message);
       return;
@@ -36,178 +33,142 @@ const Contact = () => {
 
     setSubmitting(true);
     try {
-      await apiRequest("/api/contact", {
+      const response = await fetch("/api/contact", {
         method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(form),
       });
-
+      if (!response.ok) throw new Error(`Enquiry failed (${response.status})`);
       setSubmitted(true);
-      toast.success("Message sent! We'll be in touch shortly.");
-    } catch (err: any) {
-      console.error(err);
-      toast.error("Something went wrong. Please try calling us instead.");
+    } catch {
+      toast.error(`We couldn't send your message. Please call ${BUSINESS.phone} or email ${BUSINESS.email}.`);
     } finally {
       setSubmitting(false);
     }
   };
 
+  const channels = [
+    { href: BUSINESS.phoneHref, icon: Phone, title: "Call us", detail: BUSINESS.phone },
+    { href: whatsappLink(), icon: MessageCircle, title: "WhatsApp", detail: "Send us a question", external: true },
+    { href: `mailto:${BUSINESS.email}`, icon: Mail, title: "Email", detail: BUSINESS.email },
+    { href: BUSINESS.mapsUrl, icon: MapPin, title: "Find the salon", detail: BUSINESS.address, external: true },
+  ];
+
   return (
     <>
       <SEOHead
-        title="Contact Us | E and B"
-        description="Get in touch with E and B. Call, email, WhatsApp or fill in our contact form. We respond within hours."
+        title="Contact E & B Hair | Manchester Braiding Salon"
+        description={`Questions for E & B Hair? Call, email or WhatsApp us, or send a message. Find us at ${BUSINESS.address}.`}
         canonical="/contact"
-        image={IMAGES.heroBooking}
-      />
-
-      {/* JSON-LD ContactPage */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
+        jsonLd={[
+          {
             "@context": "https://schema.org",
             "@type": "ContactPage",
-            name: "Contact E and B",
-            url: `${window.location.origin}/contact`,
-            mainEntity: {
-              "@type": "HairSalon",
-              name: BUSINESS.name,
-              telephone: BUSINESS.phone,
-              email: BUSINESS.email,
-              address: {
-                "@type": "PostalAddress",
-                streetAddress: "174 Claremont Road",
-                addressLocality: "Manchester",
-                addressRegion: "Greater Manchester",
-                postalCode: "M14 4TT",
-                addressCountry: "GB",
-              },
-            },
-          }),
-        }}
+            name: "Contact E & B Hair",
+            url: "https://eandbhair.co.uk/contact",
+            mainEntity: { "@id": BUSINESS_ID },
+          },
+          breadcrumbJsonLd([{ name: "Home", path: "/" }, { name: "Contact", path: "/contact" }]),
+        ]}
       />
-      {/* Hero */}
-      <section
-        className="relative py-20 md:py-28 bg-cover bg-center"
-        style={{ backgroundImage: `url(${siteImages.getImage("heroBooking", IMAGES.heroBooking)})` }}
-      >
-        <div className="absolute inset-0 bg-black/70" />
-        <div className="container relative z-10 text-center">
-          <h1 className="text-3xl md:text-5xl font-bold text-white mb-4">Contact Us</h1>
-          <p className="text-lg text-white/80 max-w-xl mx-auto">
-            Have a question or need help? Drop us a message and we'll get back to you quickly.
+
+      <section className="border-t border-border">
+        <div className="container py-12 lg:py-16 max-w-3xl">
+          <p className="eyebrow mb-4">Contact</p>
+          <h1 className="display-lg mb-6">Questions? We're happy to help.</h1>
+          <p className="text-base md:text-lg text-muted-foreground max-w-xl">
+            Ask us about styles, sizes, hair or anything else. To make an appointment, use our online booking page.
           </p>
         </div>
       </section>
 
-      <section className="container py-14 grid gap-10 md:grid-cols-2">
-        {/* Contact Info */}
+      <section className="container grid gap-10 lg:grid-cols-2 pb-14">
         <div className="space-y-6">
-          <h2 className="text-2xl font-bold">Get In Touch</h2>
-          <p className="text-muted-foreground">
-            Reach out by phone, WhatsApp, email, or fill in the form and we'll respond within a few hours.
-          </p>
-
-          <div className="space-y-4">
-            <a href={BUSINESS.phoneHref} className="flex items-center gap-3 p-4 rounded-lg border border-border hover:bg-muted transition-colors">
-              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10">
-                <Phone className="h-5 w-5 text-primary" />
-              </div>
+          <div className="border border-border p-5 flex flex-col sm:flex-row sm:items-center gap-4 justify-between">
+            <div className="flex items-start gap-3">
+              <CalendarCheck className="h-5 w-5 text-primary shrink-0 mt-0.5" aria-hidden="true" />
               <div>
-                <p className="font-medium">Call Us</p>
-                <p className="text-sm text-muted-foreground">{BUSINESS.phone}</p>
-              </div>
-            </a>
-
-            <a href={BUSINESS.whatsapp} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 p-4 rounded-lg border border-border hover:bg-muted transition-colors">
-              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-[#25D366]/10">
-                <MessageCircle className="h-5 w-5 text-[#25D366]" />
-              </div>
-              <div>
-                <p className="font-medium">WhatsApp</p>
-                <p className="text-sm text-muted-foreground">Message us on WhatsApp</p>
-              </div>
-            </a>
-
-            <a href={`mailto:${BUSINESS.email}`} className="flex items-center gap-3 p-4 rounded-lg border border-border hover:bg-muted transition-colors">
-              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10">
-                <Mail className="h-5 w-5 text-primary" />
-              </div>
-              <div>
-                <p className="font-medium">Email</p>
-                <p className="text-sm text-muted-foreground">{BUSINESS.email}</p>
-              </div>
-            </a>
-
-            <div className="flex items-center gap-3 p-4 rounded-lg border border-border">
-              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10">
-                <MapPin className="h-5 w-5 text-primary" />
-              </div>
-              <div>
-                <p className="font-medium">Salon Address</p>
-                <p className="text-sm text-muted-foreground">{BUSINESS.address}</p>
+                <p className="font-medium">Want to book?</p>
+                <p className="text-sm text-muted-foreground">Choose your service, date and time online.</p>
               </div>
             </div>
+            <BookNow className="shrink-0" />
           </div>
+
+          <ul className="space-y-3">
+            {channels.map(({ href, icon: Icon, title, detail, external }) => (
+              <li key={title}>
+                <a
+                  href={href}
+                  {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+                  className="flex items-center gap-4 p-4 border border-border hover:bg-muted transition-colors"
+                >
+                  <Icon className="h-5 w-5 text-primary shrink-0" aria-hidden="true" />
+                  <span className="min-w-0">
+                    <span className="block font-medium">{title}</span>
+                    <span className="block text-sm text-muted-foreground break-words">{detail}</span>
+                  </span>
+                </a>
+              </li>
+            ))}
+          </ul>
         </div>
 
-        {/* Contact Form */}
         {submitted ? (
-          <Card className="flex flex-col items-center justify-center text-center p-10">
-            <div className="h-16 w-16 rounded-full bg-primary/10 flex items-center justify-center mb-4">
-              <Send className="h-8 w-8 text-primary" />
-            </div>
-            <CardTitle className="text-xl mb-2">Message Sent!</CardTitle>
-            <CardDescription className="text-base">
-              Thanks {form.name}, we've received your message and will be in touch shortly.
-            </CardDescription>
-          </Card>
+          <div className="border border-border p-10 flex flex-col items-center justify-center text-center gap-4" role="status">
+            <Send className="h-8 w-8 text-primary" aria-hidden="true" />
+            <p className="font-display text-2xl">Message sent</p>
+            <p className="text-muted-foreground">Thanks {form.name}, we'll reply as soon as we can.</p>
+          </div>
         ) : (
-          <Card>
-            <CardHeader>
-              <CardTitle>Send Us a Message</CardTitle>
-              <CardDescription>Fill in the form below and we'll get back to you.</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <form onSubmit={handleSubmit} className="space-y-4">
-                <div>
-                  <Label htmlFor="name">Full Name *</Label>
-                  <Input id="name" value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} required maxLength={100} />
-                </div>
-                <div>
-                  <Label htmlFor="email">Email *</Label>
-                  <Input id="email" type="email" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} required maxLength={255} />
-                </div>
-                <div>
-                  <Label htmlFor="phone">Phone *</Label>
-                  <Input id="phone" type="tel" value={form.phone} onChange={(e) => setForm({ ...form, phone: e.target.value })} required maxLength={20} />
-                </div>
-                <div>
-                  <Label htmlFor="message">Your Message *</Label>
-                  <Textarea id="message" rows={5} value={form.message} onChange={(e) => setForm({ ...form, message: e.target.value })} required maxLength={2000} />
-                </div>
-                <Button type="submit" className="w-full gap-2" disabled={submitting}>
-                  <Send className="h-4 w-4" />
-                  {submitting ? "Sending..." : "Send Message"}
-                </Button>
-              </form>
-            </CardContent>
-          </Card>
+          <form onSubmit={handleSubmit} className="border border-border p-6 space-y-4" noValidate>
+            <div>
+              <p className="font-display text-2xl">Send us a message</p>
+              <p className="text-sm text-muted-foreground mt-1">For questions and enquiries. This form does not book an appointment.</p>
+            </div>
+            <div>
+              <Label htmlFor="name">Name *</Label>
+              <Input id="name" autoComplete="name" value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} required maxLength={100} />
+            </div>
+            <div>
+              <Label htmlFor="email">Email *</Label>
+              <Input id="email" type="email" autoComplete="email" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} required maxLength={255} />
+            </div>
+            <div>
+              <Label htmlFor="phone">Phone</Label>
+              <Input id="phone" type="tel" autoComplete="tel" value={form.phone} onChange={(e) => setForm({ ...form, phone: e.target.value })} maxLength={40} />
+            </div>
+            <div>
+              <Label htmlFor="message">Your question *</Label>
+              <Textarea id="message" rows={5} value={form.message} onChange={(e) => setForm({ ...form, message: e.target.value })} required maxLength={2000} />
+            </div>
+            <div className="hidden" aria-hidden="true">
+              <label htmlFor="website">Leave this empty</label>
+              <input id="website" tabIndex={-1} autoComplete="off" value={form.website} onChange={(e) => setForm({ ...form, website: e.target.value })} />
+            </div>
+            <button
+              type="submit"
+              disabled={submitting}
+              className="w-full inline-flex h-11 items-center justify-center gap-2 bg-foreground text-background text-[11px] uppercase tracking-[0.22em] font-medium hover:bg-foreground/90 transition-colors disabled:opacity-60"
+            >
+              <Send className="h-4 w-4" aria-hidden="true" />
+              {submitting ? "Sending…" : "Send message"}
+            </button>
+          </form>
         )}
       </section>
 
-      {/* Google Maps */}
-      <section className="container pb-14">
-        <div className="rounded-xl overflow-hidden border border-border">
+      <section className="container pb-4">
+        <div className="overflow-hidden border border-border">
           <iframe
-            src="https://www.google.com/maps?q=174+Claremont+Road,+Manchester+M14+4TT&output=embed"
+            src={BUSINESS.mapsEmbedUrl}
             width="100%"
             height="400"
             style={{ border: 0 }}
             allowFullScreen
             loading="lazy"
             referrerPolicy="no-referrer-when-downgrade"
-            title="E and B Salon Location"
+            title={`Map showing ${BUSINESS.name} at ${BUSINESS.address}`}
           />
         </div>
       </section>

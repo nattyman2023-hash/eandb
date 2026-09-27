@@ -1,0 +1,450 @@
+{
+  "source": "https://booking.eandbhair.co.uk/api/v1/book/eandb/catalogue",
+  "fetchedAt": "2026-09-27T18:31:50.258Z",
+  "business": {
+    "name": "E & B Hair",
+    "email": "contact@eandbhair.co.uk",
+    "website": "https://www.eandbhair.co.uk"
+  },
+  "location": {
+    "addressLine1": "171 Princess Rd",
+    "addressLine2": null,
+    "city": "Manchester",
+    "region": null,
+    "postcode": "M14 4RL",
+    "phone": null,
+    "email": "contact@eandbhair.co.uk"
+  },
+  "categories": [
+    {
+      "slug": "cornrows",
+      "name": "Cornrows",
+      "description": "Neat 2- and 4-cornrow styles, stitch braids and sculpted patterns with clean parting.",
+      "cover": {
+        "image": "https://booking.eandbhair.co.uk/service-covers/cornrows.png",
+        "alt": "Precise cornrow pattern"
+      },
+      "sortOrder": 2
+    },
+    {
+      "slug": "knotless",
+      "name": "Knotless Braids",
+      "description": "Lightweight, tension-conscious knotless braids in jumbo, medium and small finishes.",
+      "cover": {
+        "image": "https://booking.eandbhair.co.uk/service-covers/knotless.png",
+        "alt": "Long knotless braids"
+      },
+      "sortOrder": 3
+    },
+    {
+      "slug": "box-braids",
+      "name": "Box Braids",
+      "description": "Classic individual box braids in jumbo, medium, small and extra-small sizes.",
+      "cover": {
+        "image": "https://booking.eandbhair.co.uk/service-covers/box-braids.png",
+        "alt": "Classic individual box braids"
+      },
+      "sortOrder": 4
+    },
+    {
+      "slug": "twists",
+      "name": "Twists",
+      "description": "Soft, springy twists finished with a polished, wearable shape.",
+      "cover": {
+        "image": "https://booking.eandbhair.co.uk/service-covers/twists.png",
+        "alt": "Senegalese twists"
+      },
+      "sortOrder": 5
+    },
+    {
+      "slug": "locs",
+      "name": "Locs",
+      "description": "Healthy loc maintenance, retwists and styling for a clean, cared-for finish.",
+      "cover": {
+        "image": "https://booking.eandbhair.co.uk/service-covers/locs.png",
+        "alt": "Healthy locs being groomed"
+      },
+      "sortOrder": 6
+    },
+    {
+      "slug": "childrens",
+      "name": "Children's Hair",
+      "description": "Gentle, fun styles for children with safe products and patient care.",
+      "cover": {
+        "image": "https://booking.eandbhair.co.uk/service-covers/childrens.png",
+        "alt": "Gentle children's braids"
+      },
+      "sortOrder": 7
+    },
+    {
+      "slug": "treatments",
+      "name": "Treatments",
+      "description": "Moisture, scalp care and restorative treatments to support healthy hair.",
+      "cover": {
+        "image": "https://booking.eandbhair.co.uk/service-covers/treatments.png",
+        "alt": "Scalp treatment for textured hair"
+      },
+      "sortOrder": 8
+    },
+    {
+      "slug": "add-ons",
+      "name": "Add-ons",
+      "description": "Helpful extras such as wash, blow-dry, take-down and hair-care accessories.",
+      "cover": {
+        "image": "https://booking.eandbhair.co.uk/service-covers/addons.png",
+        "alt": "Braid-care accessories and add-ons"
+      },
+      "sortOrder": 9
+    }
+  ],
+  "services": [
+    {
+      "slug": "medium-knotless",
+      "name": "Medium Knotless Braids",
+      "category": "knotless",
+      "categoryName": "Knotless Braids",
+      "description": "Our signature medium knotless braids: lightweight, neat and designed to protect your natural hair.",
+      "whatsIncluded": [
+        "Consultation",
+        "Wash & condition",
+        "Medium knotless braids",
+        "Styling & finish"
+      ],
+      "cover": {
+        "image": "https://booking.eandbhair.co.uk/service-covers/knotless.png",
+        "alt": "Long knotless braids"
+      },
+      "basePrice": 70,
+      "durationMinutes": 180,
+      "isAddOn": false
+    },
+    {
+      "slug": "jumbo-knotless",
+      "name": "Jumbo Knotless Braids",
+      "category": "knotless",
+      "categoryName": "Knotless Braids",
+      "description": "A quicker, fuller knotless look with clean parts and a lightweight finish.",
+      "whatsIncluded": [
+        "Consultation",
+        "Wash & condition",
+        "Jumbo knotless braids",
+        "Styling & finish"
+      ],
+      "cover": {
+        "image": "https://booking.eandbhair.co.uk/service-covers/knotless.png",
+        "alt": "Long knotless braids"
+      },
+      "basePrice": 50,
+      "durationMinutes": 110,
+      "isAddOn": false
+    },
+    {
+      "slug": "two-cornrows",
+      "name": "2 Cornrows",
+      "category": "cornrows",
+      "categoryName": "Cornrows",
+      "description": "A clean, polished two-cornrow style for an easy everyday look.",
+      "whatsIncluded": [
+        "Consultation",
+        "Parting",
+        "2 cornrows",
+        "Finish"
+      ],
+      "cover": {
+        "image": "https://booking.eandbhair.co.uk/service-covers/cornrows.png",
+        "alt": "Precise cornrow pattern"
+      },
+      "basePrice": 10,
+      "durationMinutes": 30,
+      "isAddOn": false
+    },
+    {
+      "slug": "four-cornrows",
+      "name": "4 Cornrows",
+      "category": "cornrows",
+      "categoryName": "Cornrows",
+      "description": "Four neat cornrows with precise parting and a smooth, lasting finish.",
+      "whatsIncluded": [
+        "Consultation",
+        "Parting",
+        "4 cornrows",
+        "Finish"
+      ],
+      "cover": {
+        "image": "https://booking.eandbhair.co.uk/service-covers/cornrows.png",
+        "alt": "Precise cornrow pattern"
+      },
+      "basePrice": 25,
+      "durationMinutes": 40,
+      "isAddOn": false
+    },
+    {
+      "slug": "stitch-braids",
+      "name": "6 Stitch Braids",
+      "category": "cornrows",
+      "categoryName": "Cornrows",
+      "description": "Sculpted stitch braids with crisp sections and a clean feed-in finish.",
+      "whatsIncluded": [
+        "Consultation",
+        "Parting",
+        "Stitch braids",
+        "Finish"
+      ],
+      "cover": {
+        "image": "https://booking.eandbhair.co.uk/service-covers/cornrows.png",
+        "alt": "Precise cornrow pattern"
+      },
+      "basePrice": 25,
+      "durationMinutes": 50,
+      "isAddOn": false
+    },
+    {
+      "slug": "jumbo-box-braids",
+      "name": "Jumbo Box Braids",
+      "category": "box-braids",
+      "categoryName": "Box Braids",
+      "description": "Bold, classic box braids with clean sections and a polished dip-and-seal finish.",
+      "whatsIncluded": [
+        "Consultation",
+        "Parting",
+        "Jumbo box braids",
+        "Dip & seal"
+      ],
+      "cover": {
+        "image": "https://booking.eandbhair.co.uk/service-covers/box-braids.png",
+        "alt": "Classic individual box braids"
+      },
+      "basePrice": 40,
+      "durationMinutes": 80,
+      "isAddOn": false
+    },
+    {
+      "slug": "medium-box-braids",
+      "name": "Medium Box Braids",
+      "category": "box-braids",
+      "categoryName": "Box Braids",
+      "description": "A timeless medium box braid set in the length you want, finished for easy wear.",
+      "whatsIncluded": [
+        "Consultation",
+        "Parting",
+        "Medium box braids",
+        "Dip & seal"
+      ],
+      "cover": {
+        "image": "https://booking.eandbhair.co.uk/service-covers/box-braids.png",
+        "alt": "Classic individual box braids"
+      },
+      "basePrice": 60,
+      "durationMinutes": 150,
+      "isAddOn": false
+    },
+    {
+      "slug": "small-box-braids",
+      "name": "Small Box Braids",
+      "category": "box-braids",
+      "categoryName": "Box Braids",
+      "description": "Fine, detailed box braids for a versatile style with plenty of movement.",
+      "whatsIncluded": [
+        "Consultation",
+        "Parting",
+        "Small box braids",
+        "Dip & seal"
+      ],
+      "cover": {
+        "image": "https://booking.eandbhair.co.uk/service-covers/box-braids.png",
+        "alt": "Classic individual box braids"
+      },
+      "basePrice": 80,
+      "durationMinutes": 210,
+      "isAddOn": false
+    },
+    {
+      "slug": "extra-small-box-braids",
+      "name": "Extra Small Box Braids",
+      "category": "box-braids",
+      "categoryName": "Box Braids",
+      "description": "Our most detailed box braid finish for a refined, long-lasting protective style.",
+      "whatsIncluded": [
+        "Consultation",
+        "Parting",
+        "Extra-small box braids",
+        "Dip & seal"
+      ],
+      "cover": {
+        "image": "https://booking.eandbhair.co.uk/service-covers/box-braids.png",
+        "alt": "Classic individual box braids"
+      },
+      "basePrice": 110,
+      "durationMinutes": 240,
+      "isAddOn": false
+    },
+    {
+      "slug": "small-knotless",
+      "name": "Small Knotless Braids",
+      "category": "knotless",
+      "categoryName": "Knotless Braids",
+      "description": "Fine, natural-looking small knotless braids with a soft, seamless root.",
+      "whatsIncluded": [
+        "Consultation",
+        "Wash & condition",
+        "Small knotless braids",
+        "Styling & finish"
+      ],
+      "cover": {
+        "image": "https://booking.eandbhair.co.uk/service-covers/knotless.png",
+        "alt": "Long knotless braids"
+      },
+      "basePrice": 80,
+      "durationMinutes": 210,
+      "isAddOn": false
+    },
+    {
+      "slug": "senegalese-twists",
+      "name": "Senegalese Twists",
+      "category": "twists",
+      "categoryName": "Twists",
+      "description": "Soft, springy twists with a smooth, wearable finish and natural movement.",
+      "whatsIncluded": [
+        "Consultation",
+        "Wash & condition",
+        "Twisting",
+        "Styling"
+      ],
+      "cover": {
+        "image": "https://booking.eandbhair.co.uk/service-covers/twists.png",
+        "alt": "Senegalese twists"
+      },
+      "basePrice": 90,
+      "durationMinutes": 150,
+      "isAddOn": false
+    },
+    {
+      "slug": "loc-grooming",
+      "name": "Loc Grooming",
+      "category": "locs",
+      "categoryName": "Locs",
+      "description": "Retwist and grooming for healthy-looking locs, clean roots and an easy finish.",
+      "whatsIncluded": [
+        "Consultation",
+        "Wash",
+        "Retwist",
+        "Styling"
+      ],
+      "cover": {
+        "image": "https://booking.eandbhair.co.uk/service-covers/locs.png",
+        "alt": "Healthy locs being groomed"
+      },
+      "basePrice": 45,
+      "durationMinutes": 75,
+      "isAddOn": false
+    },
+    {
+      "slug": "kids-box-braids",
+      "name": "Kids Box Braids",
+      "category": "childrens",
+      "categoryName": "Children's Hair",
+      "description": "Gentle, fun box braids for children using patient care and safe, comfortable techniques.",
+      "whatsIncluded": [
+        "Consultation",
+        "Gentle wash",
+        "Braiding",
+        "Child-friendly finish"
+      ],
+      "cover": {
+        "image": "https://booking.eandbhair.co.uk/service-covers/childrens.png",
+        "alt": "Gentle children's braids"
+      },
+      "basePrice": 35,
+      "durationMinutes": 90,
+      "isAddOn": false
+    },
+    {
+      "slug": "deep-treatment",
+      "name": "Deep Moisture Treatment",
+      "category": "treatments",
+      "categoryName": "Treatments",
+      "description": "A restorative moisture and scalp-care reset to leave textured hair feeling nourished and refreshed.",
+      "whatsIncluded": [
+        "Hair and scalp check",
+        "Moisture treatment",
+        "Scalp massage",
+        "Finish"
+      ],
+      "cover": {
+        "image": "https://booking.eandbhair.co.uk/service-covers/treatments.png",
+        "alt": "Scalp treatment for textured hair"
+      },
+      "basePrice": 40,
+      "durationMinutes": 45,
+      "isAddOn": false
+    },
+    {
+      "slug": "wash-condition",
+      "name": "Wash & Condition",
+      "category": "add-ons",
+      "categoryName": "Add-ons",
+      "description": "A cleansing, conditioning preparation service before your chosen style.",
+      "whatsIncluded": [
+        "Cleanse",
+        "Condition",
+        "Detangle"
+      ],
+      "cover": {
+        "image": "https://booking.eandbhair.co.uk/service-covers/treatments.png",
+        "alt": "Braid-care accessories and add-ons"
+      },
+      "basePrice": 10,
+      "durationMinutes": 30,
+      "isAddOn": true
+    },
+    {
+      "slug": "braid-take-down",
+      "name": "Braid Take-down",
+      "category": "add-ons",
+      "categoryName": "Add-ons",
+      "description": "Careful removal of an existing protective style with gentle detangling.",
+      "whatsIncluded": [
+        "Safe removal",
+        "Detangle",
+        "Hair assessment"
+      ],
+      "cover": {
+        "image": "https://booking.eandbhair.co.uk/service-covers/addons.png",
+        "alt": "Braid-care accessories and add-ons"
+      },
+      "basePrice": 25,
+      "durationMinutes": 45,
+      "isAddOn": true
+    },
+    {
+      "slug": "dentagling",
+      "name": "Dentagling",
+      "category": "add-ons",
+      "categoryName": "Add-ons",
+      "description": "It starts from £15.00 and it entirely depends on the condition of the hair and we will decide with accuracy how much it will cost upon your arrival.",
+      "whatsIncluded": [],
+      "cover": null,
+      "basePrice": 15,
+      "durationMinutes": 30,
+      "isAddOn": false
+    },
+    {
+      "slug": "steam-hair-treatment",
+      "name": "Steam Hair Treatment",
+      "category": "add-ons",
+      "categoryName": "Add-ons",
+      "description": "",
+      "whatsIncluded": [],
+      "cover": null,
+      "basePrice": 15,
+      "durationMinutes": 30,
+      "isAddOn": false
+    }
+  ],
+  "popular": [
+    "medium-knotless",
+    "stitch-braids",
+    "medium-box-braids",
+    "kids-box-braids"
+  ]
+}

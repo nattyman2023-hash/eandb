@@ -1,152 +1,146 @@
-import { useParams, Link, Navigate } from "react-router-dom";
-import { Button } from "@/components/ui/button";
-import { SERVICES, BUSINESS } from "@/lib/siteContent";
-import { ArrowUpRight, Check } from "lucide-react";
-import { useSiteImages } from "@/hooks/useSiteImages";
+import { useParams, Link } from "react-router-dom";
+import { Check, Clock } from "lucide-react";
 import SEOHead from "@/components/SEOHead";
+import BookNow from "@/components/BookNow";
+import ServiceCard from "@/components/ServiceCard";
+import PriceNotice from "@/components/PriceNotice";
+import NotFound from "@/pages/NotFound";
+import { BUSINESS, whatsappLink } from "@/lib/siteContent";
+import { formatDuration, formatPrice, useCatalogue } from "@/lib/catalogue";
+import { breadcrumbJsonLd, serviceJsonLd } from "@/lib/seo";
 
 const ServicePage = () => {
   const { service: slug } = useParams<{ service: string }>();
-  const service = SERVICES.find((s) => s.slug === slug);
-  const { getImage } = useSiteImages();
+  const { catalogue, status } = useCatalogue();
+  const service = catalogue.services.find((item) => item.slug === slug);
 
-  if (!service) return <Navigate to="/services" replace />;
+  if (!service) return <NotFound />;
 
-  const serviceImage = getImage(`service.${service.slug}`, service.image);
-  const related = SERVICES.filter((s) => s.slug !== slug).slice(0, 3);
-  const idx = SERVICES.findIndex(s => s.slug === slug);
-  const number = String(idx + 1).padStart(2, "0");
+  const category = catalogue.categories.find((item) => item.slug === service.category);
+  const categoryName = category?.name || service.categoryName;
+  const duration = formatDuration(service.durationMinutes);
+  const related = catalogue.services
+    .filter((item) => item.category === service.category && item.slug !== service.slug)
+    .concat(catalogue.services.filter((item) => item.category !== service.category && !item.isAddOn))
+    .slice(0, 3);
 
   return (
     <>
       <SEOHead
-        title={service.metaTitle}
-        description={service.metaDescription}
+        title={`${service.name} in Manchester | From ${formatPrice(service.basePrice)} | E & B Hair`}
+        description={`${service.name} at E & B Hair, ${BUSINESS.address}. From ${formatPrice(service.basePrice)}${duration ? `, estimated duration ${duration}` : ""}. ${service.description}`.slice(0, 300)}
         canonical={`/services/${service.slug}`}
-        image={service.image}
+        image={service.cover?.image}
+        jsonLd={[
+          serviceJsonLd(service),
+          breadcrumbJsonLd([
+            { name: "Home", path: "/" },
+            { name: "Services", path: "/services" },
+            { name: service.name, path: `/services/${service.slug}` },
+          ]),
+        ]}
       />
 
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "Service",
-            name: service.name,
-            description: service.longDesc,
-            provider: { "@type": "HairSalon", name: BUSINESS.name, telephone: BUSINESS.phone },
-          }),
-        }}
-      />
-
-      {/* Masthead */}
       <section className="border-t border-border">
         <div className="container">
-          <div className="flex flex-wrap items-center justify-between gap-2 py-4 text-[11px] uppercase tracking-[0.22em] text-muted-foreground border-b border-border">
-            <Link to="/services" className="hover:text-primary transition-colors">← The Index</Link>
-            <span>№ {number} · {service.name}</span>
-            <Link to="/book" className="hover:text-primary transition-colors">Reserve</Link>
-          </div>
+          <nav className="flex flex-wrap items-center gap-2 py-4 text-[11px] uppercase tracking-[0.22em] text-muted-foreground border-b border-border" aria-label="Breadcrumb">
+            <Link to="/services" className="hover:text-primary transition-colors">Services</Link>
+            <span aria-hidden="true">/</span>
+            <Link to={`/services#${service.category}`} className="hover:text-primary transition-colors">{categoryName}</Link>
+          </nav>
 
-          <div className="grid lg:grid-cols-12 gap-10 lg:gap-16 py-12 lg:py-20 items-center">
-            <div className="lg:col-span-6 space-y-8 animate-rise">
-              <p className="eyebrow">Service № {number}</p>
-              <h1 className="display-xl">{service.name}.</h1>
-              <p className="pull-quote text-foreground/80 max-w-xl">"{service.shortDesc}"</p>
-              <div className="flex flex-wrap items-center gap-6 pt-2">
-                <Link to="/book">
-                  <Button size="lg" className="rounded-none h-12 px-8 text-[11px] uppercase tracking-[0.22em]">
-                    Book this service
-                  </Button>
-                </Link>
-                <a href={BUSINESS.phoneHref} className="marker-link">{BUSINESS.phone}</a>
+          <div className="grid lg:grid-cols-12 gap-10 lg:gap-16 py-10 lg:py-16 items-center">
+            <div className="lg:col-span-6 space-y-6 animate-rise">
+              <p className="eyebrow">{categoryName}</p>
+              <h1 className="display-xl break-words">{service.name}</h1>
+              {service.description && <p className="text-base md:text-lg leading-relaxed text-muted-foreground max-w-xl">{service.description}</p>}
+              <dl className="grid grid-cols-2 gap-6 border-y border-border py-5 max-w-md">
+                <div>
+                  <dt className="eyebrow mb-1">Starting price</dt>
+                  <dd className="font-display text-3xl">From {formatPrice(service.basePrice)}</dd>
+                </div>
+                {duration && (
+                  <div>
+                    <dt className="eyebrow mb-1">Estimated duration</dt>
+                    <dd className="font-display text-xl flex items-center gap-2"><Clock className="h-4 w-4 shrink-0" aria-hidden="true" /> {duration}</dd>
+                  </div>
+                )}
+              </dl>
+              <div className="flex flex-wrap items-center gap-6">
+                <BookNow size="lg" />
+                <a href={whatsappLink(`Hello E & B Hair, I have a question about ${service.name}.`)} target="_blank" rel="noopener noreferrer" className="marker-link">
+                  Ask a question
+                </a>
               </div>
             </div>
 
             <div className="lg:col-span-6">
               <div className="aspect-[4/5] w-full overflow-hidden bg-muted">
-                <img src={serviceImage} alt={service.name} className="w-full h-full object-cover" />
+                {service.cover && (
+                  <img src={service.cover.image} alt={service.cover.alt} className="w-full h-full object-cover" width={1000} height={1250} decoding="async" />
+                )}
               </div>
-              <p className="image-caption mt-3">Fig. {number} — {service.name}, photographed in available light.</p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* About */}
+      {service.whatsIncluded.length > 0 && (
+        <section className="border-t border-border section-y">
+          <div className="container grid lg:grid-cols-12 gap-10">
+            <div className="lg:col-span-4">
+              <p className="eyebrow mb-3">What's included</p>
+              <h2 className="display-md">Part of every {service.name.toLowerCase()} appointment.</h2>
+            </div>
+            <ul className="lg:col-span-7 lg:col-start-6 border-t border-foreground/80">
+              {service.whatsIncluded.map((item) => (
+                <li key={item} className="border-b border-border flex items-start gap-4 py-5">
+                  <Check className="h-5 w-5 text-primary shrink-0 mt-1" aria-hidden="true" />
+                  <span className="text-lg">{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </section>
+      )}
+
       <section className="border-t border-border section-y">
-        <div className="container grid lg:grid-cols-12 gap-10 lg:gap-16">
+        <div className="container grid lg:grid-cols-12 gap-10">
           <div className="lg:col-span-4">
-            <p className="eyebrow mb-3">On the work</p>
-            <h2 className="display-md">In our own words.</h2>
+            <p className="eyebrow mb-3">Pricing</p>
+            <h2 className="display-md">How your price is set.</h2>
           </div>
-          <div className="lg:col-span-7 lg:col-start-6 space-y-6">
-            <p className="text-base md:text-lg leading-relaxed text-muted-foreground">{service.longDesc}</p>
-            {service.durationMinutes && (
-              <p className="eyebrow">Typical duration · {service.durationMinutes >= 60 ? `${Math.floor(service.durationMinutes/60)}h${service.durationMinutes%60 ? ` ${service.durationMinutes%60}m` : ''}` : `${service.durationMinutes}m`}</p>
-            )}
+          <div className="lg:col-span-7 lg:col-start-6 space-y-4 text-muted-foreground">
+            <p>
+              {service.name} starts from {formatPrice(service.basePrice)}. When you book, you can choose options such as size, length and extras where they apply, and the booking page shows your price before you confirm.
+            </p>
+            <PriceNotice status={status} />
           </div>
         </div>
       </section>
 
-      {/* Included */}
-      <section className="border-t border-border section-y">
-        <div className="container">
-          <div className="grid lg:grid-cols-12 gap-10 mb-10">
-            <div className="lg:col-span-4">
-              <p className="eyebrow mb-3">The Inclusions</p>
-              <h2 className="display-md">What's part of it.</h2>
-            </div>
-          </div>
-          <ul className="border-t border-foreground/80">
-            {service.included.map((item, i) => (
-              <li key={item} className="border-b border-border grid grid-cols-12 items-center gap-4 py-6 px-2 -mx-2">
-                <span className="col-span-1 eyebrow text-foreground/60">№ {String(i+1).padStart(2, '0')}</span>
-                <span className="col-span-10 font-display text-xl md:text-2xl" style={{ fontVariationSettings: '"opsz" 96' }}>{item}</span>
-                <Check className="col-span-1 h-5 w-5 text-primary justify-self-end" />
-              </li>
-            ))}
-          </ul>
-        </div>
-      </section>
-
-      {/* Related */}
-      <section className="border-t border-border section-y bg-muted/40">
-        <div className="container">
-          <div className="grid lg:grid-cols-12 gap-10 mb-10">
-            <div className="lg:col-span-4">
-              <p className="eyebrow mb-3">Continue reading</p>
-              <h2 className="display-md">Other services.</h2>
-            </div>
-            <div className="lg:col-span-7 lg:col-start-6 self-end">
+      {related.length > 0 && (
+        <section className="border-t border-border section-y bg-muted/40">
+          <div className="container">
+            <div className="flex flex-wrap items-end justify-between gap-4 mb-10">
+              <div>
+                <p className="eyebrow mb-3">Related services</p>
+                <h2 className="display-md">You might also like.</h2>
+              </div>
               <Link to="/services" className="marker-link">All services</Link>
             </div>
+            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              {related.map((item) => <ServiceCard key={item.slug} service={item} />)}
+            </div>
           </div>
-          <div className="grid sm:grid-cols-3 gap-8">
-            {related.map(s => (
-              <Link key={s.slug} to={`/services/${s.slug}`} className="group block">
-                <div className="aspect-[4/5] bg-muted overflow-hidden mb-4">
-                  <img src={getImage(`service.${s.slug}`, s.image)} alt={s.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy" />
-                </div>
-                <p className="eyebrow text-foreground/60 mb-1">Service</p>
-                <h3 className="font-display text-2xl group-hover:text-primary transition-colors">{s.name}</h3>
-                <p className="text-sm text-muted-foreground mt-2">{s.shortDesc}</p>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
+        </section>
+      )}
 
-      {/* CTA */}
       <section className="border-t border-border section-y">
-        <div className="container max-w-4xl text-center space-y-8">
-          <p className="eyebrow">Reservations</p>
-          <h2 className="display-lg">
-            Ready for {service.name.toLowerCase()}?<br/>
-            <Link to="/book" className="inline-flex items-center gap-3 underline decoration-2 underline-offset-8 decoration-primary hover:text-primary transition-colors">
-              Book a chair <ArrowUpRight className="h-7 w-7" />
-            </Link>
-          </h2>
+        <div className="container max-w-3xl text-center space-y-6">
+          <p className="eyebrow">Online booking</p>
+          <h2 className="display-lg">Ready to book {service.name}?</h2>
+          <BookNow size="lg" />
         </div>
       </section>
     </>

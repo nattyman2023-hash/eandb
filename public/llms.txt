@@ -1,32 +1,14 @@
-# E and B
+# E & B Hair
 
-> Professional hairdresser and braiding specialist in Manchester. Fades, cuts, colour, box braids, cornrows and treatments. Online booking available.
+> Braiding salon at 171 Princess Rd, Manchester M14 4RL: knotless braids, box braids, cornrows, twists, loc grooming, children's hair and treatments. Services, starting prices and estimated durations come from the salon's WubSync booking system.
 
 ## Pages
 
-- [Home](/): Salon overview, featured services and online booking entry point.
-- [Book](/book): Three-step booking wizard with stylist and time selection.
-- [Services](/services): Full directory of hairdressing, braiding and treatment services.
-- [Shop](/shop): Hair care products and retail.
-- [Contact](/contact): Phone, WhatsApp, email and salon address.
+- [Home](https://eandbhair.co.uk/): Salon overview and popular services.
+- [Services & prices](https://eandbhair.co.uk/services): Every current service by category, with starting price and estimated duration.
+- [Gallery](https://eandbhair.co.uk/gallery): Style inspiration by category.
+- [Contact](https://eandbhair.co.uk/contact): Phone, WhatsApp, email, enquiry form and map.
 
-## Service categories
+## Booking
 
-- [Braiding](/braiding): Box braids, cornrows and protective styles.
-- [Hair Studio](/hair-studio): Cuts, colour and styling.
-- [Kids](/kids): Children's haircuts and styling.
-
-## Service detail
-
-- [Hairdressing](/services/hairdressing)
-- [Braiding](/services/braiding)
-- [Hair Treatments](/services/hair-treatments)
-
-## Areas served
-
-- [Manchester](/areas/manchester)
-- [Fallowfield](/areas/fallowfield)
-- [Rusholme](/areas/rusholme)
-- [Longsight](/areas/longsight)
-- [Moss Side](/areas/moss-side)
-- [Didsbury](/areas/didsbury)
+- [Book online](https://booking.eandbhair.co.uk/book/eandb): Choose a service, options, date and time. The final price is confirmed there.

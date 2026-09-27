@@ -1,7 +1,7 @@
 {
-  "name": "E and B",
-  "short_name": "E and B",
-  "description": "E and B — Manchester's salon for braiding, hairdressing and treatments.",
+  "name": "E & B Hair",
+  "short_name": "E & B Hair",
+  "description": "E & B Hair — braiding salon in Manchester.",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",

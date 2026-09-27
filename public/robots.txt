@@ -1,10 +1,5 @@
 User-agent: *
 Allow: /
-
-# Sitemap location
-Sitemap: https://eandbhair.co.uk/sitemap.xml
-
-# Disallow admin/auth paths from crawling (these are app routes, not content pages)
-Disallow: /admin/
-Disallow: /auth
 Disallow: /api/
+
+Sitemap: https://eandbhair.co.uk/sitemap.xml
