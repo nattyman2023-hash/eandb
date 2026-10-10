@@ -6,7 +6,10 @@
 // (the build-time snapshot the prerendered pages are generated from).
 
 const BOOKING_ORIGIN = 'https://booking.eandbhair.co.uk';
-const CATALOGUE_URL = `${BOOKING_ORIGIN}/api/v1/book/eandb/catalogue`;
+// include=options: every service's offered option groups and add-ons with E & B's
+// own price/duration modifiers, in the same single request.
+const CATALOGUE_URL = `${BOOKING_ORIGIN}/api/v1/book/eandb/catalogue?include=options`;
+const PRICE_TYPES = new Set(['fixed', 'from', 'varies', 'range']);
 const SLUG_PATTERN = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 
 function text(value, maximumLength = 2000) {
@@ -25,6 +28,39 @@ function money(value) {
 function minutes(value) {
   const amount = Number(value);
   return Number.isInteger(amount) && amount > 0 ? amount : null;
+}
+
+// Signed modifier (an option/add-on may add or, in principle, remove time/money).
+function delta(value) {
+  const amount = Number(value);
+  return Number.isFinite(amount) ? Math.round(amount * 100) / 100 : 0;
+}
+
+function optionGroups(value) {
+  return (Array.isArray(value) ? value : [])
+    .filter((group) => group && SLUG_PATTERN.test(group.slug || '') && Array.isArray(group.values))
+    .map((group) => ({
+      slug: group.slug,
+      name: text(group.name, 120),
+      helpText: nullableText(group.help_text, 255),
+      values: group.values
+        .filter((v) => v && SLUG_PATTERN.test(v.slug || ''))
+        .map((v) => ({ slug: v.slug, label: text(v.label, 120), priceDelta: delta(v.price_delta), durationDelta: Math.round(delta(v.duration_delta_minutes)) })),
+    }))
+    .filter((group) => group.name && group.values.length);
+}
+
+function addons(value) {
+  return (Array.isArray(value) ? value : [])
+    .filter((addon) => addon && SLUG_PATTERN.test(addon.slug || ''))
+    .map((addon) => ({
+      slug: addon.slug,
+      name: text(addon.name, 120),
+      description: nullableText(addon.description, 255),
+      priceDelta: delta(addon.price_delta),
+      durationDelta: Math.round(delta(addon.duration_delta_minutes)),
+    }))
+    .filter((addon) => addon.name);
 }
 
 // WubSync returns cover paths relative to the booking host.
@@ -63,14 +99,25 @@ function sanitiseCatalogue(raw) {
       whatsIncluded: Array.isArray(service.whats_included)
         ? service.whats_included.map((item) => text(item, 300)).filter(Boolean)
         : [],
+      shortDescription: text(service.short_description, 255),
       cover: cover(service.cover, text(service.name, 200)),
       basePrice: money(service.base_price),
+      priceType: PRICE_TYPES.has(service.price_type) ? service.price_type : 'from',
+      priceMax: service.price_max == null ? null : money(service.price_max),
       durationMinutes: minutes(service.duration_minutes),
       isAddOn: service.is_add_on === true,
+      family: nullableText(service.family, 120),
+      optionLabel: nullableText(service.option_label, 80),
+      // Extra category slugs (secondary listings) + search words, from WubSync.
+      categories: [service.category, ...(Array.isArray(service.categories) ? service.categories : [])]
+        .filter((slug, index, all) => SLUG_PATTERN.test(slug || '') && all.indexOf(slug) === index),
+      tags: (Array.isArray(service.tags) ? service.tags : []).map((tag) => text(tag, 60).toLowerCase()).filter(Boolean).slice(0, 30),
+      optionGroups: optionGroups(service.option_groups),
+      addons: addons(service.addons),
     }))
-    .filter((service) => service.name && service.basePrice !== null);
+    .filter((service) => service.name && (service.basePrice !== null || service.priceType === 'varies'));
 
-  const usedCategories = new Set(services.map((service) => service.category));
+  const usedCategories = new Set(services.flatMap((service) => service.categories));
   const categories = (Array.isArray(raw.categories) ? raw.categories : [])
     .filter((category) => category && SLUG_PATTERN.test(category.slug) && usedCategories.has(category.slug))
     .map((category) => ({

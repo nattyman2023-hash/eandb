@@ -133,7 +133,7 @@ const HomePage = () => {
           </div>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-6">
             {catalogue.categories.filter((category) => category.cover).slice(0, 4).map((category) => (
-              <Link key={category.slug} to={`/services#${category.slug}`} className="group block">
+              <Link key={category.slug} to={`/services?category=${category.slug}`} className="group block">
                 <div className="aspect-square bg-muted overflow-hidden">
                   <img
                     src={category.cover!.image}

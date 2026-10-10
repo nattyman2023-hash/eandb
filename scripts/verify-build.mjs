@@ -7,7 +7,15 @@ import path from 'node:path';
 const projectRoot = process.cwd();
 const distributionDirectory = path.join(projectRoot, 'dist');
 const BOOKING_URL = 'https://booking.eandbhair.co.uk/book/eandb';
+const MANAGE_BOOKING_URL = 'https://booking.eandbhair.co.uk/book/lookup';
 const catalogue = JSON.parse(await fs.readFile(path.join(projectRoot, 'src', 'data', 'catalogue.json'), 'utf8'));
+const serviceSlugs = new Set(catalogue.services.map((service) => service.slug));
+const money = (amount) => `£${Number.isInteger(amount) ? amount : Number(amount).toFixed(2)}`;
+// Same wording as src/lib/catalogue.ts priceLabel().
+const priceLabel = (service) => (service.priceType === 'varies' ? 'Price varies' : service.priceType === 'fixed' ? money(service.basePrice) : `From ${money(service.basePrice)}`);
+// The booking start, the lookup page, or WubSync's own route for a real E & B service.
+const allowedBookingHref = (href) => href === BOOKING_URL || href === MANAGE_BOOKING_URL
+  || (href.startsWith(`${BOOKING_URL}/service/`) && serviceSlugs.has(href.slice(`${BOOKING_URL}/service/`.length)));
 const sitemap = await fs.readFile(path.join(projectRoot, 'public', 'sitemap.xml'), 'utf8');
 const routes = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map((match) => new URL(match[1]).pathname || '/');
 const failures = [];
@@ -64,8 +72,8 @@ for (const page of pages) {
   // The site has nothing to receive a form submission; enquiries go by email/WhatsApp/phone.
   if (/<form[\s>]/i.test(page.html)) failures.push(`${page.route}: contains a <form> with no working backend`);
   const bookingHrefs = [...page.html.matchAll(/href="(https:\/\/booking\.eandbhair\.co\.uk[^"]*)"/g)].map((match) => match[1]);
-  const wrong = bookingHrefs.filter((href) => href !== BOOKING_URL);
-  if (wrong.length) failures.push(`${page.route}: booking links not pointing at ${BOOKING_URL}: ${[...new Set(wrong)].join(', ')}`);
+  const wrong = bookingHrefs.filter((href) => !allowedBookingHref(href));
+  if (wrong.length) failures.push(`${page.route}: booking links outside WubSync's E & B routes: ${[...new Set(wrong)].join(', ')}`);
   if (page.html.includes('booking.wubhairstudio.co.uk')) failures.push(`${page.route}: links to the WUB booking site`);
 }
 
@@ -80,15 +88,25 @@ if (servicesPage) {
     failures.push(`/services lists ${listed.length} services, CRM has ${expected.length} (missing: ${missing.join(', ') || 'none'}; extra: ${extra.join(', ') || 'none'})`);
   }
   for (const service of catalogue.services) {
-    const price = `From £${Number.isInteger(service.basePrice) ? service.basePrice : service.basePrice.toFixed(2)}`;
+    const price = priceLabel(service);
     if (!servicesPage.text.includes(service.name)) failures.push(`/services: missing name "${service.name}"`);
     if (!servicesPage.text.includes(price)) failures.push(`/services: missing price "${price}" for ${service.name}`);
   }
 }
 
 for (const service of catalogue.services) {
-  const page = pages.find((item) => item.route === `/services/${service.slug}`);
-  if (page && !page.text.includes(service.name)) failures.push(`/services/${service.slug}: missing service name`);
+  const route = `/services/${service.slug}`;
+  const page = pages.find((item) => item.route === route);
+  if (!page) continue;
+  if (!page.text.includes(service.name)) failures.push(`${route}: missing service name`);
+  if (!page.text.includes(priceLabel(service))) failures.push(`${route}: missing price "${priceLabel(service)}"`);
+  if (!page.html.includes(`href="${BOOKING_URL}/service/${service.slug}"`)) failures.push(`${route}: no service-specific Book link`);
+  for (const group of service.optionGroups || []) {
+    if (!page.html.includes(`data-option-group="${group.slug}"`)) failures.push(`${route}: configured option group "${group.slug}" not shown`);
+    for (const value of group.values) if (!page.text.includes(value.label)) failures.push(`${route}: option "${value.label}" not shown`);
+  }
+  for (const addon of service.addons || []) if (!page.text.includes(addon.name)) failures.push(`${route}: add-on "${addon.name}" not shown`);
+  if (!(service.addons || []).length && page.html.includes('data-addons')) failures.push(`${route}: shows an add-ons list the service does not offer`);
 }
 
 // The JS bundle must not contain the retired local booking/payment/CRM code.

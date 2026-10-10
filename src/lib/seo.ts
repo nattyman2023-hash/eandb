@@ -11,6 +11,24 @@ export function absoluteUrl(pathOrUrl: string) {
 // Opening hours are intentionally absent: WubSync holds no public E & B hours and the
 // hours previously on this site were WUB's. Add openingHoursSpecification once E & B
 // confirms its own.
+// schema.org price that matches how the price is shown: an exact price for
+// "fixed", a minimum for "from", min-max for "range", and none for "varies"
+// (no invented figure).
+export function offerPrice(service: CatalogueService) {
+  const type = service.priceType || "from";
+  if (type === "varies") return {};
+  if (type === "fixed") return { price: service.basePrice, priceCurrency: "GBP" };
+  return {
+    priceCurrency: "GBP",
+    priceSpecification: {
+      "@type": "PriceSpecification",
+      minPrice: service.basePrice,
+      ...(type === "range" && service.priceMax != null ? { maxPrice: service.priceMax } : {}),
+      priceCurrency: "GBP",
+    },
+  };
+}
+
 export function hairSalonJsonLd() {
   const catalogue = CATALOGUE_SNAPSHOT;
   return {
@@ -43,12 +61,7 @@ export function hairSalonJsonLd() {
           .map((service) => ({
             "@type": "Offer",
             url: absoluteUrl(`/services/${service.slug}`),
-            priceCurrency: "GBP",
-            priceSpecification: {
-              "@type": "PriceSpecification",
-              minPrice: service.basePrice,
-              priceCurrency: "GBP",
-            },
+            ...offerPrice(service),
             itemOffered: { "@type": "Service", name: service.name },
           })),
       })),
@@ -67,11 +80,7 @@ export function serviceJsonLd(service: CatalogueService) {
     image: service.cover?.image,
     provider: { "@id": BUSINESS_ID, "@type": "HairSalon", name: BUSINESS.name, url: `${SITE_ORIGIN}/` },
     areaServed: { "@type": "City", name: BUSINESS.city },
-    offers: {
-      "@type": "Offer",
-      priceCurrency: "GBP",
-      priceSpecification: { "@type": "PriceSpecification", minPrice: service.basePrice, priceCurrency: "GBP" },
-    },
+    offers: { "@type": "Offer", url: absoluteUrl(`/services/${service.slug}`), ...offerPrice(service) },
     ...(service.durationMinutes ? { timeRequired: isoDuration(service.durationMinutes) } : {}),
   };
 }

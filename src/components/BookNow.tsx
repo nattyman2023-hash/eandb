@@ -1,11 +1,14 @@
 import { cn } from "@/lib/utils";
-import { BOOKING_URL } from "@/lib/booking";
+import { BOOKING_URL, serviceBookingUrl } from "@/lib/booking";
 
 interface BookNowProps {
   label?: string;
   className?: string;
   variant?: "solid" | "outline" | "light";
   size?: "sm" | "md" | "lg";
+  /** Start the WubSync booking with this service already chosen. */
+  serviceSlug?: string;
+  ariaLabel?: string;
 }
 
 const VARIANTS = {
@@ -21,9 +24,10 @@ const SIZES = {
 };
 
 // A plain same-tab link to WubSync. Every booking CTA on the site uses this.
-const BookNow = ({ label = "Book Now", className, variant = "solid", size = "md" }: BookNowProps) => (
+const BookNow = ({ label = "Book Now", className, variant = "solid", size = "md", serviceSlug, ariaLabel }: BookNowProps) => (
   <a
-    href={BOOKING_URL}
+    href={serviceSlug ? serviceBookingUrl(serviceSlug) : BOOKING_URL}
+    aria-label={ariaLabel}
     className={cn(
       "inline-flex items-center justify-center whitespace-nowrap text-[11px] uppercase tracking-[0.22em] font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
       VARIANTS[variant],

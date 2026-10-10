@@ -3,7 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import { createPortal } from "react-dom";
 import { Menu, X } from "lucide-react";
 import BookNow from "@/components/BookNow";
-import { BOOKING_URL } from "@/lib/booking";
+import { BOOKING_URL, MANAGE_BOOKING_URL } from "@/lib/booking";
 import { BUSINESS, whatsappLink } from "@/lib/siteContent";
 import { useCatalogue } from "@/lib/catalogue";
 
@@ -58,6 +58,8 @@ const PublicLayout = ({ children }: { children: React.ReactNode }) => {
                 </Link>
               );
             })}
+            {/* WubSync's own booking lookup (reference + mobile): view, reschedule or cancel. */}
+            <a href={MANAGE_BOOKING_URL} className="whitespace-nowrap text-[11px] uppercase tracking-[0.22em] font-medium transition-colors hover:text-primary text-foreground">My Bookings</a>
           </nav>
 
           <Link to="/" className="flex items-center select-none min-w-0 shrink" aria-label={`${BUSINESS.name} home`}>
@@ -100,6 +102,7 @@ const PublicLayout = ({ children }: { children: React.ReactNode }) => {
                   {l.label}
                 </Link>
               ))}
+              <a href={MANAGE_BOOKING_URL} className="block py-4 font-display text-3xl border-b border-border hover:text-primary transition-colors">My Bookings</a>
             </div>
             <div className="flex flex-wrap justify-between gap-4 text-[11px] uppercase tracking-[0.22em] text-muted-foreground">
               <a href={BUSINESS.phoneHref}>{BUSINESS.phone}</a>
@@ -128,7 +131,7 @@ const PublicLayout = ({ children }: { children: React.ReactNode }) => {
               <ul className="space-y-2 text-sm">
                 {catalogue.categories.map((category) => (
                   <li key={category.slug}>
-                    <Link to={`/services#${category.slug}`} className="hover:text-primary transition-colors">{category.name}</Link>
+                    <Link to={`/services?category=${category.slug}`} className="hover:text-primary transition-colors">{category.name}</Link>
                   </li>
                 ))}
               </ul>
@@ -142,6 +145,7 @@ const PublicLayout = ({ children }: { children: React.ReactNode }) => {
                 <li><Link to="/contact" className="hover:text-primary transition-colors">Contact</Link></li>
                 <li><Link to="/areas/manchester" className="hover:text-primary transition-colors">Areas we serve</Link></li>
                 <li><a href={BOOKING_URL} className="hover:text-primary transition-colors">Book Online</a></li>
+                <li><a href={MANAGE_BOOKING_URL} className="hover:text-primary transition-colors">My Bookings</a></li>
               </ul>
             </div>
 
