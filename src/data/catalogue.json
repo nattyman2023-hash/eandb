@@ -1,6 +1,6 @@
 {
   "source": "https://booking.eandbhair.co.uk/api/v1/book/eandb/catalogue?include=options",
-  "fetchedAt": "2026-10-10T11:05:59.451Z",
+  "fetchedAt": "2026-10-11T23:31:58.871Z",
   "business": {
     "name": "E & B Hair",
     "email": "contact@eandbhair.co.uk",
@@ -17,19 +17,29 @@
   },
   "categories": [
     {
-      "slug": "cornrows",
-      "name": "Cornrows",
-      "description": "Neat 2- and 4-cornrow styles, stitch braids and sculpted patterns with clean parting.",
+      "slug": "womens-braids",
+      "name": "Women's Braiding",
+      "description": "Protective braids, cornrows, twists and traditional styles for women.",
       "cover": {
-        "image": "https://booking.eandbhair.co.uk/service-covers/cornrows.jpg",
-        "alt": "Precise cornrow pattern"
+        "image": "https://booking.eandbhair.co.uk/service-covers/womens-braids.jpg",
+        "alt": "Long protective braids in a salon"
+      },
+      "sortOrder": 1
+    },
+    {
+      "slug": "mens-braids",
+      "name": "Men's Styling",
+      "description": "Two-strand twists, design cornrows, box braids and loc retwists for men.",
+      "cover": {
+        "image": "https://booking.eandbhair.co.uk/service-covers/mens-braids.jpg",
+        "alt": "Men's braids and line-up in a salon"
       },
       "sortOrder": 2
     },
     {
       "slug": "knotless",
       "name": "Knotless Braids",
-      "description": "Lightweight, tension-conscious knotless braids in jumbo, medium and small finishes.",
+      "description": "Tension-conscious knotless braids from jumbo to small, plus French curl braids.",
       "cover": {
         "image": "https://booking.eandbhair.co.uk/service-covers/knotless.jpg",
         "alt": "Long knotless braids"
@@ -39,7 +49,7 @@
     {
       "slug": "box-braids",
       "name": "Box Braids",
-      "description": "Classic individual box braids in jumbo, medium, small and extra-small sizes.",
+      "description": "Classic individual box braids in a range of sizes.",
       "cover": {
         "image": "https://booking.eandbhair.co.uk/service-covers/box-braids.jpg",
         "alt": "Classic individual box braids"
@@ -47,44 +57,74 @@
       "sortOrder": 4
     },
     {
-      "slug": "twists",
-      "name": "Twists",
-      "description": "Soft, springy twists finished with a polished, wearable shape.",
+      "slug": "cornrows",
+      "name": "Cornrows & Stitch",
+      "description": "Cornrows, stitch braids, ponytail styles, designs and lemonade braids.",
       "cover": {
-        "image": "https://booking.eandbhair.co.uk/service-covers/twists.jpg",
-        "alt": "Senegalese twists"
+        "image": "https://booking.eandbhair.co.uk/service-covers/cornrows.jpg",
+        "alt": "Precise cornrow pattern"
       },
       "sortOrder": 5
     },
     {
-      "slug": "locs",
-      "name": "Locs",
-      "description": "Healthy loc maintenance, retwists and styling for a clean, cared-for finish.",
+      "slug": "fulani-braids",
+      "name": "Fulani Braids",
+      "description": "Fulani cornrows at the top with braids, curls or twists through the back.",
       "cover": {
-        "image": "https://booking.eandbhair.co.uk/service-covers/locs.jpg",
-        "alt": "Healthy locs being groomed"
+        "image": "https://booking.eandbhair.co.uk/service-covers/fulani-braids.jpg",
+        "alt": "Fulani Braids"
       },
       "sortOrder": 6
     },
     {
-      "slug": "childrens",
-      "name": "Children's Hair",
-      "description": "Gentle, fun styles for children with safe products and patient care.",
+      "slug": "goddess-braids",
+      "name": "Goddess & Boho Braids",
+      "description": "Braids finished with curly pieces for a fuller goddess or boho look.",
       "cover": {
-        "image": "https://booking.eandbhair.co.uk/service-covers/childrens.jpg",
-        "alt": "Gentle children's braids"
+        "image": "https://booking.eandbhair.co.uk/service-covers/goddess-braids.jpg",
+        "alt": "Goddess & Boho Braids"
       },
       "sortOrder": 7
     },
     {
+      "slug": "twists",
+      "name": "Twists",
+      "description": "Finger twists, two-strand twists and twists with extensions.",
+      "cover": {
+        "image": "https://booking.eandbhair.co.uk/service-covers/twists.jpg",
+        "alt": "Senegalese twists"
+      },
+      "sortOrder": 8
+    },
+    {
+      "slug": "locs",
+      "name": "Locs & Dreadlocks",
+      "description": "Starter locs, dreadlock maintenance and retwists.",
+      "cover": {
+        "image": "https://booking.eandbhair.co.uk/service-covers/locs.jpg",
+        "alt": "Healthy locs being groomed"
+      },
+      "sortOrder": 11
+    },
+    {
+      "slug": "childrens",
+      "name": "Kids Styles",
+      "description": "Cornrows, box braids and boho braids for children.",
+      "cover": {
+        "image": "https://booking.eandbhair.co.uk/service-covers/childrens.jpg",
+        "alt": "Gentle children's braids"
+      },
+      "sortOrder": 12
+    },
+    {
       "slug": "treatments",
-      "name": "Treatments",
-      "description": "Moisture, scalp care and restorative treatments to support healthy hair.",
+      "name": "Hair Care & Finishing",
+      "description": "Wash & dry, straightening, colour, perms, take-downs and finishing styles.",
       "cover": {
         "image": "https://booking.eandbhair.co.uk/service-covers/treatments.jpg",
         "alt": "Scalp treatment for textured hair"
       },
-      "sortOrder": 8
+      "sortOrder": 13
     },
     {
       "slug": "add-ons",
@@ -94,28 +134,371 @@
         "image": "https://booking.eandbhair.co.uk/service-covers/addons.jpg",
         "alt": "Braid-care accessories and add-ons"
       },
-      "sortOrder": 9
+      "sortOrder": 14
     }
   ],
   "services": [
     {
-      "slug": "two-cornrows",
-      "name": "2 Cornrow (Without Extension)",
-      "category": "cornrows",
-      "categoryName": "Cornrows",
-      "description": "Classic two-cornrow style using your natural hair.",
-      "whatsIncluded": [
-        "Consultation",
-        "Parting",
-        "2 cornrows",
-        "Finish"
+      "slug": "traditional-ethiopian-eritrean-braids",
+      "name": "Traditional Ethiopian & Eritrean Braids",
+      "category": "womens-braids",
+      "categoryName": "Women's Braiding",
+      "description": "Traditional Habesha braided styles.",
+      "whatsIncluded": [],
+      "shortDescription": "Traditional Habesha braided styles.",
+      "cover": {
+        "image": "https://booking.eandbhair.co.uk/service-covers/womens-braids.jpg",
+        "alt": "Long protective braids in a salon"
+      },
+      "basePrice": 40,
+      "priceType": "from",
+      "priceMax": null,
+      "durationMinutes": 150,
+      "isAddOn": false,
+      "family": null,
+      "optionLabel": null,
+      "categories": [
+        "womens-braids",
+        "cornrows"
       ],
+      "tags": [
+        "traditional",
+        "ethiopian",
+        "eritrean",
+        "habesha",
+        "cornrows"
+      ],
+      "optionGroups": [],
+      "addons": []
+    },
+    {
+      "slug": "mens-full-head-twist",
+      "name": "Men's Two-Strand Twists — Full Head",
+      "category": "mens-braids",
+      "categoryName": "Men's Styling",
+      "description": "Full head of two-strand twists.",
+      "whatsIncluded": [],
       "shortDescription": "",
       "cover": {
-        "image": "https://booking.eandbhair.co.uk/service-covers/cornrows.jpg",
-        "alt": "Precise cornrow pattern"
+        "image": "https://booking.eandbhair.co.uk/service-covers/mens-braids.jpg",
+        "alt": "Men's braids and line-up in a salon"
       },
-      "basePrice": 10,
+      "basePrice": 35,
+      "priceType": "from",
+      "priceMax": null,
+      "durationMinutes": 150,
+      "isAddOn": false,
+      "family": "Men's Two-Strand Twists",
+      "optionLabel": "Full Head",
+      "categories": [
+        "mens-braids",
+        "twists"
+      ],
+      "tags": [
+        "twists",
+        "men",
+        "two strand"
+      ],
+      "optionGroups": [],
+      "addons": []
+    },
+    {
+      "slug": "mens-twist-half-head",
+      "name": "Men's Two-Strand Twists — Half Head",
+      "category": "mens-braids",
+      "categoryName": "Men's Styling",
+      "description": "Two-strand twists on the top half of the head.",
+      "whatsIncluded": [],
+      "shortDescription": "",
+      "cover": {
+        "image": "https://booking.eandbhair.co.uk/service-covers/mens-braids.jpg",
+        "alt": "Men's braids and line-up in a salon"
+      },
+      "basePrice": 30,
+      "priceType": "fixed",
+      "priceMax": null,
+      "durationMinutes": 100,
+      "isAddOn": false,
+      "family": "Men's Two-Strand Twists",
+      "optionLabel": "Half Head",
+      "categories": [
+        "mens-braids",
+        "twists"
+      ],
+      "tags": [
+        "twists",
+        "men",
+        "two strand"
+      ],
+      "optionGroups": [],
+      "addons": []
+    },
+    {
+      "slug": "mens-design-cornrow",
+      "name": "Men's Design Cornrows",
+      "category": "mens-braids",
+      "categoryName": "Men's Styling",
+      "description": "Custom cornrow designs tailored to your style.",
+      "whatsIncluded": [],
+      "shortDescription": "",
+      "cover": {
+        "image": "https://booking.eandbhair.co.uk/service-covers/mens-braids.jpg",
+        "alt": "Men's braids and line-up in a salon"
+      },
+      "basePrice": 25,
+      "priceType": "from",
+      "priceMax": null,
+      "durationMinutes": 60,
+      "isAddOn": false,
+      "family": null,
+      "optionLabel": null,
+      "categories": [
+        "mens-braids",
+        "cornrows"
+      ],
+      "tags": [
+        "cornrows",
+        "men",
+        "design"
+      ],
+      "optionGroups": [],
+      "addons": []
+    },
+    {
+      "slug": "mens-full-head-box-braids",
+      "name": "Men's Box Braids — Full Head",
+      "category": "mens-braids",
+      "categoryName": "Men's Styling",
+      "description": "Full head",
+      "whatsIncluded": [],
+      "shortDescription": "Full head",
+      "cover": {
+        "image": "https://booking.eandbhair.co.uk/service-covers/mens-braids.jpg",
+        "alt": "Men's braids and line-up in a salon"
+      },
+      "basePrice": 30,
+      "priceType": "fixed",
+      "priceMax": null,
+      "durationMinutes": 105,
+      "isAddOn": false,
+      "family": "Men's Box Braids",
+      "optionLabel": "Full Head",
+      "categories": [
+        "mens-braids",
+        "box-braids"
+      ],
+      "tags": [
+        "box-braids",
+        "men"
+      ],
+      "optionGroups": [],
+      "addons": []
+    },
+    {
+      "slug": "mens-half-head-box-braids",
+      "name": "Men's Box Braids — Half Head",
+      "category": "mens-braids",
+      "categoryName": "Men's Styling",
+      "description": "Half head",
+      "whatsIncluded": [],
+      "shortDescription": "Half head",
+      "cover": {
+        "image": "https://booking.eandbhair.co.uk/service-covers/mens-braids.jpg",
+        "alt": "Men's braids and line-up in a salon"
+      },
+      "basePrice": 25,
+      "priceType": "fixed",
+      "priceMax": null,
+      "durationMinutes": 50,
+      "isAddOn": false,
+      "family": "Men's Box Braids",
+      "optionLabel": "Half Head",
+      "categories": [
+        "mens-braids",
+        "box-braids"
+      ],
+      "tags": [
+        "box-braids",
+        "men"
+      ],
+      "optionGroups": [],
+      "addons": []
+    },
+    {
+      "slug": "mens-loc-retwist",
+      "name": "Men's Loc Retwist",
+      "category": "mens-braids",
+      "categoryName": "Men's Styling",
+      "description": "Retwist and tidy for existing locs.",
+      "whatsIncluded": [],
+      "shortDescription": "Retwist and tidy for existing locs.",
+      "cover": {
+        "image": "https://booking.eandbhair.co.uk/service-covers/mens-braids.jpg",
+        "alt": "Men's braids and line-up in a salon"
+      },
+      "basePrice": 40,
+      "priceType": "fixed",
+      "priceMax": null,
+      "durationMinutes": 150,
+      "isAddOn": false,
+      "family": null,
+      "optionLabel": null,
+      "categories": [
+        "mens-braids",
+        "locs"
+      ],
+      "tags": [
+        "locs",
+        "men",
+        "retwist",
+        "dreadlocks"
+      ],
+      "optionGroups": [],
+      "addons": []
+    },
+    {
+      "slug": "half-cornrow-half-twist",
+      "name": "Half Cornrow Half Twist",
+      "category": "mens-braids",
+      "categoryName": "Men's Styling",
+      "description": "Cornrows on sides with twists on top.",
+      "whatsIncluded": [],
+      "shortDescription": "",
+      "cover": {
+        "image": "https://booking.eandbhair.co.uk/service-covers/mens-braids.jpg",
+        "alt": "Half Cornrow Half Twist"
+      },
+      "basePrice": 35,
+      "priceType": "from",
+      "priceMax": null,
+      "durationMinutes": 60,
+      "isAddOn": false,
+      "family": null,
+      "optionLabel": null,
+      "categories": [
+        "mens-braids"
+      ],
+      "tags": [],
+      "optionGroups": [],
+      "addons": []
+    },
+    {
+      "slug": "barrel-twist",
+      "name": "Barrel Twist",
+      "category": "mens-braids",
+      "categoryName": "Men's Styling",
+      "description": "Chunky barrel-style twists for a bold look. Price: £35 - £45 · approx. 1h.",
+      "whatsIncluded": [],
+      "shortDescription": "",
+      "cover": {
+        "image": "https://booking.eandbhair.co.uk/service-covers/mens-braids.jpg",
+        "alt": "Barrel Twist"
+      },
+      "basePrice": 35,
+      "priceType": "from",
+      "priceMax": null,
+      "durationMinutes": 60,
+      "isAddOn": false,
+      "family": null,
+      "optionLabel": null,
+      "categories": [
+        "mens-braids"
+      ],
+      "tags": [],
+      "optionGroups": [],
+      "addons": []
+    },
+    {
+      "slug": "twist-cornrow",
+      "name": "Twist Cornrow",
+      "category": "mens-braids",
+      "categoryName": "Men's Styling",
+      "description": "Combination of twists and cornrow patterns. Price: £30 - £35 · approx. 1h.",
+      "whatsIncluded": [],
+      "shortDescription": "",
+      "cover": {
+        "image": "https://booking.eandbhair.co.uk/service-covers/mens-braids.jpg",
+        "alt": "Twist Cornrow"
+      },
+      "basePrice": 30,
+      "priceType": "from",
+      "priceMax": null,
+      "durationMinutes": 60,
+      "isAddOn": false,
+      "family": null,
+      "optionLabel": null,
+      "categories": [
+        "mens-braids"
+      ],
+      "tags": [],
+      "optionGroups": [],
+      "addons": []
+    },
+    {
+      "slug": "pop-smoke-braids",
+      "name": "Pop Smoke Braids",
+      "category": "mens-braids",
+      "categoryName": "Men's Styling",
+      "description": "Trendy Pop Smoke-inspired braiding style.",
+      "whatsIncluded": [],
+      "shortDescription": "",
+      "cover": {
+        "image": "https://booking.eandbhair.co.uk/service-covers/mens-braids.jpg",
+        "alt": "Pop Smoke Braids"
+      },
+      "basePrice": 25,
+      "priceType": "from",
+      "priceMax": null,
+      "durationMinutes": 45,
+      "isAddOn": false,
+      "family": null,
+      "optionLabel": null,
+      "categories": [
+        "mens-braids"
+      ],
+      "tags": [],
+      "optionGroups": [],
+      "addons": []
+    },
+    {
+      "slug": "detangling-and-wash",
+      "name": "Detangling and Wash",
+      "category": "mens-braids",
+      "categoryName": "Men's Styling",
+      "description": "Deep detangling treatment with thorough cleansing. Price: From £15 · approx. 30-45min.",
+      "whatsIncluded": [],
+      "shortDescription": "",
+      "cover": {
+        "image": "https://booking.eandbhair.co.uk/service-covers/mens-braids.jpg",
+        "alt": "Detangling and Wash"
+      },
+      "basePrice": 15,
+      "priceType": "from",
+      "priceMax": null,
+      "durationMinutes": 45,
+      "isAddOn": false,
+      "family": null,
+      "optionLabel": null,
+      "categories": [
+        "mens-braids"
+      ],
+      "tags": [],
+      "optionGroups": [],
+      "addons": []
+    },
+    {
+      "slug": "finger-curls",
+      "name": "Finger Curls",
+      "category": "mens-braids",
+      "categoryName": "Men's Styling",
+      "description": "Defined finger coils for a polished curly look. Price: £25 - £30 · approx. 30min.",
+      "whatsIncluded": [],
+      "shortDescription": "",
+      "cover": {
+        "image": "https://booking.eandbhair.co.uk/service-covers/mens-braids.jpg",
+        "alt": "Finger Curls"
+      },
+      "basePrice": 25,
       "priceType": "from",
       "priceMax": null,
       "durationMinutes": 30,
@@ -123,9 +506,43 @@
       "family": null,
       "optionLabel": null,
       "categories": [
-        "cornrows"
+        "mens-braids"
       ],
       "tags": [],
+      "optionGroups": [],
+      "addons": []
+    },
+    {
+      "slug": "four-cornrows",
+      "name": "4 Cornrows",
+      "category": "cornrows",
+      "categoryName": "Cornrows & Stitch",
+      "description": "Four neatly braided rows using your natural hair.",
+      "whatsIncluded": [
+        "Consultation",
+        "Parting",
+        "4 cornrows",
+        "Finish"
+      ],
+      "shortDescription": "",
+      "cover": {
+        "image": "https://booking.eandbhair.co.uk/service-covers/cornrows.jpg",
+        "alt": "Precise cornrow pattern"
+      },
+      "basePrice": 25,
+      "priceType": "from",
+      "priceMax": null,
+      "durationMinutes": 30,
+      "isAddOn": false,
+      "family": null,
+      "optionLabel": null,
+      "categories": [
+        "cornrows",
+        "womens-braids"
+      ],
+      "tags": [
+        "womens-braids"
+      ],
       "optionGroups": [
         {
           "slug": "size",
@@ -137,6 +554,18 @@
               "label": "Small",
               "priceDelta": 0,
               "durationDelta": 0
+            },
+            {
+              "slug": "medium",
+              "label": "Medium",
+              "priceDelta": 20,
+              "durationDelta": 30
+            },
+            {
+              "slug": "large",
+              "label": "Large",
+              "priceDelta": 45,
+              "durationDelta": 60
             }
           ]
         },
@@ -212,18 +641,133 @@
       ]
     },
     {
-      "slug": "four-cornrows",
-      "name": "4 Cornrows (Without Extension)",
+      "slug": "small-design-cornrow-extension",
+      "name": "Small Cornrow Braids — Ladies",
       "category": "cornrows",
-      "categoryName": "Cornrows",
-      "description": "Four neatly braided rows using your natural hair.",
-      "whatsIncluded": [
-        "Consultation",
-        "Parting",
-        "4 cornrows",
-        "Finish"
-      ],
+      "categoryName": "Cornrows & Stitch",
+      "description": "Intricate cornrow designs with extensions for length and detail. Price: £40 - £55 · approx. 2h+.",
+      "whatsIncluded": [],
       "shortDescription": "",
+      "cover": {
+        "image": "https://booking.eandbhair.co.uk/service-covers/cornrows.jpg",
+        "alt": "Precise cornrow pattern"
+      },
+      "basePrice": 45,
+      "priceType": "from",
+      "priceMax": null,
+      "durationMinutes": 120,
+      "isAddOn": false,
+      "family": null,
+      "optionLabel": null,
+      "categories": [
+        "cornrows",
+        "womens-braids"
+      ],
+      "tags": [
+        "womens-braids",
+        "ladies"
+      ],
+      "optionGroups": [],
+      "addons": []
+    },
+    {
+      "slug": "cornrow-braids-back-designs",
+      "name": "Cornrow Braids Back with Designs",
+      "category": "cornrows",
+      "categoryName": "Cornrows & Stitch",
+      "description": "Cornrows braided back with a design.",
+      "whatsIncluded": [],
+      "shortDescription": "Cornrows braided back with a design.",
+      "cover": {
+        "image": "https://booking.eandbhair.co.uk/service-covers/cornrows.jpg",
+        "alt": "Precise cornrow pattern"
+      },
+      "basePrice": 35,
+      "priceType": "from",
+      "priceMax": null,
+      "durationMinutes": 120,
+      "isAddOn": false,
+      "family": null,
+      "optionLabel": null,
+      "categories": [
+        "cornrows",
+        "womens-braids"
+      ],
+      "tags": [
+        "womens-braids",
+        "design"
+      ],
+      "optionGroups": [],
+      "addons": []
+    },
+    {
+      "slug": "large-stitch-braids",
+      "name": "Large Stitch Braids — 4/6",
+      "category": "cornrows",
+      "categoryName": "Cornrows & Stitch",
+      "description": "4 or 6 large stitch braids.",
+      "whatsIncluded": [],
+      "shortDescription": "4 or 6 large stitch braids.",
+      "cover": {
+        "image": "https://booking.eandbhair.co.uk/service-covers/cornrows.jpg",
+        "alt": "Precise cornrow pattern"
+      },
+      "basePrice": 30,
+      "priceType": "fixed",
+      "priceMax": null,
+      "durationMinutes": 60,
+      "isAddOn": false,
+      "family": null,
+      "optionLabel": null,
+      "categories": [
+        "cornrows",
+        "womens-braids"
+      ],
+      "tags": [
+        "womens-braids",
+        "stitch"
+      ],
+      "optionGroups": [],
+      "addons": []
+    },
+    {
+      "slug": "ponytail-cornrow-medium",
+      "name": "Cornrow Ponytail Styles",
+      "category": "cornrows",
+      "categoryName": "Cornrows & Stitch",
+      "description": "Medium-sized cornrows styled into a sleek, elegant ponytail. Price varies depending on complexity of the cornrow pattern and ponytail style. Price: £45 - £55 · approx. 2h.",
+      "whatsIncluded": [],
+      "shortDescription": "",
+      "cover": {
+        "image": "https://booking.eandbhair.co.uk/service-covers/cornrows.jpg",
+        "alt": "Precise cornrow pattern"
+      },
+      "basePrice": 40,
+      "priceType": "from",
+      "priceMax": null,
+      "durationMinutes": 150,
+      "isAddOn": false,
+      "family": null,
+      "optionLabel": null,
+      "categories": [
+        "cornrows",
+        "womens-braids"
+      ],
+      "tags": [
+        "womens-braids",
+        "ponytail"
+      ],
+      "optionGroups": [],
+      "addons": []
+    },
+    {
+      "slug": "cornrows-without-extensions",
+      "name": "Cornrows Without Extensions",
+      "category": "cornrows",
+      "categoryName": "Cornrows & Stitch",
+      "description": "Cornrows using your natural hair only.",
+      "whatsIncluded": [],
+      "shortDescription": "Cornrows using your natural hair only.",
       "cover": {
         "image": "https://booking.eandbhair.co.uk/service-covers/cornrows.jpg",
         "alt": "Precise cornrow pattern"
@@ -231,14 +775,111 @@
       "basePrice": 25,
       "priceType": "from",
       "priceMax": null,
+      "durationMinutes": 60,
+      "isAddOn": false,
+      "family": null,
+      "optionLabel": null,
+      "categories": [
+        "cornrows",
+        "womens-braids"
+      ],
+      "tags": [
+        "womens-braids",
+        "natural hair"
+      ],
+      "optionGroups": [],
+      "addons": []
+    },
+    {
+      "slug": "two-french-braids-extension",
+      "name": "2 French Cornrows with Extensions",
+      "category": "cornrows",
+      "categoryName": "Cornrows & Stitch",
+      "description": "Classic French braids with extensions for length.",
+      "whatsIncluded": [],
+      "shortDescription": "",
+      "cover": {
+        "image": "https://booking.eandbhair.co.uk/service-covers/cornrows.jpg",
+        "alt": "Precise cornrow pattern"
+      },
+      "basePrice": 20,
+      "priceType": "fixed",
+      "priceMax": null,
       "durationMinutes": 40,
       "isAddOn": false,
       "family": null,
       "optionLabel": null,
       "categories": [
-        "cornrows"
+        "cornrows",
+        "womens-braids"
       ],
-      "tags": [],
+      "tags": [
+        "womens-braids",
+        "french"
+      ],
+      "optionGroups": [],
+      "addons": []
+    },
+    {
+      "slug": "lemonade-braids",
+      "name": "Lemonade Braids",
+      "category": "cornrows",
+      "categoryName": "Cornrows & Stitch",
+      "description": "Side-swept cornrow braids.",
+      "whatsIncluded": [],
+      "shortDescription": "Side-swept cornrow braids.",
+      "cover": {
+        "image": "https://booking.eandbhair.co.uk/service-covers/cornrows.jpg",
+        "alt": "Precise cornrow pattern"
+      },
+      "basePrice": 70,
+      "priceType": "from",
+      "priceMax": null,
+      "durationMinutes": 180,
+      "isAddOn": false,
+      "family": null,
+      "optionLabel": null,
+      "categories": [
+        "cornrows",
+        "womens-braids"
+      ],
+      "tags": [
+        "womens-braids"
+      ],
+      "optionGroups": [],
+      "addons": []
+    },
+    {
+      "slug": "two-cornrows",
+      "name": "2 Cornrow (Without Extension)",
+      "category": "cornrows",
+      "categoryName": "Cornrows & Stitch",
+      "description": "Classic two-cornrow style using your natural hair.",
+      "whatsIncluded": [
+        "Consultation",
+        "Parting",
+        "2 cornrows",
+        "Finish"
+      ],
+      "shortDescription": "",
+      "cover": {
+        "image": "https://booking.eandbhair.co.uk/service-covers/cornrows.jpg",
+        "alt": "Precise cornrow pattern"
+      },
+      "basePrice": 10,
+      "priceType": "from",
+      "priceMax": null,
+      "durationMinutes": 30,
+      "isAddOn": false,
+      "family": null,
+      "optionLabel": null,
+      "categories": [
+        "cornrows",
+        "womens-braids"
+      ],
+      "tags": [
+        "womens-braids"
+      ],
       "optionGroups": [
         {
           "slug": "size",
@@ -250,6 +891,12 @@
               "label": "Small",
               "priceDelta": 0,
               "durationDelta": 0
+            },
+            {
+              "slug": "medium",
+              "label": "Medium",
+              "priceDelta": 20,
+              "durationDelta": 30
             }
           ]
         },
@@ -328,7 +975,7 @@
       "slug": "stitch-braids",
       "name": "6 Stitch Braids (No Extension)",
       "category": "cornrows",
-      "categoryName": "Cornrows",
+      "categoryName": "Cornrows & Stitch",
       "description": "Classic stitch braids with your natural hair.",
       "whatsIncluded": [
         "Consultation",
@@ -349,9 +996,12 @@
       "family": null,
       "optionLabel": null,
       "categories": [
-        "cornrows"
+        "cornrows",
+        "womens-braids"
       ],
-      "tags": [],
+      "tags": [
+        "womens-braids"
+      ],
       "optionGroups": [
         {
           "slug": "size",
@@ -363,6 +1013,233 @@
               "label": "Small",
               "priceDelta": 0,
               "durationDelta": 0
+            },
+            {
+              "slug": "medium",
+              "label": "Medium",
+              "priceDelta": 20,
+              "durationDelta": 30
+            },
+            {
+              "slug": "large",
+              "label": "Large",
+              "priceDelta": 45,
+              "durationDelta": 60
+            }
+          ]
+        },
+        {
+          "slug": "length",
+          "name": "Length",
+          "helpText": "How long you want the finished style.",
+          "values": [
+            {
+              "slug": "shoulder",
+              "label": "Shoulder",
+              "priceDelta": 0,
+              "durationDelta": 0
+            },
+            {
+              "slug": "mid-back",
+              "label": "Mid-back",
+              "priceDelta": 15,
+              "durationDelta": 20
+            },
+            {
+              "slug": "waist",
+              "label": "Waist",
+              "priceDelta": 35,
+              "durationDelta": 45
+            }
+          ]
+        }
+      ],
+      "addons": [
+        {
+          "slug": "wash",
+          "name": "Wash",
+          "description": "Cleansing wash before your style.",
+          "priceDelta": 10,
+          "durationDelta": 15
+        },
+        {
+          "slug": "blow-dry",
+          "name": "Blow dry",
+          "description": "Blow dry and prep.",
+          "priceDelta": 15,
+          "durationDelta": 20
+        },
+        {
+          "slug": "take-down",
+          "name": "Take down",
+          "description": "Removal of an existing protective style.",
+          "priceDelta": 25,
+          "durationDelta": 45
+        },
+        {
+          "slug": "hair-included",
+          "name": "Hair included",
+          "description": "Hair provided by the salon.",
+          "priceDelta": 30,
+          "durationDelta": 0
+        },
+        {
+          "slug": "extra-length",
+          "name": "Extra length",
+          "description": "Additional hair length.",
+          "priceDelta": 25,
+          "durationDelta": 15
+        },
+        {
+          "slug": "braid-accessories",
+          "name": "Braid accessories",
+          "description": "Beads, cuffs and finishing accessories.",
+          "priceDelta": 5,
+          "durationDelta": 10
+        }
+      ]
+    },
+    {
+      "slug": "four-stitch-braids-extension",
+      "name": "4 Stitch Braids With Extension",
+      "category": "cornrows",
+      "categoryName": "Cornrows & Stitch",
+      "description": "Four stitch braids with extensions for a defined look.",
+      "whatsIncluded": [],
+      "shortDescription": "",
+      "cover": {
+        "image": "https://booking.eandbhair.co.uk/service-covers/cornrows.jpg",
+        "alt": "4 Stitch Braids With Extension"
+      },
+      "basePrice": 25,
+      "priceType": "from",
+      "priceMax": null,
+      "durationMinutes": 45,
+      "isAddOn": false,
+      "family": null,
+      "optionLabel": null,
+      "categories": [
+        "cornrows",
+        "womens-braids"
+      ],
+      "tags": [
+        "womens-braids"
+      ],
+      "optionGroups": [],
+      "addons": []
+    },
+    {
+      "slug": "six-stitch-braids-extension",
+      "name": "6 Stitch Braids With Extension",
+      "category": "cornrows",
+      "categoryName": "Cornrows & Stitch",
+      "description": "Stitch braids with added length and volume.",
+      "whatsIncluded": [],
+      "shortDescription": "",
+      "cover": {
+        "image": "https://booking.eandbhair.co.uk/service-covers/cornrows.jpg",
+        "alt": "6 Stitch Braids With Extension"
+      },
+      "basePrice": 30,
+      "priceType": "from",
+      "priceMax": null,
+      "durationMinutes": 60,
+      "isAddOn": false,
+      "family": null,
+      "optionLabel": null,
+      "categories": [
+        "cornrows",
+        "womens-braids"
+      ],
+      "tags": [
+        "womens-braids"
+      ],
+      "optionGroups": [],
+      "addons": []
+    },
+    {
+      "slug": "eight-stitch-braids-extension",
+      "name": "8 Stitch Braids With Extension",
+      "category": "cornrows",
+      "categoryName": "Cornrows & Stitch",
+      "description": "More braids for a fuller, detailed look.",
+      "whatsIncluded": [],
+      "shortDescription": "",
+      "cover": {
+        "image": "https://booking.eandbhair.co.uk/service-covers/cornrows.jpg",
+        "alt": "8 Stitch Braids With Extension"
+      },
+      "basePrice": 35,
+      "priceType": "from",
+      "priceMax": null,
+      "durationMinutes": 75,
+      "isAddOn": false,
+      "family": null,
+      "optionLabel": null,
+      "categories": [
+        "cornrows",
+        "womens-braids"
+      ],
+      "tags": [
+        "womens-braids"
+      ],
+      "optionGroups": [],
+      "addons": []
+    },
+    {
+      "slug": "jumbo-knotless",
+      "name": "Jumbo Knotless Braids",
+      "category": "knotless",
+      "categoryName": "Knotless Braids",
+      "description": "Large, lightweight knotless braids for a natural look.",
+      "whatsIncluded": [
+        "Consultation",
+        "Wash & condition",
+        "Jumbo knotless braids",
+        "Styling & finish"
+      ],
+      "shortDescription": "",
+      "cover": {
+        "image": "https://booking.eandbhair.co.uk/service-covers/knotless.jpg",
+        "alt": "Long knotless braids"
+      },
+      "basePrice": 50,
+      "priceType": "from",
+      "priceMax": null,
+      "durationMinutes": 130,
+      "isAddOn": false,
+      "family": "Knotless Braids",
+      "optionLabel": "Jumbo",
+      "categories": [
+        "knotless",
+        "womens-braids"
+      ],
+      "tags": [
+        "womens-braids"
+      ],
+      "optionGroups": [
+        {
+          "slug": "size",
+          "name": "Size",
+          "helpText": "How large the finished style is.",
+          "values": [
+            {
+              "slug": "small",
+              "label": "Small",
+              "priceDelta": 0,
+              "durationDelta": 0
+            },
+            {
+              "slug": "medium",
+              "label": "Medium",
+              "priceDelta": 20,
+              "durationDelta": 30
+            },
+            {
+              "slug": "large",
+              "label": "Large",
+              "priceDelta": 45,
+              "durationDelta": 60
             }
           ]
         },
@@ -442,14 +1319,14 @@
       "name": "Medium Knotless Braids",
       "category": "knotless",
       "categoryName": "Knotless Braids",
-      "description": "Classic medium size with seamless, flat roots.",
+      "description": "A protective style designed to reduce tension and provide a comfortable full-head finish. Full head = 6 rows.",
       "whatsIncluded": [
         "Consultation",
         "Wash & condition",
         "Medium knotless braids",
         "Styling & finish"
       ],
-      "shortDescription": "",
+      "shortDescription": "Protective knotless braids with a comfortable full-head finish. Full head = 6 rows.",
       "cover": {
         "image": "https://booking.eandbhair.co.uk/service-covers/knotless.jpg",
         "alt": "Long knotless braids"
@@ -457,14 +1334,17 @@
       "basePrice": 70,
       "priceType": "from",
       "priceMax": null,
-      "durationMinutes": 180,
+      "durationMinutes": 170,
       "isAddOn": false,
-      "family": null,
-      "optionLabel": null,
+      "family": "Knotless Braids",
+      "optionLabel": "Medium",
       "categories": [
-        "knotless"
+        "knotless",
+        "womens-braids"
       ],
-      "tags": [],
+      "tags": [
+        "womens-braids"
+      ],
       "optionGroups": [
         {
           "slug": "size",
@@ -476,6 +1356,18 @@
               "label": "Small",
               "priceDelta": 0,
               "durationDelta": 0
+            },
+            {
+              "slug": "medium",
+              "label": "Medium",
+              "priceDelta": 20,
+              "durationDelta": 30
+            },
+            {
+              "slug": "large",
+              "label": "Large",
+              "priceDelta": 45,
+              "durationDelta": 60
             }
           ]
         },
@@ -551,117 +1443,66 @@
       ]
     },
     {
-      "slug": "jumbo-knotless",
-      "name": "Jumbo Knotless Braids",
+      "slug": "s-medium-knotless",
+      "name": "S-Medium Knotless Braids",
       "category": "knotless",
       "categoryName": "Knotless Braids",
-      "description": "Large, lightweight knotless braids for a natural look.",
-      "whatsIncluded": [
-        "Consultation",
-        "Wash & condition",
-        "Jumbo knotless braids",
-        "Styling & finish"
-      ],
-      "shortDescription": "",
+      "description": "Full head = 6 rows",
+      "whatsIncluded": [],
+      "shortDescription": "Full head = 6 rows",
       "cover": {
         "image": "https://booking.eandbhair.co.uk/service-covers/knotless.jpg",
         "alt": "Long knotless braids"
       },
-      "basePrice": 50,
+      "basePrice": 85,
       "priceType": "from",
       "priceMax": null,
-      "durationMinutes": 110,
+      "durationMinutes": 220,
       "isAddOn": false,
-      "family": null,
-      "optionLabel": null,
+      "family": "Knotless Braids",
+      "optionLabel": "S-Medium",
       "categories": [
-        "knotless"
+        "knotless",
+        "womens-braids"
       ],
-      "tags": [],
+      "tags": [
+        "womens-braids",
+        "small medium"
+      ],
       "optionGroups": [
-        {
-          "slug": "size",
-          "name": "Size",
-          "helpText": "How large the finished style is.",
-          "values": [
-            {
-              "slug": "small",
-              "label": "Small",
-              "priceDelta": 0,
-              "durationDelta": 0
-            }
-          ]
-        },
         {
           "slug": "length",
           "name": "Length",
           "helpText": "How long you want the finished style.",
           "values": [
             {
-              "slug": "shoulder",
-              "label": "Shoulder",
+              "slug": "mid-back",
+              "label": "Mid-back",
               "priceDelta": 0,
               "durationDelta": 0
             },
             {
-              "slug": "mid-back",
-              "label": "Mid-back",
-              "priceDelta": 15,
-              "durationDelta": 20
-            },
-            {
               "slug": "waist",
               "label": "Waist",
+              "priceDelta": 15,
+              "durationDelta": 0
+            },
+            {
+              "slug": "bum",
+              "label": "Bum",
+              "priceDelta": 25,
+              "durationDelta": 0
+            },
+            {
+              "slug": "knee",
+              "label": "Knee",
               "priceDelta": 35,
-              "durationDelta": 45
+              "durationDelta": 0
             }
           ]
         }
       ],
-      "addons": [
-        {
-          "slug": "wash",
-          "name": "Wash",
-          "description": "Cleansing wash before your style.",
-          "priceDelta": 10,
-          "durationDelta": 15
-        },
-        {
-          "slug": "blow-dry",
-          "name": "Blow dry",
-          "description": "Blow dry and prep.",
-          "priceDelta": 15,
-          "durationDelta": 20
-        },
-        {
-          "slug": "take-down",
-          "name": "Take down",
-          "description": "Removal of an existing protective style.",
-          "priceDelta": 25,
-          "durationDelta": 45
-        },
-        {
-          "slug": "hair-included",
-          "name": "Hair included",
-          "description": "Hair provided by the salon.",
-          "priceDelta": 30,
-          "durationDelta": 0
-        },
-        {
-          "slug": "extra-length",
-          "name": "Extra length",
-          "description": "Additional hair length.",
-          "priceDelta": 25,
-          "durationDelta": 15
-        },
-        {
-          "slug": "braid-accessories",
-          "name": "Braid accessories",
-          "description": "Beads, cuffs and finishing accessories.",
-          "priceDelta": 5,
-          "durationDelta": 10
-        }
-      ]
+      "addons": []
     },
     {
       "slug": "small-knotless",
@@ -683,14 +1524,17 @@
       "basePrice": 80,
       "priceType": "from",
       "priceMax": null,
-      "durationMinutes": 210,
+      "durationMinutes": 300,
       "isAddOn": false,
-      "family": null,
-      "optionLabel": null,
+      "family": "Knotless Braids",
+      "optionLabel": "Small",
       "categories": [
-        "knotless"
+        "knotless",
+        "womens-braids"
       ],
-      "tags": [],
+      "tags": [
+        "womens-braids"
+      ],
       "optionGroups": [
         {
           "slug": "size",
@@ -702,6 +1546,18 @@
               "label": "Small",
               "priceDelta": 0,
               "durationDelta": 0
+            },
+            {
+              "slug": "medium",
+              "label": "Medium",
+              "priceDelta": 20,
+              "durationDelta": 30
+            },
+            {
+              "slug": "large",
+              "label": "Large",
+              "priceDelta": 45,
+              "durationDelta": 60
             }
           ]
         },
@@ -777,8 +1633,132 @@
       ]
     },
     {
+      "slug": "french-curl-braids",
+      "name": "French Curl Braids",
+      "category": "knotless",
+      "categoryName": "Knotless Braids",
+      "description": "Braided at the roots and released into curls.",
+      "whatsIncluded": [],
+      "shortDescription": "Braided at the roots and released into curls.",
+      "cover": {
+        "image": "https://booking.eandbhair.co.uk/service-covers/knotless.jpg",
+        "alt": "Long knotless braids"
+      },
+      "basePrice": 85,
+      "priceType": "from",
+      "priceMax": null,
+      "durationMinutes": 210,
+      "isAddOn": false,
+      "family": "Knotless Braids",
+      "optionLabel": "French Curl",
+      "categories": [
+        "knotless",
+        "womens-braids"
+      ],
+      "tags": [
+        "womens-braids",
+        "curls",
+        "french curls"
+      ],
+      "optionGroups": [
+        {
+          "slug": "length",
+          "name": "Length",
+          "helpText": "How long you want the finished style.",
+          "values": [
+            {
+              "slug": "mid-back",
+              "label": "Mid-back",
+              "priceDelta": 0,
+              "durationDelta": 0
+            },
+            {
+              "slug": "waist",
+              "label": "Waist",
+              "priceDelta": 15,
+              "durationDelta": 0
+            },
+            {
+              "slug": "bum",
+              "label": "Bum",
+              "priceDelta": 25,
+              "durationDelta": 0
+            },
+            {
+              "slug": "knee",
+              "label": "Knee",
+              "priceDelta": 35,
+              "durationDelta": 0
+            }
+          ]
+        }
+      ],
+      "addons": []
+    },
+    {
+      "slug": "extra-small-knotless",
+      "name": "Extra Small Knotless Braids",
+      "category": "knotless",
+      "categoryName": "Knotless Braids",
+      "description": "Micro knotless for maximum versatility and natural appearance. Price: £120 · approx. 5h+.",
+      "whatsIncluded": [],
+      "shortDescription": "",
+      "cover": {
+        "image": "https://booking.eandbhair.co.uk/service-covers/knotless.jpg",
+        "alt": "Extra Small Knotless Braids"
+      },
+      "basePrice": 120,
+      "priceType": "from",
+      "priceMax": null,
+      "durationMinutes": 300,
+      "isAddOn": false,
+      "family": null,
+      "optionLabel": null,
+      "categories": [
+        "knotless",
+        "womens-braids"
+      ],
+      "tags": [
+        "womens-braids"
+      ],
+      "optionGroups": [
+        {
+          "slug": "length",
+          "name": "Length",
+          "helpText": "How long you want the finished style.",
+          "values": [
+            {
+              "slug": "mid-back",
+              "label": "Mid-back",
+              "priceDelta": 0,
+              "durationDelta": 0
+            },
+            {
+              "slug": "waist",
+              "label": "Waist",
+              "priceDelta": 15,
+              "durationDelta": 0
+            },
+            {
+              "slug": "bum",
+              "label": "Bum",
+              "priceDelta": 25,
+              "durationDelta": 0
+            },
+            {
+              "slug": "knee",
+              "label": "Knee",
+              "priceDelta": 35,
+              "durationDelta": 0
+            }
+          ]
+        }
+      ],
+      "addons": []
+    },
+    {
       "slug": "jumbo-box-braids",
-      "name": "Jumbo Box Braids",
+      "name": "Jumbo Box Braids — Ladies",
       "category": "box-braids",
       "categoryName": "Box Braids",
       "description": "Large, statement braids that are quick to install and lightweight.",
@@ -788,7 +1768,7 @@
         "Jumbo box braids",
         "Dip & seal"
       ],
-      "shortDescription": "",
+      "shortDescription": "Full head = 4 rows",
       "cover": {
         "image": "https://booking.eandbhair.co.uk/service-covers/box-braids.jpg",
         "alt": "Classic individual box braids"
@@ -796,14 +1776,18 @@
       "basePrice": 40,
       "priceType": "from",
       "priceMax": null,
-      "durationMinutes": 80,
+      "durationMinutes": 150,
       "isAddOn": false,
-      "family": null,
-      "optionLabel": null,
+      "family": "Box Braids",
+      "optionLabel": "Ladies Jumbo",
       "categories": [
-        "box-braids"
+        "box-braids",
+        "womens-braids"
       ],
-      "tags": [],
+      "tags": [
+        "womens-braids",
+        "jumbo"
+      ],
       "optionGroups": [
         {
           "slug": "size",
@@ -815,6 +1799,18 @@
               "label": "Small",
               "priceDelta": 0,
               "durationDelta": 0
+            },
+            {
+              "slug": "medium",
+              "label": "Medium",
+              "priceDelta": 20,
+              "durationDelta": 30
+            },
+            {
+              "slug": "large",
+              "label": "Large",
+              "priceDelta": 45,
+              "durationDelta": 60
             }
           ]
         },
@@ -909,14 +1905,17 @@
       "basePrice": 60,
       "priceType": "from",
       "priceMax": null,
-      "durationMinutes": 150,
+      "durationMinutes": 270,
       "isAddOn": false,
-      "family": null,
-      "optionLabel": null,
+      "family": "Box Braids",
+      "optionLabel": "Medium",
       "categories": [
-        "box-braids"
+        "box-braids",
+        "womens-braids"
       ],
-      "tags": [],
+      "tags": [
+        "womens-braids"
+      ],
       "optionGroups": [
         {
           "slug": "size",
@@ -928,6 +1927,18 @@
               "label": "Small",
               "priceDelta": 0,
               "durationDelta": 0
+            },
+            {
+              "slug": "medium",
+              "label": "Medium",
+              "priceDelta": 20,
+              "durationDelta": 30
+            },
+            {
+              "slug": "large",
+              "label": "Large",
+              "priceDelta": 45,
+              "durationDelta": 60
             }
           ]
         },
@@ -1003,6 +2014,67 @@
       ]
     },
     {
+      "slug": "box-braids-standard",
+      "name": "Box Braids",
+      "category": "box-braids",
+      "categoryName": "Box Braids",
+      "description": "Classic individual box braids.",
+      "whatsIncluded": [],
+      "shortDescription": "Classic individual box braids.",
+      "cover": {
+        "image": "https://booking.eandbhair.co.uk/service-covers/box-braids.jpg",
+        "alt": "Classic individual box braids"
+      },
+      "basePrice": 75,
+      "priceType": "from",
+      "priceMax": null,
+      "durationMinutes": 180,
+      "isAddOn": false,
+      "family": "Box Braids",
+      "optionLabel": "Standard",
+      "categories": [
+        "box-braids",
+        "womens-braids"
+      ],
+      "tags": [
+        "womens-braids"
+      ],
+      "optionGroups": [
+        {
+          "slug": "length",
+          "name": "Length",
+          "helpText": "How long you want the finished style.",
+          "values": [
+            {
+              "slug": "mid-back",
+              "label": "Mid-back",
+              "priceDelta": 0,
+              "durationDelta": 0
+            },
+            {
+              "slug": "waist",
+              "label": "Waist",
+              "priceDelta": 15,
+              "durationDelta": 0
+            },
+            {
+              "slug": "bum",
+              "label": "Bum",
+              "priceDelta": 25,
+              "durationDelta": 0
+            },
+            {
+              "slug": "knee",
+              "label": "Knee",
+              "priceDelta": 35,
+              "durationDelta": 0
+            }
+          ]
+        }
+      ],
+      "addons": []
+    },
+    {
       "slug": "small-box-braids",
       "name": "Small Box Braids",
       "category": "box-braids",
@@ -1027,9 +2099,12 @@
       "family": null,
       "optionLabel": null,
       "categories": [
-        "box-braids"
+        "box-braids",
+        "womens-braids"
       ],
-      "tags": [],
+      "tags": [
+        "womens-braids"
+      ],
       "optionGroups": [
         {
           "slug": "size",
@@ -1041,6 +2116,18 @@
               "label": "Small",
               "priceDelta": 0,
               "durationDelta": 0
+            },
+            {
+              "slug": "medium",
+              "label": "Medium",
+              "priceDelta": 20,
+              "durationDelta": 30
+            },
+            {
+              "slug": "large",
+              "label": "Large",
+              "priceDelta": 45,
+              "durationDelta": 60
             }
           ]
         },
@@ -1140,9 +2227,12 @@
       "family": null,
       "optionLabel": null,
       "categories": [
-        "box-braids"
+        "box-braids",
+        "womens-braids"
       ],
-      "tags": [],
+      "tags": [
+        "womens-braids"
+      ],
       "optionGroups": [
         {
           "slug": "size",
@@ -1154,6 +2244,18 @@
               "label": "Small",
               "priceDelta": 0,
               "durationDelta": 0
+            },
+            {
+              "slug": "medium",
+              "label": "Medium",
+              "priceDelta": 20,
+              "durationDelta": 30
+            },
+            {
+              "slug": "large",
+              "label": "Large",
+              "priceDelta": 45,
+              "durationDelta": 60
             }
           ]
         },
@@ -1227,6 +2329,600 @@
           "durationDelta": 10
         }
       ]
+    },
+    {
+      "slug": "fulani-braids-large",
+      "name": "Large Fulani Braids",
+      "category": "fulani-braids",
+      "categoryName": "Fulani Braids",
+      "description": "Up to 8 cornrows at the top with box braids at the back.",
+      "whatsIncluded": [],
+      "shortDescription": "Up to 8 cornrows at the top with box braids at the back.",
+      "cover": {
+        "image": "https://booking.eandbhair.co.uk/service-covers/fulani-braids.jpg",
+        "alt": "Large Fulani Braids"
+      },
+      "basePrice": 55,
+      "priceType": "from",
+      "priceMax": null,
+      "durationMinutes": 210,
+      "isAddOn": false,
+      "family": "Fulani Braids",
+      "optionLabel": "Large",
+      "categories": [
+        "fulani-braids",
+        "womens-braids"
+      ],
+      "tags": [
+        "womens-braids"
+      ],
+      "optionGroups": [],
+      "addons": []
+    },
+    {
+      "slug": "fulani-braids-medium",
+      "name": "Medium Fulani Braids",
+      "category": "fulani-braids",
+      "categoryName": "Fulani Braids",
+      "description": "Medium-sized pattern for a balanced, elegant look.",
+      "whatsIncluded": [],
+      "shortDescription": "",
+      "cover": {
+        "image": "https://booking.eandbhair.co.uk/service-covers/fulani-braids.jpg",
+        "alt": "Medium Fulani Braids"
+      },
+      "basePrice": 75,
+      "priceType": "fixed",
+      "priceMax": null,
+      "durationMinutes": 210,
+      "isAddOn": false,
+      "family": "Fulani Braids",
+      "optionLabel": "Medium",
+      "categories": [
+        "fulani-braids",
+        "womens-braids"
+      ],
+      "tags": [
+        "womens-braids"
+      ],
+      "optionGroups": [],
+      "addons": []
+    },
+    {
+      "slug": "flip-goddess-fulani-braids",
+      "name": "Goddess Fulani Braids — Flip Over",
+      "category": "fulani-braids",
+      "categoryName": "Fulani Braids",
+      "description": "Trendy flip-over goddess Fulani style combining flipped braids with flowing curly accents.",
+      "whatsIncluded": [],
+      "shortDescription": "",
+      "cover": {
+        "image": "https://booking.eandbhair.co.uk/service-covers/fulani-braids.jpg",
+        "alt": "Goddess Fulani Braids — Flip Over"
+      },
+      "basePrice": 95,
+      "priceType": "fixed",
+      "priceMax": null,
+      "durationMinutes": 180,
+      "isAddOn": false,
+      "family": "Fulani Braids",
+      "optionLabel": "Goddess Flip Over",
+      "categories": [
+        "fulani-braids",
+        "womens-braids",
+        "goddess-braids"
+      ],
+      "tags": [
+        "womens-braids",
+        "goddess-braids",
+        "goddess"
+      ],
+      "optionGroups": [
+        {
+          "slug": "length",
+          "name": "Length",
+          "helpText": "How long you want the finished style.",
+          "values": [
+            {
+              "slug": "mid-back",
+              "label": "Mid-back",
+              "priceDelta": 0,
+              "durationDelta": 0
+            },
+            {
+              "slug": "waist",
+              "label": "Waist",
+              "priceDelta": 15,
+              "durationDelta": 0
+            },
+            {
+              "slug": "bum",
+              "label": "Bum",
+              "priceDelta": 25,
+              "durationDelta": 0
+            },
+            {
+              "slug": "knee",
+              "label": "Knee",
+              "priceDelta": 35,
+              "durationDelta": 0
+            }
+          ]
+        }
+      ],
+      "addons": []
+    },
+    {
+      "slug": "medium-goddess-fulani-braids",
+      "name": "Medium Goddess Fulani Braids",
+      "category": "fulani-braids",
+      "categoryName": "Fulani Braids",
+      "description": "Up to 16 cornrows at the top with curls for a fuller Goddess/Fulani finish. Curls in synthetic or human deep wave hair, your choice. Hair not included.",
+      "whatsIncluded": [],
+      "shortDescription": "Up to 16 cornrows at the top with curls for a fuller Goddess/Fulani finish. Hair not included.",
+      "cover": {
+        "image": "https://booking.eandbhair.co.uk/service-covers/fulani-braids.jpg",
+        "alt": "Medium Goddess Fulani Braids"
+      },
+      "basePrice": 90,
+      "priceType": "from",
+      "priceMax": null,
+      "durationMinutes": 270,
+      "isAddOn": false,
+      "family": "Fulani Braids",
+      "optionLabel": "Medium Goddess",
+      "categories": [
+        "fulani-braids",
+        "womens-braids",
+        "goddess-braids"
+      ],
+      "tags": [
+        "womens-braids",
+        "goddess-braids",
+        "goddess"
+      ],
+      "optionGroups": [
+        {
+          "slug": "length",
+          "name": "Length",
+          "helpText": "How long you want the finished style.",
+          "values": [
+            {
+              "slug": "mid-back",
+              "label": "Mid-back",
+              "priceDelta": 0,
+              "durationDelta": 0
+            },
+            {
+              "slug": "waist",
+              "label": "Waist",
+              "priceDelta": 15,
+              "durationDelta": 0
+            },
+            {
+              "slug": "bum",
+              "label": "Bum",
+              "priceDelta": 25,
+              "durationDelta": 0
+            },
+            {
+              "slug": "knee",
+              "label": "Knee",
+              "priceDelta": 35,
+              "durationDelta": 0
+            }
+          ]
+        }
+      ],
+      "addons": []
+    },
+    {
+      "slug": "boho-fulani-twist",
+      "name": "Boho Fulani Twist",
+      "category": "fulani-braids",
+      "categoryName": "Fulani Braids",
+      "description": "Fulani-style cornrows with boho twists.",
+      "whatsIncluded": [],
+      "shortDescription": "Fulani-style cornrows with boho twists.",
+      "cover": {
+        "image": "https://booking.eandbhair.co.uk/service-covers/fulani-braids.jpg",
+        "alt": "Boho Fulani Twist"
+      },
+      "basePrice": 85,
+      "priceType": "from",
+      "priceMax": null,
+      "durationMinutes": 210,
+      "isAddOn": false,
+      "family": "Fulani Braids",
+      "optionLabel": "Boho Fulani Twist",
+      "categories": [
+        "fulani-braids",
+        "womens-braids",
+        "goddess-braids",
+        "twists"
+      ],
+      "tags": [
+        "womens-braids",
+        "goddess-braids",
+        "twists",
+        "boho"
+      ],
+      "optionGroups": [],
+      "addons": []
+    },
+    {
+      "slug": "goddess-braid-small",
+      "name": "Small Goddess Braids",
+      "category": "goddess-braids",
+      "categoryName": "Goddess & Boho Braids",
+      "description": "Price confirmed with the salon based on length and fullness.",
+      "whatsIncluded": [],
+      "shortDescription": "Price confirmed with the salon based on length and fullness.",
+      "cover": {
+        "image": "https://booking.eandbhair.co.uk/service-covers/goddess-braids.jpg",
+        "alt": "Small Goddess Braids"
+      },
+      "basePrice": 100,
+      "priceType": "varies",
+      "priceMax": null,
+      "durationMinutes": 270,
+      "isAddOn": false,
+      "family": "Goddess Braids",
+      "optionLabel": "Small",
+      "categories": [
+        "goddess-braids",
+        "womens-braids"
+      ],
+      "tags": [
+        "womens-braids",
+        "goddess"
+      ],
+      "optionGroups": [
+        {
+          "slug": "length",
+          "name": "Length",
+          "helpText": "How long you want the finished style.",
+          "values": [
+            {
+              "slug": "mid-back",
+              "label": "Mid-back",
+              "priceDelta": 0,
+              "durationDelta": 0
+            },
+            {
+              "slug": "waist",
+              "label": "Waist",
+              "priceDelta": 15,
+              "durationDelta": 0
+            },
+            {
+              "slug": "bum",
+              "label": "Bum",
+              "priceDelta": 25,
+              "durationDelta": 0
+            },
+            {
+              "slug": "knee",
+              "label": "Knee",
+              "priceDelta": 35,
+              "durationDelta": 0
+            }
+          ]
+        }
+      ],
+      "addons": []
+    },
+    {
+      "slug": "goddess-braid-small-medium",
+      "name": "S-Medium Goddess Braids",
+      "category": "goddess-braids",
+      "categoryName": "Goddess & Boho Braids",
+      "description": "Small-medium goddess braids with beautiful bohemian curly accents woven throughout for a romantic, carefree look.",
+      "whatsIncluded": [],
+      "shortDescription": "",
+      "cover": {
+        "image": "https://booking.eandbhair.co.uk/service-covers/goddess-braids.jpg",
+        "alt": "S-Medium Goddess Braids"
+      },
+      "basePrice": 85,
+      "priceType": "from",
+      "priceMax": null,
+      "durationMinutes": 240,
+      "isAddOn": false,
+      "family": "Goddess Braids",
+      "optionLabel": "S-Medium",
+      "categories": [
+        "goddess-braids",
+        "womens-braids"
+      ],
+      "tags": [
+        "womens-braids",
+        "goddess",
+        "small medium"
+      ],
+      "optionGroups": [
+        {
+          "slug": "length",
+          "name": "Length",
+          "helpText": "How long you want the finished style.",
+          "values": [
+            {
+              "slug": "mid-back",
+              "label": "Mid-back",
+              "priceDelta": 0,
+              "durationDelta": 0
+            },
+            {
+              "slug": "waist",
+              "label": "Waist",
+              "priceDelta": 15,
+              "durationDelta": 0
+            },
+            {
+              "slug": "bum",
+              "label": "Bum",
+              "priceDelta": 25,
+              "durationDelta": 0
+            },
+            {
+              "slug": "knee",
+              "label": "Knee",
+              "priceDelta": 35,
+              "durationDelta": 0
+            }
+          ]
+        }
+      ],
+      "addons": []
+    },
+    {
+      "slug": "goddess-braids-medium",
+      "name": "Medium Goddess Braids",
+      "category": "goddess-braids",
+      "categoryName": "Goddess & Boho Braids",
+      "description": "Medium braids finished with curly pieces.",
+      "whatsIncluded": [],
+      "shortDescription": "Medium braids finished with curly pieces.",
+      "cover": {
+        "image": "https://booking.eandbhair.co.uk/service-covers/goddess-braids.jpg",
+        "alt": "Medium Goddess Braids"
+      },
+      "basePrice": 70,
+      "priceType": "fixed",
+      "priceMax": null,
+      "durationMinutes": 150,
+      "isAddOn": false,
+      "family": "Goddess Braids",
+      "optionLabel": "Medium",
+      "categories": [
+        "goddess-braids",
+        "womens-braids"
+      ],
+      "tags": [
+        "womens-braids",
+        "goddess"
+      ],
+      "optionGroups": [
+        {
+          "slug": "length",
+          "name": "Length",
+          "helpText": "How long you want the finished style.",
+          "values": [
+            {
+              "slug": "mid-back",
+              "label": "Mid-back",
+              "priceDelta": 0,
+              "durationDelta": 0
+            },
+            {
+              "slug": "waist",
+              "label": "Waist",
+              "priceDelta": 15,
+              "durationDelta": 0
+            },
+            {
+              "slug": "bum",
+              "label": "Bum",
+              "priceDelta": 25,
+              "durationDelta": 0
+            },
+            {
+              "slug": "knee",
+              "label": "Knee",
+              "priceDelta": 35,
+              "durationDelta": 0
+            }
+          ]
+        }
+      ],
+      "addons": []
+    },
+    {
+      "slug": "boho-braids",
+      "name": "Boho Braids",
+      "category": "goddess-braids",
+      "categoryName": "Goddess & Boho Braids",
+      "description": "Box or knotless braids finished with curly pieces throughout the style.",
+      "whatsIncluded": [],
+      "shortDescription": "Box or knotless braids finished with curly pieces throughout the style.",
+      "cover": {
+        "image": "https://booking.eandbhair.co.uk/service-covers/goddess-braids.jpg",
+        "alt": "Boho Braids"
+      },
+      "basePrice": 85,
+      "priceType": "from",
+      "priceMax": null,
+      "durationMinutes": 180,
+      "isAddOn": false,
+      "family": null,
+      "optionLabel": null,
+      "categories": [
+        "goddess-braids",
+        "womens-braids",
+        "knotless"
+      ],
+      "tags": [
+        "womens-braids",
+        "boho",
+        "knotless",
+        "box"
+      ],
+      "optionGroups": [
+        {
+          "slug": "length",
+          "name": "Length",
+          "helpText": "How long you want the finished style.",
+          "values": [
+            {
+              "slug": "mid-back",
+              "label": "Mid-back",
+              "priceDelta": 0,
+              "durationDelta": 0
+            },
+            {
+              "slug": "waist",
+              "label": "Waist",
+              "priceDelta": 15,
+              "durationDelta": 0
+            },
+            {
+              "slug": "bum",
+              "label": "Bum",
+              "priceDelta": 25,
+              "durationDelta": 0
+            },
+            {
+              "slug": "knee",
+              "label": "Knee",
+              "priceDelta": 35,
+              "durationDelta": 0
+            }
+          ]
+        }
+      ],
+      "addons": []
+    },
+    {
+      "slug": "finger-twists",
+      "name": "Finger Twists",
+      "category": "twists",
+      "categoryName": "Twists",
+      "description": "Defined finger twists on natural hair.",
+      "whatsIncluded": [],
+      "shortDescription": "Defined finger twists on natural hair.",
+      "cover": {
+        "image": "https://booking.eandbhair.co.uk/service-covers/twists.jpg",
+        "alt": "Senegalese twists"
+      },
+      "basePrice": 25,
+      "priceType": "from",
+      "priceMax": null,
+      "durationMinutes": 90,
+      "isAddOn": false,
+      "family": null,
+      "optionLabel": null,
+      "categories": [
+        "twists",
+        "womens-braids"
+      ],
+      "tags": [
+        "womens-braids"
+      ],
+      "optionGroups": [],
+      "addons": []
+    },
+    {
+      "slug": "jumbo-twist",
+      "name": "Jumbo Twist",
+      "category": "twists",
+      "categoryName": "Twists",
+      "description": "Large twists with extensions.",
+      "whatsIncluded": [],
+      "shortDescription": "Large twists with extensions.",
+      "cover": {
+        "image": "https://booking.eandbhair.co.uk/service-covers/twists.jpg",
+        "alt": "Senegalese twists"
+      },
+      "basePrice": 60,
+      "priceType": "fixed",
+      "priceMax": null,
+      "durationMinutes": 150,
+      "isAddOn": false,
+      "family": null,
+      "optionLabel": null,
+      "categories": [
+        "twists",
+        "womens-braids"
+      ],
+      "tags": [
+        "womens-braids",
+        "jumbo"
+      ],
+      "optionGroups": [],
+      "addons": []
+    },
+    {
+      "slug": "ladies-twist-extensions",
+      "name": "Ladies Twist with Extensions",
+      "category": "twists",
+      "categoryName": "Twists",
+      "description": "With extensions.",
+      "whatsIncluded": [],
+      "shortDescription": "With extensions.",
+      "cover": {
+        "image": "https://booking.eandbhair.co.uk/service-covers/twists.jpg",
+        "alt": "Senegalese twists"
+      },
+      "basePrice": 60,
+      "priceType": "from",
+      "priceMax": null,
+      "durationMinutes": 30,
+      "isAddOn": false,
+      "family": null,
+      "optionLabel": null,
+      "categories": [
+        "twists",
+        "womens-braids"
+      ],
+      "tags": [
+        "womens-braids",
+        "ladies",
+        "extensions"
+      ],
+      "optionGroups": [],
+      "addons": []
+    },
+    {
+      "slug": "natural-two-strand-twist-ladies",
+      "name": "Natural Hair Two-Strand Twist — Ladies",
+      "category": "twists",
+      "categoryName": "Twists",
+      "description": "Two-strand twists on your natural hair.",
+      "whatsIncluded": [],
+      "shortDescription": "Two-strand twists on your natural hair.",
+      "cover": {
+        "image": "https://booking.eandbhair.co.uk/service-covers/twists.jpg",
+        "alt": "Senegalese twists"
+      },
+      "basePrice": 40,
+      "priceType": "from",
+      "priceMax": null,
+      "durationMinutes": 120,
+      "isAddOn": false,
+      "family": null,
+      "optionLabel": null,
+      "categories": [
+        "twists",
+        "womens-braids"
+      ],
+      "tags": [
+        "womens-braids",
+        "ladies",
+        "two strand",
+        "natural hair"
+      ],
+      "optionGroups": [],
+      "addons": []
     },
     {
       "slug": "senegalese-twists",
@@ -1253,9 +2949,12 @@
       "family": null,
       "optionLabel": null,
       "categories": [
-        "twists"
+        "twists",
+        "womens-braids"
       ],
-      "tags": [],
+      "tags": [
+        "womens-braids"
+      ],
       "optionGroups": [
         {
           "slug": "size",
@@ -1267,6 +2966,18 @@
               "label": "Small",
               "priceDelta": 0,
               "durationDelta": 0
+            },
+            {
+              "slug": "medium",
+              "label": "Medium",
+              "priceDelta": 20,
+              "durationDelta": 30
+            },
+            {
+              "slug": "large",
+              "label": "Large",
+              "priceDelta": 45,
+              "durationDelta": 60
             }
           ]
         },
@@ -1342,10 +3053,155 @@
       ]
     },
     {
+      "slug": "small-fulani-braids",
+      "name": "Small Fulani Braids",
+      "category": "fulani-braids",
+      "categoryName": "Fulani Braids",
+      "description": "Smaller, more intricate Fulani braids for a detailed finish.",
+      "whatsIncluded": [],
+      "shortDescription": "",
+      "cover": {
+        "image": "https://booking.eandbhair.co.uk/service-covers/fulani-braids.jpg",
+        "alt": "Small Fulani Braids"
+      },
+      "basePrice": 75,
+      "priceType": "from",
+      "priceMax": null,
+      "durationMinutes": 180,
+      "isAddOn": false,
+      "family": null,
+      "optionLabel": null,
+      "categories": [
+        "fulani-braids",
+        "womens-braids"
+      ],
+      "tags": [
+        "womens-braids"
+      ],
+      "optionGroups": [],
+      "addons": []
+    },
+    {
+      "slug": "medium-twist-extension",
+      "name": "Medium Twist With Extension",
+      "category": "twists",
+      "categoryName": "Twists",
+      "description": "Medium-sized twists with extensions for added length and fullness.",
+      "whatsIncluded": [],
+      "shortDescription": "",
+      "cover": {
+        "image": "https://booking.eandbhair.co.uk/service-covers/twists.jpg",
+        "alt": "Medium Twist With Extension"
+      },
+      "basePrice": 60,
+      "priceType": "from",
+      "priceMax": null,
+      "durationMinutes": 120,
+      "isAddOn": false,
+      "family": null,
+      "optionLabel": null,
+      "categories": [
+        "twists",
+        "womens-braids"
+      ],
+      "tags": [
+        "womens-braids"
+      ],
+      "optionGroups": [],
+      "addons": []
+    },
+    {
+      "slug": "s-medium-twist-extension",
+      "name": "S Medium Twist With Extension",
+      "category": "twists",
+      "categoryName": "Twists",
+      "description": "Between medium and small twists with extensions.",
+      "whatsIncluded": [],
+      "shortDescription": "",
+      "cover": {
+        "image": "https://booking.eandbhair.co.uk/service-covers/twists.jpg",
+        "alt": "S Medium Twist With Extension"
+      },
+      "basePrice": 70,
+      "priceType": "from",
+      "priceMax": null,
+      "durationMinutes": 150,
+      "isAddOn": false,
+      "family": null,
+      "optionLabel": null,
+      "categories": [
+        "twists",
+        "womens-braids"
+      ],
+      "tags": [
+        "womens-braids"
+      ],
+      "optionGroups": [],
+      "addons": []
+    },
+    {
+      "slug": "twist-with-curls-medium",
+      "name": "Twist With Curls (Medium)",
+      "category": "twists",
+      "categoryName": "Twists",
+      "description": "Beautiful twists finished with curly ends for an elegant look.",
+      "whatsIncluded": [],
+      "shortDescription": "",
+      "cover": {
+        "image": "https://booking.eandbhair.co.uk/service-covers/twists.jpg",
+        "alt": "Twist With Curls (Medium)"
+      },
+      "basePrice": 85,
+      "priceType": "from",
+      "priceMax": null,
+      "durationMinutes": 180,
+      "isAddOn": false,
+      "family": null,
+      "optionLabel": null,
+      "categories": [
+        "twists",
+        "womens-braids"
+      ],
+      "tags": [
+        "womens-braids"
+      ],
+      "optionGroups": [],
+      "addons": []
+    },
+    {
+      "slug": "mini-twist-natural-hair",
+      "name": "Mini Twist With Natural Hair",
+      "category": "twists",
+      "categoryName": "Twists",
+      "description": "Delicate mini twists using your natural hair.",
+      "whatsIncluded": [],
+      "shortDescription": "",
+      "cover": {
+        "image": "https://booking.eandbhair.co.uk/service-covers/twists.jpg",
+        "alt": "Mini Twist With Natural Hair"
+      },
+      "basePrice": 45,
+      "priceType": "from",
+      "priceMax": null,
+      "durationMinutes": 120,
+      "isAddOn": false,
+      "family": null,
+      "optionLabel": null,
+      "categories": [
+        "twists",
+        "womens-braids"
+      ],
+      "tags": [
+        "womens-braids"
+      ],
+      "optionGroups": [],
+      "addons": []
+    },
+    {
       "slug": "loc-grooming",
       "name": "Loc Grooming",
       "category": "locs",
-      "categoryName": "Locs",
+      "categoryName": "Locs & Dreadlocks",
       "description": "Retwist and grooming for healthy-looking locs, clean roots and an easy finish.",
       "whatsIncluded": [
         "Consultation",
@@ -1380,6 +3236,18 @@
               "label": "Small",
               "priceDelta": 0,
               "durationDelta": 0
+            },
+            {
+              "slug": "medium",
+              "label": "Medium",
+              "priceDelta": 20,
+              "durationDelta": 30
+            },
+            {
+              "slug": "large",
+              "label": "Large",
+              "priceDelta": 45,
+              "durationDelta": 60
             }
           ]
         },
@@ -1455,10 +3323,104 @@
       ]
     },
     {
+      "slug": "kids-cornrow",
+      "name": "Kids Cornrows Without Extensions",
+      "category": "childrens",
+      "categoryName": "Kids Styles",
+      "description": "Simple, neat cornrows for a classic, tidy look. Price: £25 · approx. 45min - 1h.",
+      "whatsIncluded": [],
+      "shortDescription": "",
+      "cover": {
+        "image": "https://booking.eandbhair.co.uk/service-covers/childrens.jpg",
+        "alt": "Gentle children's braids"
+      },
+      "basePrice": 30,
+      "priceType": "from",
+      "priceMax": null,
+      "durationMinutes": 150,
+      "isAddOn": false,
+      "family": null,
+      "optionLabel": null,
+      "categories": [
+        "childrens",
+        "cornrows"
+      ],
+      "tags": [
+        "kids",
+        "cornrows",
+        "children"
+      ],
+      "optionGroups": [],
+      "addons": []
+    },
+    {
+      "slug": "kids-box-braid-extension",
+      "name": "Kids Under 10 — Box Braids with Extensions",
+      "category": "childrens",
+      "categoryName": "Kids Styles",
+      "description": "For children under 10.",
+      "whatsIncluded": [],
+      "shortDescription": "For children under 10.",
+      "cover": {
+        "image": "https://booking.eandbhair.co.uk/service-covers/childrens.jpg",
+        "alt": "Gentle children's braids"
+      },
+      "basePrice": 45,
+      "priceType": "from",
+      "priceMax": null,
+      "durationMinutes": 120,
+      "isAddOn": false,
+      "family": null,
+      "optionLabel": null,
+      "categories": [
+        "childrens",
+        "box-braids"
+      ],
+      "tags": [
+        "kids",
+        "box-braids",
+        "children"
+      ],
+      "optionGroups": [],
+      "addons": []
+    },
+    {
+      "slug": "kids-boho-braids",
+      "name": "Kids Boho Braids",
+      "category": "childrens",
+      "categoryName": "Kids Styles",
+      "description": "Boho braids for children.",
+      "whatsIncluded": [],
+      "shortDescription": "Boho braids for children.",
+      "cover": {
+        "image": "https://booking.eandbhair.co.uk/service-covers/childrens.jpg",
+        "alt": "Gentle children's braids"
+      },
+      "basePrice": 55,
+      "priceType": "from",
+      "priceMax": null,
+      "durationMinutes": 30,
+      "isAddOn": false,
+      "family": null,
+      "optionLabel": null,
+      "categories": [
+        "childrens",
+        "goddess-braids"
+      ],
+      "tags": [
+        "kids",
+        "goddess-braids",
+        "boho",
+        "children"
+      ],
+      "optionGroups": [],
+      "addons": []
+    },
+    {
       "slug": "kids-box-braids",
       "name": "Kids Box Braids",
       "category": "childrens",
-      "categoryName": "Children's Hair",
+      "categoryName": "Kids Styles",
       "description": "Gentle, fun box braids for children using patient care and safe, comfortable techniques.",
       "whatsIncluded": [
         "Consultation",
@@ -1493,6 +3455,18 @@
               "label": "Small",
               "priceDelta": 0,
               "durationDelta": 0
+            },
+            {
+              "slug": "medium",
+              "label": "Medium",
+              "priceDelta": 20,
+              "durationDelta": 30
+            },
+            {
+              "slug": "large",
+              "label": "Large",
+              "priceDelta": 45,
+              "durationDelta": 60
             }
           ]
         },
@@ -1568,10 +3542,203 @@
       ]
     },
     {
+      "slug": "kids-box-braids-natural-hair",
+      "name": "Box Braids With Natural Hair",
+      "category": "childrens",
+      "categoryName": "Kids Styles",
+      "description": "Gentle box braiding using your child's natural hair for a protective, cute style. Price: £30 · approx. 1h - 2h.",
+      "whatsIncluded": [],
+      "shortDescription": "",
+      "cover": {
+        "image": "https://booking.eandbhair.co.uk/service-covers/childrens.jpg",
+        "alt": "Box Braids With Natural Hair"
+      },
+      "basePrice": 30,
+      "priceType": "from",
+      "priceMax": null,
+      "durationMinutes": 120,
+      "isAddOn": false,
+      "family": null,
+      "optionLabel": null,
+      "categories": [
+        "childrens"
+      ],
+      "tags": [],
+      "optionGroups": [],
+      "addons": []
+    },
+    {
+      "slug": "kids-design-cornrow-natural-hair",
+      "name": "Design Cornrow With Natural Hair",
+      "category": "childrens",
+      "categoryName": "Kids Styles",
+      "description": "Creative cornrow patterns using natural hair for a stylish, school-friendly look. Price: £30 · approx. 1h - 2h.",
+      "whatsIncluded": [],
+      "shortDescription": "",
+      "cover": {
+        "image": "https://booking.eandbhair.co.uk/service-covers/childrens.jpg",
+        "alt": "Design Cornrow With Natural Hair"
+      },
+      "basePrice": 30,
+      "priceType": "from",
+      "priceMax": null,
+      "durationMinutes": 120,
+      "isAddOn": false,
+      "family": null,
+      "optionLabel": null,
+      "categories": [
+        "childrens"
+      ],
+      "tags": [],
+      "optionGroups": [],
+      "addons": []
+    },
+    {
+      "slug": "kids-design-cornrow-extension",
+      "name": "Design Cornrow With Extension",
+      "category": "childrens",
+      "categoryName": "Kids Styles",
+      "description": "Intricate cornrow designs with extensions for longer-lasting, elaborate styles. Price: From £35 · approx. 2h - 3h.",
+      "whatsIncluded": [],
+      "shortDescription": "",
+      "cover": {
+        "image": "https://booking.eandbhair.co.uk/service-covers/childrens.jpg",
+        "alt": "Design Cornrow With Extension"
+      },
+      "basePrice": 35,
+      "priceType": "from",
+      "priceMax": null,
+      "durationMinutes": 180,
+      "isAddOn": false,
+      "family": null,
+      "optionLabel": null,
+      "categories": [
+        "childrens"
+      ],
+      "tags": [],
+      "optionGroups": [],
+      "addons": []
+    },
+    {
+      "slug": "kids-beads-installation",
+      "name": "Beads Installation",
+      "category": "childrens",
+      "categoryName": "Kids Styles",
+      "description": "Add colourful beads to any braided style for a fun, personalised touch.",
+      "whatsIncluded": [],
+      "shortDescription": "",
+      "cover": {
+        "image": "https://booking.eandbhair.co.uk/service-covers/childrens.jpg",
+        "alt": "Beads Installation"
+      },
+      "basePrice": 5,
+      "priceType": "from",
+      "priceMax": null,
+      "durationMinutes": 15,
+      "isAddOn": false,
+      "family": null,
+      "optionLabel": null,
+      "categories": [
+        "childrens"
+      ],
+      "tags": [],
+      "optionGroups": [],
+      "addons": []
+    },
+    {
+      "slug": "take-out-braids",
+      "name": "Take Out Braids",
+      "category": "treatments",
+      "categoryName": "Hair Care & Finishing",
+      "description": "Careful removal of existing braids.",
+      "whatsIncluded": [],
+      "shortDescription": "Careful removal of existing braids.",
+      "cover": {
+        "image": "https://booking.eandbhair.co.uk/service-covers/treatments.jpg",
+        "alt": "Scalp treatment for textured hair"
+      },
+      "basePrice": 20,
+      "priceType": "from",
+      "priceMax": null,
+      "durationMinutes": 45,
+      "isAddOn": false,
+      "family": null,
+      "optionLabel": null,
+      "categories": [
+        "treatments"
+      ],
+      "tags": [
+        "take down",
+        "removal"
+      ],
+      "optionGroups": [],
+      "addons": []
+    },
+    {
+      "slug": "mens-wash-and-dry",
+      "name": "Wash & Dry",
+      "category": "treatments",
+      "categoryName": "Hair Care & Finishing",
+      "description": "Quick professional wash and towel dry.",
+      "whatsIncluded": [],
+      "shortDescription": "",
+      "cover": {
+        "image": "https://booking.eandbhair.co.uk/service-covers/treatments.jpg",
+        "alt": "Scalp treatment for textured hair"
+      },
+      "basePrice": 10,
+      "priceType": "fixed",
+      "priceMax": null,
+      "durationMinutes": 30,
+      "isAddOn": false,
+      "family": null,
+      "optionLabel": null,
+      "categories": [
+        "treatments",
+        "mens-braids"
+      ],
+      "tags": [
+        "mens-braids",
+        "wash"
+      ],
+      "optionGroups": [],
+      "addons": []
+    },
+    {
+      "slug": "silk-ponytail",
+      "name": "Silk Ponytail",
+      "category": "treatments",
+      "categoryName": "Hair Care & Finishing",
+      "description": "Sleek silk-press ponytail.",
+      "whatsIncluded": [],
+      "shortDescription": "Sleek silk-press ponytail.",
+      "cover": {
+        "image": "https://booking.eandbhair.co.uk/service-covers/treatments.jpg",
+        "alt": "Scalp treatment for textured hair"
+      },
+      "basePrice": 25,
+      "priceType": "from",
+      "priceMax": null,
+      "durationMinutes": 60,
+      "isAddOn": false,
+      "family": null,
+      "optionLabel": null,
+      "categories": [
+        "treatments",
+        "womens-braids"
+      ],
+      "tags": [
+        "womens-braids",
+        "ponytail"
+      ],
+      "optionGroups": [],
+      "addons": []
+    },
+    {
       "slug": "deep-treatment",
       "name": "Deep Moisture Treatment",
       "category": "treatments",
-      "categoryName": "Treatments",
+      "categoryName": "Hair Care & Finishing",
       "description": "A restorative moisture and scalp-care reset to leave textured hair feeling nourished and refreshed.",
       "whatsIncluded": [
         "Hair and scalp check",
@@ -1606,6 +3773,18 @@
               "label": "Small",
               "priceDelta": 0,
               "durationDelta": 0
+            },
+            {
+              "slug": "medium",
+              "label": "Medium",
+              "priceDelta": 20,
+              "durationDelta": 30
+            },
+            {
+              "slug": "large",
+              "label": "Large",
+              "priceDelta": 45,
+              "durationDelta": 60
             }
           ]
         },
@@ -1679,6 +3858,32 @@
           "durationDelta": 10
         }
       ]
+    },
+    {
+      "slug": "hair-treatment",
+      "name": "Hair Treatment",
+      "category": "treatments",
+      "categoryName": "Hair Care & Finishing",
+      "description": "Nourishing treatment to restore health and shine.",
+      "whatsIncluded": [],
+      "shortDescription": "",
+      "cover": {
+        "image": "https://booking.eandbhair.co.uk/service-covers/treatments.jpg",
+        "alt": "Hair Treatment"
+      },
+      "basePrice": 15,
+      "priceType": "from",
+      "priceMax": null,
+      "durationMinutes": 30,
+      "isAddOn": false,
+      "family": null,
+      "optionLabel": null,
+      "categories": [
+        "treatments"
+      ],
+      "tags": [],
+      "optionGroups": [],
+      "addons": []
     },
     {
       "slug": "wash-condition",
@@ -1718,6 +3923,18 @@
               "label": "Small",
               "priceDelta": 0,
               "durationDelta": 0
+            },
+            {
+              "slug": "medium",
+              "label": "Medium",
+              "priceDelta": 20,
+              "durationDelta": 30
+            },
+            {
+              "slug": "large",
+              "label": "Large",
+              "priceDelta": 45,
+              "durationDelta": 60
             }
           ]
         },
@@ -1830,6 +4047,18 @@
               "label": "Small",
               "priceDelta": 0,
               "durationDelta": 0
+            },
+            {
+              "slug": "medium",
+              "label": "Medium",
+              "priceDelta": 20,
+              "durationDelta": 30
+            },
+            {
+              "slug": "large",
+              "label": "Large",
+              "priceDelta": 45,
+              "durationDelta": 60
             }
           ]
         },
@@ -1938,6 +4167,18 @@
               "label": "Small",
               "priceDelta": 0,
               "durationDelta": 0
+            },
+            {
+              "slug": "medium",
+              "label": "Medium",
+              "priceDelta": 20,
+              "durationDelta": 30
+            },
+            {
+              "slug": "large",
+              "label": "Large",
+              "priceDelta": 45,
+              "durationDelta": 60
             }
           ]
         },
@@ -2046,6 +4287,18 @@
               "label": "Small",
               "priceDelta": 0,
               "durationDelta": 0
+            },
+            {
+              "slug": "medium",
+              "label": "Medium",
+              "priceDelta": 20,
+              "durationDelta": 30
+            },
+            {
+              "slug": "large",
+              "label": "Large",
+              "priceDelta": 45,
+              "durationDelta": 60
             }
           ]
         },
@@ -2122,9 +4375,9 @@
     }
   ],
   "popular": [
-    "medium-knotless",
-    "stitch-braids",
-    "medium-box-braids",
-    "kids-box-braids"
+    "mens-full-head-twist",
+    "mens-design-cornrow",
+    "four-cornrows",
+    "medium-knotless"
   ]
 }
