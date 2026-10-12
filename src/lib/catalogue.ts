@@ -37,6 +37,8 @@ export interface CatalogueAddon {
 
 export interface CatalogueService {
   slug: string;
+  /** False while this branch has no qualified stylist (the other branch is offered). */
+  bookableHere?: boolean;
   name: string;
   category: string;
   categoryName: string;
@@ -65,7 +67,11 @@ export interface CatalogueCategory {
   sortOrder: number;
 }
 
+export type DayKey = "mon" | "tue" | "wed" | "thu" | "fri" | "sat" | "sun";
+export type OpeningHours = Record<DayKey, { open: string; close: string } | null>;
+
 export interface Catalogue {
+  openingHours?: OpeningHours | null;
   source: string;
   fetchedAt: string;
   business: { name: string; email: string | null; website: string | null };
@@ -233,3 +239,20 @@ export function isoDuration(totalMinutes: number | null) {
 
 export const PRICE_DISCLAIMER =
   "Prices and estimated durations may vary depending on hair length, thickness, condition, style requirements and any additional options selected.";
+
+// Opening hours come from WubSync (the hours the booking engine enforces).
+export const WEEK: Array<[DayKey, string]> = [["mon", "Monday"], ["tue", "Tuesday"], ["wed", "Wednesday"], ["thu", "Thursday"], ["fri", "Friday"], ["sat", "Saturday"], ["sun", "Sunday"]];
+export function clock12(time: string) {
+  const [h, m] = time.split(":").map(Number);
+  const suffix = h >= 12 ? "pm" : "am";
+  const hour = h % 12 || 12;
+  return m ? `${hour}:${String(m).padStart(2, "0")} ${suffix}` : `${hour} ${suffix}`;
+}
+export function openingHoursRows(hours: OpeningHours | null | undefined) {
+  if (!hours) return [];
+  return WEEK.map(([key, day]) => ({ day, hours: hours[key] ? `${clock12(hours[key]!.open)}–${clock12(hours[key]!.close)}` : "Closed" }));
+}
+export function openingHoursSpecification(hours: OpeningHours | null | undefined) {
+  if (!hours) return undefined;
+  return WEEK.filter(([key]) => hours[key]).map(([key, day]) => ({ "@type": "OpeningHoursSpecification", dayOfWeek: day, opens: hours[key]!.open, closes: hours[key]!.close }));
+}

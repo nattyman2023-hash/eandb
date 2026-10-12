@@ -15,17 +15,22 @@ const { sanitiseCatalogue, CATALOGUE_URL } = require("../../server/catalogue.js"
 const catalogue = snapshot as Catalogue;
 
 describe("E & B catalogue parity", () => {
-  it("A. lists every bookable E & B service from WubSync, and nothing unbookable", () => {
+  it("A. lists every E & B service from WubSync (same menu as WUB), flagging any this branch cannot staff yet", () => {
     const raw = {
       business: { slug: "eandb", name: "E & B Hair" },
       categories: [{ slug: "cornrows", name: "Cornrows", sort_order: 1 }],
       services: [
         { slug: "two-cornrows", name: "2 Cornrows", category: "cornrows", base_price: 10, duration_minutes: 30, bookable: true, price_type: "from", option_groups: [], addons: [] },
-        { slug: "nobody-qualified", name: "Hidden", category: "cornrows", base_price: 20, duration_minutes: 30, bookable: false },
+        { slug: "nobody-qualified", name: "At WUB for now", category: "cornrows", base_price: 20, duration_minutes: 30, bookable: false },
+        { slug: "retired", name: "Retired", category: "cornrows", base_price: 20, duration_minutes: 30, active: false },
       ],
+      opening_hours: { mon: { open: "09:00", close: "20:00" }, sun: { open: "10:30", close: "18:00" } },
     };
     const clean = sanitiseCatalogue(raw);
-    expect(clean.services.map((s: { slug: string }) => s.slug)).toEqual(["two-cornrows"]);
+    expect(clean.services.map((s: { slug: string }) => s.slug)).toEqual(["two-cornrows", "nobody-qualified"]);
+    expect(clean.services.map((s: { bookableHere: boolean }) => s.bookableHere)).toEqual([true, false]);
+    expect(clean.openingHours.mon).toEqual({ open: "09:00", close: "20:00" });
+    expect(clean.openingHours.tue).toBeNull();
     expect(CATALOGUE_URL).toBe("https://booking.eandbhair.co.uk/api/v1/book/eandb/catalogue?include=options");
     expect(catalogue.services.length).toBeGreaterThan(0);
   });

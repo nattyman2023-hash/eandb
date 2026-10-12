@@ -1,5 +1,5 @@
 import { BUSINESS, SITE_ORIGIN } from "@/lib/siteContent";
-import { CATALOGUE_SNAPSHOT, isoDuration, type CatalogueService } from "@/lib/catalogue";
+import { CATALOGUE_SNAPSHOT, isoDuration, openingHoursSpecification, type CatalogueService } from "@/lib/catalogue";
 
 export const BUSINESS_ID = `${SITE_ORIGIN}/#business`;
 export const DEFAULT_SHARE_IMAGE = `${SITE_ORIGIN}/eandb-logo.svg`;
@@ -8,9 +8,8 @@ export function absoluteUrl(pathOrUrl: string) {
   return new URL(pathOrUrl, SITE_ORIGIN).href;
 }
 
-// Opening hours are intentionally absent: WubSync holds no public E & B hours and the
-// hours previously on this site were WUB's. Add openingHoursSpecification once E & B
-// confirms its own.
+// Opening hours come from WubSync's catalogue snapshot (the hours online booking
+// enforces), so visible hours, structured data and the booking engine agree.
 // schema.org price that matches how the price is shown: an exact price for
 // "fixed", a minimum for "from", min-max for "range", and none for "varies"
 // (no invented figure).
@@ -50,6 +49,7 @@ export function hairSalonJsonLd() {
       addressCountry: "GB",
     },
     hasMap: BUSINESS.mapsUrl,
+    ...(openingHoursSpecification(catalogue.openingHours) ? { openingHoursSpecification: openingHoursSpecification(catalogue.openingHours) } : {}),
     hasOfferCatalog: {
       "@type": "OfferCatalog",
       name: "E & B Hair services",

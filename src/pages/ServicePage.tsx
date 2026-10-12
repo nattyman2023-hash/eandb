@@ -2,6 +2,7 @@ import { useParams, Link } from "react-router-dom";
 import { Check, Clock } from "lucide-react";
 import SEOHead from "@/components/SEOHead";
 import BookNow from "@/components/BookNow";
+import { OTHER_BRANCH, otherBranchServiceUrl } from "@/lib/booking";
 import ServiceCard from "@/components/ServiceCard";
 import PriceNotice from "@/components/PriceNotice";
 import NotFound from "@/pages/NotFound";
@@ -74,6 +75,8 @@ const ServicePage = () => {
               </dl>
               <div className="flex flex-wrap items-center gap-6">
                 <BookNow size="lg" serviceSlug={service.slug} label={`Book ${service.name}`} className="whitespace-normal text-center" />
+                {service.bookableHere === false && <p className="text-sm text-muted-foreground">Online booking for this service is currently at our nearby {OTHER_BRANCH.name} branch — same service, same price.</p>}
+                <a href={otherBranchServiceUrl(service.slug)} className="text-sm underline underline-offset-4 hover:text-primary">Or book it at {OTHER_BRANCH.name} (1-minute walk)</a>
                 <a href={whatsappLink(`Hello E & B Hair, I have a question about ${service.name}.`)} target="_blank" rel="noopener noreferrer" className="marker-link">
                   Ask a question
                 </a>

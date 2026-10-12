@@ -74,7 +74,11 @@ for (const page of pages) {
   const bookingHrefs = [...page.html.matchAll(/href="(https:\/\/booking\.eandbhair\.co\.uk[^"]*)"/g)].map((match) => match[1]);
   const wrong = bookingHrefs.filter((href) => !allowedBookingHref(href));
   if (wrong.length) failures.push(`${page.route}: booking links outside WubSync's E & B routes: ${[...new Set(wrong)].join(', ')}`);
-  if (page.html.includes('booking.wubhairstudio.co.uk')) failures.push(`${page.route}: links to the WUB booking site`);
+  // Both branches offer the same menu at the same prices, so the nearby WUB
+  // branch may be offered — but only its WubSync booking routes.
+  const wubHrefs = [...page.html.matchAll(/href="(https:\/\/booking\.wubhairstudio\.co\.uk[^"]*)"/g)].map((match) => match[1]);
+  const wrongWub = wubHrefs.filter((href) => !/^https:\/\/booking\.wubhairstudio\.co\.uk\/book\/wub(\/service\/[a-z0-9-]+)?$/.test(href));
+  if (wrongWub.length) failures.push(`${page.route}: WUB branch links outside WubSync's WUB routes: ${[...new Set(wrongWub)].join(', ')}`);
 }
 
 // Services page must list exactly the CRM services, with CRM names and prices.

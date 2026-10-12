@@ -3,7 +3,8 @@ import { Link, useLocation } from "react-router-dom";
 import { createPortal } from "react-dom";
 import { Menu, X } from "lucide-react";
 import BookNow from "@/components/BookNow";
-import { BOOKING_URL, MANAGE_BOOKING_URL } from "@/lib/booking";
+import { BOOKING_URL, MANAGE_BOOKING_URL, OTHER_BRANCH } from "@/lib/booking";
+import OpeningHours from "@/components/OpeningHours";
 import { BUSINESS, whatsappLink } from "@/lib/siteContent";
 import { useCatalogue } from "@/lib/catalogue";
 
@@ -145,6 +146,7 @@ const PublicLayout = ({ children }: { children: React.ReactNode }) => {
                 <li><Link to="/contact" className="hover:text-primary transition-colors">Contact</Link></li>
                 <li><Link to="/areas/manchester" className="hover:text-primary transition-colors">Areas we serve</Link></li>
                 <li><a href={BOOKING_URL} className="hover:text-primary transition-colors">Book Online</a></li>
+                <li><a href={OTHER_BRANCH.bookingUrl} className="hover:text-primary transition-colors">Book at {OTHER_BRANCH.name}</a></li>
                 <li><a href={MANAGE_BOOKING_URL} className="hover:text-primary transition-colors">My Bookings</a></li>
               </ul>
             </div>
@@ -158,6 +160,7 @@ const PublicLayout = ({ children }: { children: React.ReactNode }) => {
                 <div className="pt-2"><a href={BUSINESS.phoneHref} className="hover:text-primary">{BUSINESS.phone}</a></div>
                 <div><a href={`mailto:${BUSINESS.email}`} className="hover:text-primary break-all">{BUSINESS.email}</a></div>
                 <div><a href={BUSINESS.mapsUrl} target="_blank" rel="noopener noreferrer" className="hover:text-primary">Open in Google Maps</a></div>
+                <OpeningHours className="pt-3" />
               </address>
             </div>
           </div>

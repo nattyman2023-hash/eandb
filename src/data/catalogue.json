@@ -1,10 +1,40 @@
 {
   "source": "https://booking.eandbhair.co.uk/api/v1/book/eandb/catalogue?include=options",
-  "fetchedAt": "2026-10-11T23:31:58.871Z",
+  "fetchedAt": "2026-10-12T00:55:05.390Z",
   "business": {
     "name": "E & B Hair",
     "email": "contact@eandbhair.co.uk",
     "website": "https://eandbhair.co.uk"
+  },
+  "openingHours": {
+    "mon": {
+      "open": "09:00",
+      "close": "20:00"
+    },
+    "tue": {
+      "open": "10:00",
+      "close": "20:00"
+    },
+    "wed": {
+      "open": "10:00",
+      "close": "20:00"
+    },
+    "thu": {
+      "open": "10:00",
+      "close": "20:00"
+    },
+    "fri": {
+      "open": "10:00",
+      "close": "20:00"
+    },
+    "sat": {
+      "open": "10:00",
+      "close": "20:00"
+    },
+    "sun": {
+      "open": "10:30",
+      "close": "18:00"
+    }
   },
   "location": {
     "addressLine1": "171 Princess Rd",
@@ -97,6 +127,26 @@
       "sortOrder": 8
     },
     {
+      "slug": "crochet-braids",
+      "name": "Crochet Braids",
+      "description": "Crochet installs, including individual crochet braids.",
+      "cover": {
+        "image": "https://booking.eandbhair.co.uk/service-covers/crochet-braids.jpg",
+        "alt": "Crochet Braids"
+      },
+      "sortOrder": 9
+    },
+    {
+      "slug": "sew-in",
+      "name": "Sew-In Extensions",
+      "description": "Sew-in extensions, including Fulani sew-in styles.",
+      "cover": {
+        "image": "https://booking.eandbhair.co.uk/service-covers/sew-in.jpg",
+        "alt": "Sew-In Extensions"
+      },
+      "sortOrder": 10
+    },
+    {
       "slug": "locs",
       "name": "Locs & Dreadlocks",
       "description": "Starter locs, dreadlock maintenance and retwists.",
@@ -125,21 +175,12 @@
         "alt": "Scalp treatment for textured hair"
       },
       "sortOrder": 13
-    },
-    {
-      "slug": "add-ons",
-      "name": "Add-ons",
-      "description": "Helpful extras such as wash, blow-dry, take-down and hair-care accessories.",
-      "cover": {
-        "image": "https://booking.eandbhair.co.uk/service-covers/addons.jpg",
-        "alt": "Braid-care accessories and add-ons"
-      },
-      "sortOrder": 14
     }
   ],
   "services": [
     {
       "slug": "traditional-ethiopian-eritrean-braids",
+      "bookableHere": true,
       "name": "Traditional Ethiopian & Eritrean Braids",
       "category": "womens-braids",
       "categoryName": "Women's Braiding",
@@ -173,6 +214,7 @@
     },
     {
       "slug": "mens-full-head-twist",
+      "bookableHere": true,
       "name": "Men's Two-Strand Twists — Full Head",
       "category": "mens-braids",
       "categoryName": "Men's Styling",
@@ -204,6 +246,7 @@
     },
     {
       "slug": "mens-twist-half-head",
+      "bookableHere": true,
       "name": "Men's Two-Strand Twists — Half Head",
       "category": "mens-braids",
       "categoryName": "Men's Styling",
@@ -235,6 +278,7 @@
     },
     {
       "slug": "mens-design-cornrow",
+      "bookableHere": true,
       "name": "Men's Design Cornrows",
       "category": "mens-braids",
       "categoryName": "Men's Styling",
@@ -266,6 +310,7 @@
     },
     {
       "slug": "mens-full-head-box-braids",
+      "bookableHere": true,
       "name": "Men's Box Braids — Full Head",
       "category": "mens-braids",
       "categoryName": "Men's Styling",
@@ -296,6 +341,7 @@
     },
     {
       "slug": "mens-half-head-box-braids",
+      "bookableHere": true,
       "name": "Men's Box Braids — Half Head",
       "category": "mens-braids",
       "categoryName": "Men's Styling",
@@ -326,6 +372,7 @@
     },
     {
       "slug": "mens-loc-retwist",
+      "bookableHere": true,
       "name": "Men's Loc Retwist",
       "category": "mens-braids",
       "categoryName": "Men's Styling",
@@ -358,6 +405,7 @@
     },
     {
       "slug": "half-cornrow-half-twist",
+      "bookableHere": true,
       "name": "Half Cornrow Half Twist",
       "category": "mens-braids",
       "categoryName": "Men's Styling",
@@ -384,6 +432,7 @@
     },
     {
       "slug": "barrel-twist",
+      "bookableHere": true,
       "name": "Barrel Twist",
       "category": "mens-braids",
       "categoryName": "Men's Styling",
@@ -410,6 +459,7 @@
     },
     {
       "slug": "twist-cornrow",
+      "bookableHere": true,
       "name": "Twist Cornrow",
       "category": "mens-braids",
       "categoryName": "Men's Styling",
@@ -436,6 +486,7 @@
     },
     {
       "slug": "pop-smoke-braids",
+      "bookableHere": true,
       "name": "Pop Smoke Braids",
       "category": "mens-braids",
       "categoryName": "Men's Styling",
@@ -462,6 +513,7 @@
     },
     {
       "slug": "detangling-and-wash",
+      "bookableHere": true,
       "name": "Detangling and Wash",
       "category": "mens-braids",
       "categoryName": "Men's Styling",
@@ -488,6 +540,7 @@
     },
     {
       "slug": "finger-curls",
+      "bookableHere": true,
       "name": "Finger Curls",
       "category": "mens-braids",
       "categoryName": "Men's Styling",
@@ -514,6 +567,7 @@
     },
     {
       "slug": "four-cornrows",
+      "bookableHere": true,
       "name": "4 Cornrows",
       "category": "cornrows",
       "categoryName": "Cornrows & Stitch",
@@ -529,8 +583,8 @@
         "image": "https://booking.eandbhair.co.uk/service-covers/cornrows.jpg",
         "alt": "Precise cornrow pattern"
       },
-      "basePrice": 25,
-      "priceType": "from",
+      "basePrice": 20,
+      "priceType": "fixed",
       "priceMax": null,
       "durationMinutes": 30,
       "isAddOn": false,
@@ -543,105 +597,12 @@
       "tags": [
         "womens-braids"
       ],
-      "optionGroups": [
-        {
-          "slug": "size",
-          "name": "Size",
-          "helpText": "How large the finished style is.",
-          "values": [
-            {
-              "slug": "small",
-              "label": "Small",
-              "priceDelta": 0,
-              "durationDelta": 0
-            },
-            {
-              "slug": "medium",
-              "label": "Medium",
-              "priceDelta": 20,
-              "durationDelta": 30
-            },
-            {
-              "slug": "large",
-              "label": "Large",
-              "priceDelta": 45,
-              "durationDelta": 60
-            }
-          ]
-        },
-        {
-          "slug": "length",
-          "name": "Length",
-          "helpText": "How long you want the finished style.",
-          "values": [
-            {
-              "slug": "shoulder",
-              "label": "Shoulder",
-              "priceDelta": 0,
-              "durationDelta": 0
-            },
-            {
-              "slug": "mid-back",
-              "label": "Mid-back",
-              "priceDelta": 15,
-              "durationDelta": 20
-            },
-            {
-              "slug": "waist",
-              "label": "Waist",
-              "priceDelta": 35,
-              "durationDelta": 45
-            }
-          ]
-        }
-      ],
-      "addons": [
-        {
-          "slug": "wash",
-          "name": "Wash",
-          "description": "Cleansing wash before your style.",
-          "priceDelta": 10,
-          "durationDelta": 15
-        },
-        {
-          "slug": "blow-dry",
-          "name": "Blow dry",
-          "description": "Blow dry and prep.",
-          "priceDelta": 15,
-          "durationDelta": 20
-        },
-        {
-          "slug": "take-down",
-          "name": "Take down",
-          "description": "Removal of an existing protective style.",
-          "priceDelta": 25,
-          "durationDelta": 45
-        },
-        {
-          "slug": "hair-included",
-          "name": "Hair included",
-          "description": "Hair provided by the salon.",
-          "priceDelta": 30,
-          "durationDelta": 0
-        },
-        {
-          "slug": "extra-length",
-          "name": "Extra length",
-          "description": "Additional hair length.",
-          "priceDelta": 25,
-          "durationDelta": 15
-        },
-        {
-          "slug": "braid-accessories",
-          "name": "Braid accessories",
-          "description": "Beads, cuffs and finishing accessories.",
-          "priceDelta": 5,
-          "durationDelta": 10
-        }
-      ]
+      "optionGroups": [],
+      "addons": []
     },
     {
       "slug": "small-design-cornrow-extension",
+      "bookableHere": true,
       "name": "Small Cornrow Braids — Ladies",
       "category": "cornrows",
       "categoryName": "Cornrows & Stitch",
@@ -672,6 +633,7 @@
     },
     {
       "slug": "cornrow-braids-back-designs",
+      "bookableHere": true,
       "name": "Cornrow Braids Back with Designs",
       "category": "cornrows",
       "categoryName": "Cornrows & Stitch",
@@ -702,6 +664,7 @@
     },
     {
       "slug": "large-stitch-braids",
+      "bookableHere": true,
       "name": "Large Stitch Braids — 4/6",
       "category": "cornrows",
       "categoryName": "Cornrows & Stitch",
@@ -732,6 +695,7 @@
     },
     {
       "slug": "ponytail-cornrow-medium",
+      "bookableHere": true,
       "name": "Cornrow Ponytail Styles",
       "category": "cornrows",
       "categoryName": "Cornrows & Stitch",
@@ -762,6 +726,7 @@
     },
     {
       "slug": "cornrows-without-extensions",
+      "bookableHere": true,
       "name": "Cornrows Without Extensions",
       "category": "cornrows",
       "categoryName": "Cornrows & Stitch",
@@ -792,6 +757,7 @@
     },
     {
       "slug": "two-french-braids-extension",
+      "bookableHere": true,
       "name": "2 French Cornrows with Extensions",
       "category": "cornrows",
       "categoryName": "Cornrows & Stitch",
@@ -822,6 +788,7 @@
     },
     {
       "slug": "lemonade-braids",
+      "bookableHere": true,
       "name": "Lemonade Braids",
       "category": "cornrows",
       "categoryName": "Cornrows & Stitch",
@@ -851,6 +818,7 @@
     },
     {
       "slug": "two-cornrows",
+      "bookableHere": true,
       "name": "2 Cornrow (Without Extension)",
       "category": "cornrows",
       "categoryName": "Cornrows & Stitch",
@@ -880,99 +848,12 @@
       "tags": [
         "womens-braids"
       ],
-      "optionGroups": [
-        {
-          "slug": "size",
-          "name": "Size",
-          "helpText": "How large the finished style is.",
-          "values": [
-            {
-              "slug": "small",
-              "label": "Small",
-              "priceDelta": 0,
-              "durationDelta": 0
-            },
-            {
-              "slug": "medium",
-              "label": "Medium",
-              "priceDelta": 20,
-              "durationDelta": 30
-            }
-          ]
-        },
-        {
-          "slug": "length",
-          "name": "Length",
-          "helpText": "How long you want the finished style.",
-          "values": [
-            {
-              "slug": "shoulder",
-              "label": "Shoulder",
-              "priceDelta": 0,
-              "durationDelta": 0
-            },
-            {
-              "slug": "mid-back",
-              "label": "Mid-back",
-              "priceDelta": 15,
-              "durationDelta": 20
-            },
-            {
-              "slug": "waist",
-              "label": "Waist",
-              "priceDelta": 35,
-              "durationDelta": 45
-            }
-          ]
-        }
-      ],
-      "addons": [
-        {
-          "slug": "wash",
-          "name": "Wash",
-          "description": "Cleansing wash before your style.",
-          "priceDelta": 10,
-          "durationDelta": 15
-        },
-        {
-          "slug": "blow-dry",
-          "name": "Blow dry",
-          "description": "Blow dry and prep.",
-          "priceDelta": 15,
-          "durationDelta": 20
-        },
-        {
-          "slug": "take-down",
-          "name": "Take down",
-          "description": "Removal of an existing protective style.",
-          "priceDelta": 25,
-          "durationDelta": 45
-        },
-        {
-          "slug": "hair-included",
-          "name": "Hair included",
-          "description": "Hair provided by the salon.",
-          "priceDelta": 30,
-          "durationDelta": 0
-        },
-        {
-          "slug": "extra-length",
-          "name": "Extra length",
-          "description": "Additional hair length.",
-          "priceDelta": 25,
-          "durationDelta": 15
-        },
-        {
-          "slug": "braid-accessories",
-          "name": "Braid accessories",
-          "description": "Beads, cuffs and finishing accessories.",
-          "priceDelta": 5,
-          "durationDelta": 10
-        }
-      ]
+      "optionGroups": [],
+      "addons": []
     },
     {
       "slug": "stitch-braids",
+      "bookableHere": true,
       "name": "6 Stitch Braids (No Extension)",
       "category": "cornrows",
       "categoryName": "Cornrows & Stitch",
@@ -1002,105 +883,12 @@
       "tags": [
         "womens-braids"
       ],
-      "optionGroups": [
-        {
-          "slug": "size",
-          "name": "Size",
-          "helpText": "How large the finished style is.",
-          "values": [
-            {
-              "slug": "small",
-              "label": "Small",
-              "priceDelta": 0,
-              "durationDelta": 0
-            },
-            {
-              "slug": "medium",
-              "label": "Medium",
-              "priceDelta": 20,
-              "durationDelta": 30
-            },
-            {
-              "slug": "large",
-              "label": "Large",
-              "priceDelta": 45,
-              "durationDelta": 60
-            }
-          ]
-        },
-        {
-          "slug": "length",
-          "name": "Length",
-          "helpText": "How long you want the finished style.",
-          "values": [
-            {
-              "slug": "shoulder",
-              "label": "Shoulder",
-              "priceDelta": 0,
-              "durationDelta": 0
-            },
-            {
-              "slug": "mid-back",
-              "label": "Mid-back",
-              "priceDelta": 15,
-              "durationDelta": 20
-            },
-            {
-              "slug": "waist",
-              "label": "Waist",
-              "priceDelta": 35,
-              "durationDelta": 45
-            }
-          ]
-        }
-      ],
-      "addons": [
-        {
-          "slug": "wash",
-          "name": "Wash",
-          "description": "Cleansing wash before your style.",
-          "priceDelta": 10,
-          "durationDelta": 15
-        },
-        {
-          "slug": "blow-dry",
-          "name": "Blow dry",
-          "description": "Blow dry and prep.",
-          "priceDelta": 15,
-          "durationDelta": 20
-        },
-        {
-          "slug": "take-down",
-          "name": "Take down",
-          "description": "Removal of an existing protective style.",
-          "priceDelta": 25,
-          "durationDelta": 45
-        },
-        {
-          "slug": "hair-included",
-          "name": "Hair included",
-          "description": "Hair provided by the salon.",
-          "priceDelta": 30,
-          "durationDelta": 0
-        },
-        {
-          "slug": "extra-length",
-          "name": "Extra length",
-          "description": "Additional hair length.",
-          "priceDelta": 25,
-          "durationDelta": 15
-        },
-        {
-          "slug": "braid-accessories",
-          "name": "Braid accessories",
-          "description": "Beads, cuffs and finishing accessories.",
-          "priceDelta": 5,
-          "durationDelta": 10
-        }
-      ]
+      "optionGroups": [],
+      "addons": []
     },
     {
       "slug": "four-stitch-braids-extension",
+      "bookableHere": true,
       "name": "4 Stitch Braids With Extension",
       "category": "cornrows",
       "categoryName": "Cornrows & Stitch",
@@ -1130,6 +918,7 @@
     },
     {
       "slug": "six-stitch-braids-extension",
+      "bookableHere": true,
       "name": "6 Stitch Braids With Extension",
       "category": "cornrows",
       "categoryName": "Cornrows & Stitch",
@@ -1159,6 +948,7 @@
     },
     {
       "slug": "eight-stitch-braids-extension",
+      "bookableHere": true,
       "name": "8 Stitch Braids With Extension",
       "category": "cornrows",
       "categoryName": "Cornrows & Stitch",
@@ -1188,6 +978,7 @@
     },
     {
       "slug": "jumbo-knotless",
+      "bookableHere": true,
       "name": "Jumbo Knotless Braids",
       "category": "knotless",
       "categoryName": "Knotless Braids",
@@ -1219,103 +1010,42 @@
       ],
       "optionGroups": [
         {
-          "slug": "size",
-          "name": "Size",
-          "helpText": "How large the finished style is.",
-          "values": [
-            {
-              "slug": "small",
-              "label": "Small",
-              "priceDelta": 0,
-              "durationDelta": 0
-            },
-            {
-              "slug": "medium",
-              "label": "Medium",
-              "priceDelta": 20,
-              "durationDelta": 30
-            },
-            {
-              "slug": "large",
-              "label": "Large",
-              "priceDelta": 45,
-              "durationDelta": 60
-            }
-          ]
-        },
-        {
           "slug": "length",
           "name": "Length",
           "helpText": "How long you want the finished style.",
           "values": [
             {
-              "slug": "shoulder",
-              "label": "Shoulder",
+              "slug": "mid-back",
+              "label": "Mid-back",
               "priceDelta": 0,
               "durationDelta": 0
             },
             {
-              "slug": "mid-back",
-              "label": "Mid-back",
-              "priceDelta": 15,
-              "durationDelta": 20
-            },
-            {
               "slug": "waist",
               "label": "Waist",
+              "priceDelta": 15,
+              "durationDelta": 0
+            },
+            {
+              "slug": "bum",
+              "label": "Bum",
+              "priceDelta": 25,
+              "durationDelta": 0
+            },
+            {
+              "slug": "knee",
+              "label": "Knee",
               "priceDelta": 35,
-              "durationDelta": 45
+              "durationDelta": 0
             }
           ]
         }
       ],
-      "addons": [
-        {
-          "slug": "wash",
-          "name": "Wash",
-          "description": "Cleansing wash before your style.",
-          "priceDelta": 10,
-          "durationDelta": 15
-        },
-        {
-          "slug": "blow-dry",
-          "name": "Blow dry",
-          "description": "Blow dry and prep.",
-          "priceDelta": 15,
-          "durationDelta": 20
-        },
-        {
-          "slug": "take-down",
-          "name": "Take down",
-          "description": "Removal of an existing protective style.",
-          "priceDelta": 25,
-          "durationDelta": 45
-        },
-        {
-          "slug": "hair-included",
-          "name": "Hair included",
-          "description": "Hair provided by the salon.",
-          "priceDelta": 30,
-          "durationDelta": 0
-        },
-        {
-          "slug": "extra-length",
-          "name": "Extra length",
-          "description": "Additional hair length.",
-          "priceDelta": 25,
-          "durationDelta": 15
-        },
-        {
-          "slug": "braid-accessories",
-          "name": "Braid accessories",
-          "description": "Beads, cuffs and finishing accessories.",
-          "priceDelta": 5,
-          "durationDelta": 10
-        }
-      ]
+      "addons": []
     },
     {
       "slug": "medium-knotless",
+      "bookableHere": true,
       "name": "Medium Knotless Braids",
       "category": "knotless",
       "categoryName": "Knotless Braids",
@@ -1347,103 +1077,42 @@
       ],
       "optionGroups": [
         {
-          "slug": "size",
-          "name": "Size",
-          "helpText": "How large the finished style is.",
-          "values": [
-            {
-              "slug": "small",
-              "label": "Small",
-              "priceDelta": 0,
-              "durationDelta": 0
-            },
-            {
-              "slug": "medium",
-              "label": "Medium",
-              "priceDelta": 20,
-              "durationDelta": 30
-            },
-            {
-              "slug": "large",
-              "label": "Large",
-              "priceDelta": 45,
-              "durationDelta": 60
-            }
-          ]
-        },
-        {
           "slug": "length",
           "name": "Length",
           "helpText": "How long you want the finished style.",
           "values": [
             {
-              "slug": "shoulder",
-              "label": "Shoulder",
+              "slug": "mid-back",
+              "label": "Mid-back",
               "priceDelta": 0,
               "durationDelta": 0
             },
             {
-              "slug": "mid-back",
-              "label": "Mid-back",
-              "priceDelta": 15,
-              "durationDelta": 20
-            },
-            {
               "slug": "waist",
               "label": "Waist",
+              "priceDelta": 15,
+              "durationDelta": 0
+            },
+            {
+              "slug": "bum",
+              "label": "Bum",
+              "priceDelta": 25,
+              "durationDelta": 0
+            },
+            {
+              "slug": "knee",
+              "label": "Knee",
               "priceDelta": 35,
-              "durationDelta": 45
+              "durationDelta": 0
             }
           ]
         }
       ],
-      "addons": [
-        {
-          "slug": "wash",
-          "name": "Wash",
-          "description": "Cleansing wash before your style.",
-          "priceDelta": 10,
-          "durationDelta": 15
-        },
-        {
-          "slug": "blow-dry",
-          "name": "Blow dry",
-          "description": "Blow dry and prep.",
-          "priceDelta": 15,
-          "durationDelta": 20
-        },
-        {
-          "slug": "take-down",
-          "name": "Take down",
-          "description": "Removal of an existing protective style.",
-          "priceDelta": 25,
-          "durationDelta": 45
-        },
-        {
-          "slug": "hair-included",
-          "name": "Hair included",
-          "description": "Hair provided by the salon.",
-          "priceDelta": 30,
-          "durationDelta": 0
-        },
-        {
-          "slug": "extra-length",
-          "name": "Extra length",
-          "description": "Additional hair length.",
-          "priceDelta": 25,
-          "durationDelta": 15
-        },
-        {
-          "slug": "braid-accessories",
-          "name": "Braid accessories",
-          "description": "Beads, cuffs and finishing accessories.",
-          "priceDelta": 5,
-          "durationDelta": 10
-        }
-      ]
+      "addons": []
     },
     {
       "slug": "s-medium-knotless",
+      "bookableHere": true,
       "name": "S-Medium Knotless Braids",
       "category": "knotless",
       "categoryName": "Knotless Braids",
@@ -1506,6 +1175,7 @@
     },
     {
       "slug": "small-knotless",
+      "bookableHere": true,
       "name": "Small Knotless Braids",
       "category": "knotless",
       "categoryName": "Knotless Braids",
@@ -1521,7 +1191,7 @@
         "image": "https://booking.eandbhair.co.uk/service-covers/knotless.jpg",
         "alt": "Long knotless braids"
       },
-      "basePrice": 80,
+      "basePrice": 100,
       "priceType": "from",
       "priceMax": null,
       "durationMinutes": 300,
@@ -1537,103 +1207,42 @@
       ],
       "optionGroups": [
         {
-          "slug": "size",
-          "name": "Size",
-          "helpText": "How large the finished style is.",
-          "values": [
-            {
-              "slug": "small",
-              "label": "Small",
-              "priceDelta": 0,
-              "durationDelta": 0
-            },
-            {
-              "slug": "medium",
-              "label": "Medium",
-              "priceDelta": 20,
-              "durationDelta": 30
-            },
-            {
-              "slug": "large",
-              "label": "Large",
-              "priceDelta": 45,
-              "durationDelta": 60
-            }
-          ]
-        },
-        {
           "slug": "length",
           "name": "Length",
           "helpText": "How long you want the finished style.",
           "values": [
             {
-              "slug": "shoulder",
-              "label": "Shoulder",
+              "slug": "mid-back",
+              "label": "Mid-back",
               "priceDelta": 0,
               "durationDelta": 0
             },
             {
-              "slug": "mid-back",
-              "label": "Mid-back",
-              "priceDelta": 15,
-              "durationDelta": 20
-            },
-            {
               "slug": "waist",
               "label": "Waist",
+              "priceDelta": 15,
+              "durationDelta": 0
+            },
+            {
+              "slug": "bum",
+              "label": "Bum",
+              "priceDelta": 25,
+              "durationDelta": 0
+            },
+            {
+              "slug": "knee",
+              "label": "Knee",
               "priceDelta": 35,
-              "durationDelta": 45
+              "durationDelta": 0
             }
           ]
         }
       ],
-      "addons": [
-        {
-          "slug": "wash",
-          "name": "Wash",
-          "description": "Cleansing wash before your style.",
-          "priceDelta": 10,
-          "durationDelta": 15
-        },
-        {
-          "slug": "blow-dry",
-          "name": "Blow dry",
-          "description": "Blow dry and prep.",
-          "priceDelta": 15,
-          "durationDelta": 20
-        },
-        {
-          "slug": "take-down",
-          "name": "Take down",
-          "description": "Removal of an existing protective style.",
-          "priceDelta": 25,
-          "durationDelta": 45
-        },
-        {
-          "slug": "hair-included",
-          "name": "Hair included",
-          "description": "Hair provided by the salon.",
-          "priceDelta": 30,
-          "durationDelta": 0
-        },
-        {
-          "slug": "extra-length",
-          "name": "Extra length",
-          "description": "Additional hair length.",
-          "priceDelta": 25,
-          "durationDelta": 15
-        },
-        {
-          "slug": "braid-accessories",
-          "name": "Braid accessories",
-          "description": "Beads, cuffs and finishing accessories.",
-          "priceDelta": 5,
-          "durationDelta": 10
-        }
-      ]
+      "addons": []
     },
     {
       "slug": "french-curl-braids",
+      "bookableHere": true,
       "name": "French Curl Braids",
       "category": "knotless",
       "categoryName": "Knotless Braids",
@@ -1697,6 +1306,7 @@
     },
     {
       "slug": "extra-small-knotless",
+      "bookableHere": true,
       "name": "Extra Small Knotless Braids",
       "category": "knotless",
       "categoryName": "Knotless Braids",
@@ -1758,6 +1368,7 @@
     },
     {
       "slug": "jumbo-box-braids",
+      "bookableHere": true,
       "name": "Jumbo Box Braids — Ladies",
       "category": "box-braids",
       "categoryName": "Box Braids",
@@ -1773,7 +1384,7 @@
         "image": "https://booking.eandbhair.co.uk/service-covers/box-braids.jpg",
         "alt": "Classic individual box braids"
       },
-      "basePrice": 40,
+      "basePrice": 50,
       "priceType": "from",
       "priceMax": null,
       "durationMinutes": 150,
@@ -1790,103 +1401,42 @@
       ],
       "optionGroups": [
         {
-          "slug": "size",
-          "name": "Size",
-          "helpText": "How large the finished style is.",
-          "values": [
-            {
-              "slug": "small",
-              "label": "Small",
-              "priceDelta": 0,
-              "durationDelta": 0
-            },
-            {
-              "slug": "medium",
-              "label": "Medium",
-              "priceDelta": 20,
-              "durationDelta": 30
-            },
-            {
-              "slug": "large",
-              "label": "Large",
-              "priceDelta": 45,
-              "durationDelta": 60
-            }
-          ]
-        },
-        {
           "slug": "length",
           "name": "Length",
           "helpText": "How long you want the finished style.",
           "values": [
             {
-              "slug": "shoulder",
-              "label": "Shoulder",
+              "slug": "mid-back",
+              "label": "Mid-back",
               "priceDelta": 0,
               "durationDelta": 0
             },
             {
-              "slug": "mid-back",
-              "label": "Mid-back",
-              "priceDelta": 15,
-              "durationDelta": 20
-            },
-            {
               "slug": "waist",
               "label": "Waist",
+              "priceDelta": 15,
+              "durationDelta": 0
+            },
+            {
+              "slug": "bum",
+              "label": "Bum",
+              "priceDelta": 25,
+              "durationDelta": 0
+            },
+            {
+              "slug": "knee",
+              "label": "Knee",
               "priceDelta": 35,
-              "durationDelta": 45
+              "durationDelta": 0
             }
           ]
         }
       ],
-      "addons": [
-        {
-          "slug": "wash",
-          "name": "Wash",
-          "description": "Cleansing wash before your style.",
-          "priceDelta": 10,
-          "durationDelta": 15
-        },
-        {
-          "slug": "blow-dry",
-          "name": "Blow dry",
-          "description": "Blow dry and prep.",
-          "priceDelta": 15,
-          "durationDelta": 20
-        },
-        {
-          "slug": "take-down",
-          "name": "Take down",
-          "description": "Removal of an existing protective style.",
-          "priceDelta": 25,
-          "durationDelta": 45
-        },
-        {
-          "slug": "hair-included",
-          "name": "Hair included",
-          "description": "Hair provided by the salon.",
-          "priceDelta": 30,
-          "durationDelta": 0
-        },
-        {
-          "slug": "extra-length",
-          "name": "Extra length",
-          "description": "Additional hair length.",
-          "priceDelta": 25,
-          "durationDelta": 15
-        },
-        {
-          "slug": "braid-accessories",
-          "name": "Braid accessories",
-          "description": "Beads, cuffs and finishing accessories.",
-          "priceDelta": 5,
-          "durationDelta": 10
-        }
-      ]
+      "addons": []
     },
     {
       "slug": "medium-box-braids",
+      "bookableHere": true,
       "name": "Medium Box Braids",
       "category": "box-braids",
       "categoryName": "Box Braids",
@@ -1902,8 +1452,8 @@
         "image": "https://booking.eandbhair.co.uk/service-covers/box-braids.jpg",
         "alt": "Classic individual box braids"
       },
-      "basePrice": 60,
-      "priceType": "from",
+      "basePrice": 70,
+      "priceType": "fixed",
       "priceMax": null,
       "durationMinutes": 270,
       "isAddOn": false,
@@ -1918,103 +1468,42 @@
       ],
       "optionGroups": [
         {
-          "slug": "size",
-          "name": "Size",
-          "helpText": "How large the finished style is.",
-          "values": [
-            {
-              "slug": "small",
-              "label": "Small",
-              "priceDelta": 0,
-              "durationDelta": 0
-            },
-            {
-              "slug": "medium",
-              "label": "Medium",
-              "priceDelta": 20,
-              "durationDelta": 30
-            },
-            {
-              "slug": "large",
-              "label": "Large",
-              "priceDelta": 45,
-              "durationDelta": 60
-            }
-          ]
-        },
-        {
           "slug": "length",
           "name": "Length",
           "helpText": "How long you want the finished style.",
           "values": [
             {
-              "slug": "shoulder",
-              "label": "Shoulder",
+              "slug": "mid-back",
+              "label": "Mid-back",
               "priceDelta": 0,
               "durationDelta": 0
             },
             {
-              "slug": "mid-back",
-              "label": "Mid-back",
-              "priceDelta": 15,
-              "durationDelta": 20
-            },
-            {
               "slug": "waist",
               "label": "Waist",
+              "priceDelta": 15,
+              "durationDelta": 0
+            },
+            {
+              "slug": "bum",
+              "label": "Bum",
+              "priceDelta": 25,
+              "durationDelta": 0
+            },
+            {
+              "slug": "knee",
+              "label": "Knee",
               "priceDelta": 35,
-              "durationDelta": 45
+              "durationDelta": 0
             }
           ]
         }
       ],
-      "addons": [
-        {
-          "slug": "wash",
-          "name": "Wash",
-          "description": "Cleansing wash before your style.",
-          "priceDelta": 10,
-          "durationDelta": 15
-        },
-        {
-          "slug": "blow-dry",
-          "name": "Blow dry",
-          "description": "Blow dry and prep.",
-          "priceDelta": 15,
-          "durationDelta": 20
-        },
-        {
-          "slug": "take-down",
-          "name": "Take down",
-          "description": "Removal of an existing protective style.",
-          "priceDelta": 25,
-          "durationDelta": 45
-        },
-        {
-          "slug": "hair-included",
-          "name": "Hair included",
-          "description": "Hair provided by the salon.",
-          "priceDelta": 30,
-          "durationDelta": 0
-        },
-        {
-          "slug": "extra-length",
-          "name": "Extra length",
-          "description": "Additional hair length.",
-          "priceDelta": 25,
-          "durationDelta": 15
-        },
-        {
-          "slug": "braid-accessories",
-          "name": "Braid accessories",
-          "description": "Beads, cuffs and finishing accessories.",
-          "priceDelta": 5,
-          "durationDelta": 10
-        }
-      ]
+      "addons": []
     },
     {
       "slug": "box-braids-standard",
+      "bookableHere": true,
       "name": "Box Braids",
       "category": "box-braids",
       "categoryName": "Box Braids",
@@ -2075,135 +1564,8 @@
       "addons": []
     },
     {
-      "slug": "small-box-braids",
-      "name": "Small Box Braids",
-      "category": "box-braids",
-      "categoryName": "Box Braids",
-      "description": "Fine, detailed box braids for a versatile style with plenty of movement.",
-      "whatsIncluded": [
-        "Consultation",
-        "Parting",
-        "Small box braids",
-        "Dip & seal"
-      ],
-      "shortDescription": "",
-      "cover": {
-        "image": "https://booking.eandbhair.co.uk/service-covers/box-braids.jpg",
-        "alt": "Classic individual box braids"
-      },
-      "basePrice": 80,
-      "priceType": "from",
-      "priceMax": null,
-      "durationMinutes": 210,
-      "isAddOn": false,
-      "family": null,
-      "optionLabel": null,
-      "categories": [
-        "box-braids",
-        "womens-braids"
-      ],
-      "tags": [
-        "womens-braids"
-      ],
-      "optionGroups": [
-        {
-          "slug": "size",
-          "name": "Size",
-          "helpText": "How large the finished style is.",
-          "values": [
-            {
-              "slug": "small",
-              "label": "Small",
-              "priceDelta": 0,
-              "durationDelta": 0
-            },
-            {
-              "slug": "medium",
-              "label": "Medium",
-              "priceDelta": 20,
-              "durationDelta": 30
-            },
-            {
-              "slug": "large",
-              "label": "Large",
-              "priceDelta": 45,
-              "durationDelta": 60
-            }
-          ]
-        },
-        {
-          "slug": "length",
-          "name": "Length",
-          "helpText": "How long you want the finished style.",
-          "values": [
-            {
-              "slug": "shoulder",
-              "label": "Shoulder",
-              "priceDelta": 0,
-              "durationDelta": 0
-            },
-            {
-              "slug": "mid-back",
-              "label": "Mid-back",
-              "priceDelta": 15,
-              "durationDelta": 20
-            },
-            {
-              "slug": "waist",
-              "label": "Waist",
-              "priceDelta": 35,
-              "durationDelta": 45
-            }
-          ]
-        }
-      ],
-      "addons": [
-        {
-          "slug": "wash",
-          "name": "Wash",
-          "description": "Cleansing wash before your style.",
-          "priceDelta": 10,
-          "durationDelta": 15
-        },
-        {
-          "slug": "blow-dry",
-          "name": "Blow dry",
-          "description": "Blow dry and prep.",
-          "priceDelta": 15,
-          "durationDelta": 20
-        },
-        {
-          "slug": "take-down",
-          "name": "Take down",
-          "description": "Removal of an existing protective style.",
-          "priceDelta": 25,
-          "durationDelta": 45
-        },
-        {
-          "slug": "hair-included",
-          "name": "Hair included",
-          "description": "Hair provided by the salon.",
-          "priceDelta": 30,
-          "durationDelta": 0
-        },
-        {
-          "slug": "extra-length",
-          "name": "Extra length",
-          "description": "Additional hair length.",
-          "priceDelta": 25,
-          "durationDelta": 15
-        },
-        {
-          "slug": "braid-accessories",
-          "name": "Braid accessories",
-          "description": "Beads, cuffs and finishing accessories.",
-          "priceDelta": 5,
-          "durationDelta": 10
-        }
-      ]
-    },
-    {
       "slug": "extra-small-box-braids",
+      "bookableHere": true,
       "name": "Extra Small Box Braids",
       "category": "box-braids",
       "categoryName": "Box Braids",
@@ -2219,7 +1581,7 @@
         "image": "https://booking.eandbhair.co.uk/service-covers/box-braids.jpg",
         "alt": "Classic individual box braids"
       },
-      "basePrice": 110,
+      "basePrice": 100,
       "priceType": "from",
       "priceMax": null,
       "durationMinutes": 240,
@@ -2235,103 +1597,42 @@
       ],
       "optionGroups": [
         {
-          "slug": "size",
-          "name": "Size",
-          "helpText": "How large the finished style is.",
-          "values": [
-            {
-              "slug": "small",
-              "label": "Small",
-              "priceDelta": 0,
-              "durationDelta": 0
-            },
-            {
-              "slug": "medium",
-              "label": "Medium",
-              "priceDelta": 20,
-              "durationDelta": 30
-            },
-            {
-              "slug": "large",
-              "label": "Large",
-              "priceDelta": 45,
-              "durationDelta": 60
-            }
-          ]
-        },
-        {
           "slug": "length",
           "name": "Length",
           "helpText": "How long you want the finished style.",
           "values": [
             {
-              "slug": "shoulder",
-              "label": "Shoulder",
+              "slug": "mid-back",
+              "label": "Mid-back",
               "priceDelta": 0,
               "durationDelta": 0
             },
             {
-              "slug": "mid-back",
-              "label": "Mid-back",
-              "priceDelta": 15,
-              "durationDelta": 20
-            },
-            {
               "slug": "waist",
               "label": "Waist",
+              "priceDelta": 15,
+              "durationDelta": 0
+            },
+            {
+              "slug": "bum",
+              "label": "Bum",
+              "priceDelta": 25,
+              "durationDelta": 0
+            },
+            {
+              "slug": "knee",
+              "label": "Knee",
               "priceDelta": 35,
-              "durationDelta": 45
+              "durationDelta": 0
             }
           ]
         }
       ],
-      "addons": [
-        {
-          "slug": "wash",
-          "name": "Wash",
-          "description": "Cleansing wash before your style.",
-          "priceDelta": 10,
-          "durationDelta": 15
-        },
-        {
-          "slug": "blow-dry",
-          "name": "Blow dry",
-          "description": "Blow dry and prep.",
-          "priceDelta": 15,
-          "durationDelta": 20
-        },
-        {
-          "slug": "take-down",
-          "name": "Take down",
-          "description": "Removal of an existing protective style.",
-          "priceDelta": 25,
-          "durationDelta": 45
-        },
-        {
-          "slug": "hair-included",
-          "name": "Hair included",
-          "description": "Hair provided by the salon.",
-          "priceDelta": 30,
-          "durationDelta": 0
-        },
-        {
-          "slug": "extra-length",
-          "name": "Extra length",
-          "description": "Additional hair length.",
-          "priceDelta": 25,
-          "durationDelta": 15
-        },
-        {
-          "slug": "braid-accessories",
-          "name": "Braid accessories",
-          "description": "Beads, cuffs and finishing accessories.",
-          "priceDelta": 5,
-          "durationDelta": 10
-        }
-      ]
+      "addons": []
     },
     {
       "slug": "fulani-braids-large",
+      "bookableHere": true,
       "name": "Large Fulani Braids",
       "category": "fulani-braids",
       "categoryName": "Fulani Braids",
@@ -2361,6 +1662,7 @@
     },
     {
       "slug": "fulani-braids-medium",
+      "bookableHere": true,
       "name": "Medium Fulani Braids",
       "category": "fulani-braids",
       "categoryName": "Fulani Braids",
@@ -2390,6 +1692,7 @@
     },
     {
       "slug": "flip-goddess-fulani-braids",
+      "bookableHere": true,
       "name": "Goddess Fulani Braids — Flip Over",
       "category": "fulani-braids",
       "categoryName": "Fulani Braids",
@@ -2454,6 +1757,7 @@
     },
     {
       "slug": "medium-goddess-fulani-braids",
+      "bookableHere": true,
       "name": "Medium Goddess Fulani Braids",
       "category": "fulani-braids",
       "categoryName": "Fulani Braids",
@@ -2518,6 +1822,7 @@
     },
     {
       "slug": "boho-fulani-twist",
+      "bookableHere": true,
       "name": "Boho Fulani Twist",
       "category": "fulani-braids",
       "categoryName": "Fulani Braids",
@@ -2551,7 +1856,41 @@
       "addons": []
     },
     {
+      "slug": "fulani-sew-in",
+      "bookableHere": false,
+      "name": "Fulani Sew-In",
+      "category": "fulani-braids",
+      "categoryName": "Fulani Braids",
+      "description": "Fulani cornrows with a sew-in.",
+      "whatsIncluded": [],
+      "shortDescription": "Fulani cornrows with a sew-in.",
+      "cover": {
+        "image": "https://booking.eandbhair.co.uk/service-covers/fulani-braids.jpg",
+        "alt": "Fulani Sew-In"
+      },
+      "basePrice": 55,
+      "priceType": "from",
+      "priceMax": null,
+      "durationMinutes": 30,
+      "isAddOn": false,
+      "family": "Fulani Braids",
+      "optionLabel": "Fulani Sew-In",
+      "categories": [
+        "fulani-braids",
+        "womens-braids",
+        "sew-in"
+      ],
+      "tags": [
+        "womens-braids",
+        "sew-in",
+        "sew in"
+      ],
+      "optionGroups": [],
+      "addons": []
+    },
+    {
       "slug": "goddess-braid-small",
+      "bookableHere": true,
       "name": "Small Goddess Braids",
       "category": "goddess-braids",
       "categoryName": "Goddess & Boho Braids",
@@ -2614,6 +1953,7 @@
     },
     {
       "slug": "goddess-braid-small-medium",
+      "bookableHere": true,
       "name": "S-Medium Goddess Braids",
       "category": "goddess-braids",
       "categoryName": "Goddess & Boho Braids",
@@ -2677,6 +2017,7 @@
     },
     {
       "slug": "goddess-braids-medium",
+      "bookableHere": true,
       "name": "Medium Goddess Braids",
       "category": "goddess-braids",
       "categoryName": "Goddess & Boho Braids",
@@ -2739,6 +2080,7 @@
     },
     {
       "slug": "boho-braids",
+      "bookableHere": true,
       "name": "Boho Braids",
       "category": "goddess-braids",
       "categoryName": "Goddess & Boho Braids",
@@ -2804,6 +2146,7 @@
     },
     {
       "slug": "finger-twists",
+      "bookableHere": true,
       "name": "Finger Twists",
       "category": "twists",
       "categoryName": "Twists",
@@ -2833,6 +2176,7 @@
     },
     {
       "slug": "jumbo-twist",
+      "bookableHere": true,
       "name": "Jumbo Twist",
       "category": "twists",
       "categoryName": "Twists",
@@ -2863,6 +2207,7 @@
     },
     {
       "slug": "ladies-twist-extensions",
+      "bookableHere": true,
       "name": "Ladies Twist with Extensions",
       "category": "twists",
       "categoryName": "Twists",
@@ -2894,6 +2239,7 @@
     },
     {
       "slug": "natural-two-strand-twist-ladies",
+      "bookableHere": true,
       "name": "Natural Hair Two-Strand Twist — Ladies",
       "category": "twists",
       "categoryName": "Twists",
@@ -2925,135 +2271,8 @@
       "addons": []
     },
     {
-      "slug": "senegalese-twists",
-      "name": "Senegalese Twists",
-      "category": "twists",
-      "categoryName": "Twists",
-      "description": "Soft, springy twists with a smooth, wearable finish and natural movement.",
-      "whatsIncluded": [
-        "Consultation",
-        "Wash & condition",
-        "Twisting",
-        "Styling"
-      ],
-      "shortDescription": "",
-      "cover": {
-        "image": "https://booking.eandbhair.co.uk/service-covers/twists.jpg",
-        "alt": "Senegalese twists"
-      },
-      "basePrice": 90,
-      "priceType": "from",
-      "priceMax": null,
-      "durationMinutes": 150,
-      "isAddOn": false,
-      "family": null,
-      "optionLabel": null,
-      "categories": [
-        "twists",
-        "womens-braids"
-      ],
-      "tags": [
-        "womens-braids"
-      ],
-      "optionGroups": [
-        {
-          "slug": "size",
-          "name": "Size",
-          "helpText": "How large the finished style is.",
-          "values": [
-            {
-              "slug": "small",
-              "label": "Small",
-              "priceDelta": 0,
-              "durationDelta": 0
-            },
-            {
-              "slug": "medium",
-              "label": "Medium",
-              "priceDelta": 20,
-              "durationDelta": 30
-            },
-            {
-              "slug": "large",
-              "label": "Large",
-              "priceDelta": 45,
-              "durationDelta": 60
-            }
-          ]
-        },
-        {
-          "slug": "length",
-          "name": "Length",
-          "helpText": "How long you want the finished style.",
-          "values": [
-            {
-              "slug": "shoulder",
-              "label": "Shoulder",
-              "priceDelta": 0,
-              "durationDelta": 0
-            },
-            {
-              "slug": "mid-back",
-              "label": "Mid-back",
-              "priceDelta": 15,
-              "durationDelta": 20
-            },
-            {
-              "slug": "waist",
-              "label": "Waist",
-              "priceDelta": 35,
-              "durationDelta": 45
-            }
-          ]
-        }
-      ],
-      "addons": [
-        {
-          "slug": "wash",
-          "name": "Wash",
-          "description": "Cleansing wash before your style.",
-          "priceDelta": 10,
-          "durationDelta": 15
-        },
-        {
-          "slug": "blow-dry",
-          "name": "Blow dry",
-          "description": "Blow dry and prep.",
-          "priceDelta": 15,
-          "durationDelta": 20
-        },
-        {
-          "slug": "take-down",
-          "name": "Take down",
-          "description": "Removal of an existing protective style.",
-          "priceDelta": 25,
-          "durationDelta": 45
-        },
-        {
-          "slug": "hair-included",
-          "name": "Hair included",
-          "description": "Hair provided by the salon.",
-          "priceDelta": 30,
-          "durationDelta": 0
-        },
-        {
-          "slug": "extra-length",
-          "name": "Extra length",
-          "description": "Additional hair length.",
-          "priceDelta": 25,
-          "durationDelta": 15
-        },
-        {
-          "slug": "braid-accessories",
-          "name": "Braid accessories",
-          "description": "Beads, cuffs and finishing accessories.",
-          "priceDelta": 5,
-          "durationDelta": 10
-        }
-      ]
-    },
-    {
       "slug": "small-fulani-braids",
+      "bookableHere": true,
       "name": "Small Fulani Braids",
       "category": "fulani-braids",
       "categoryName": "Fulani Braids",
@@ -3083,6 +2302,7 @@
     },
     {
       "slug": "medium-twist-extension",
+      "bookableHere": true,
       "name": "Medium Twist With Extension",
       "category": "twists",
       "categoryName": "Twists",
@@ -3112,6 +2332,7 @@
     },
     {
       "slug": "s-medium-twist-extension",
+      "bookableHere": true,
       "name": "S Medium Twist With Extension",
       "category": "twists",
       "categoryName": "Twists",
@@ -3141,6 +2362,7 @@
     },
     {
       "slug": "twist-with-curls-medium",
+      "bookableHere": true,
       "name": "Twist With Curls (Medium)",
       "category": "twists",
       "categoryName": "Twists",
@@ -3170,6 +2392,7 @@
     },
     {
       "slug": "mini-twist-natural-hair",
+      "bookableHere": true,
       "name": "Mini Twist With Natural Hair",
       "category": "twists",
       "categoryName": "Twists",
@@ -3198,132 +2421,252 @@
       "addons": []
     },
     {
-      "slug": "loc-grooming",
-      "name": "Loc Grooming",
+      "slug": "crochet-braids",
+      "bookableHere": false,
+      "name": "Crochet Braids",
+      "category": "crochet-braids",
+      "categoryName": "Crochet Braids",
+      "description": "Quick-install crochet braids for instant volume and style. Pre-looped hair attached to cornrow base.",
+      "whatsIncluded": [],
+      "shortDescription": "",
+      "cover": {
+        "image": "https://booking.eandbhair.co.uk/service-covers/crochet-braids.jpg",
+        "alt": "Crochet Braids"
+      },
+      "basePrice": 45,
+      "priceType": "fixed",
+      "priceMax": null,
+      "durationMinutes": 120,
+      "isAddOn": false,
+      "family": null,
+      "optionLabel": null,
+      "categories": [
+        "crochet-braids",
+        "womens-braids"
+      ],
+      "tags": [
+        "womens-braids",
+        "crochet"
+      ],
+      "optionGroups": [],
+      "addons": []
+    },
+    {
+      "slug": "individual-crochet",
+      "bookableHere": false,
+      "name": "Individual Crochet Braids",
+      "category": "crochet-braids",
+      "categoryName": "Crochet Braids",
+      "description": "Sections of natural hair are braided and extensions are crocheted onto the individual braids.",
+      "whatsIncluded": [],
+      "shortDescription": "Sections of natural hair are braided and extensions are crocheted onto the individual braids.",
+      "cover": {
+        "image": "https://booking.eandbhair.co.uk/service-covers/crochet-braids.jpg",
+        "alt": "Individual Crochet Braids"
+      },
+      "basePrice": 65,
+      "priceType": "from",
+      "priceMax": null,
+      "durationMinutes": 150,
+      "isAddOn": false,
+      "family": null,
+      "optionLabel": null,
+      "categories": [
+        "crochet-braids",
+        "womens-braids"
+      ],
+      "tags": [
+        "womens-braids",
+        "crochet"
+      ],
+      "optionGroups": [],
+      "addons": []
+    },
+    {
+      "slug": "leave-out-sew-in",
+      "bookableHere": false,
+      "name": "Sew-In Extensions",
+      "category": "sew-in",
+      "categoryName": "Sew-In Extensions",
+      "description": "Leave-out sew-in extensions.",
+      "whatsIncluded": [],
+      "shortDescription": "Leave-out sew-in extensions.",
+      "cover": {
+        "image": "https://booking.eandbhair.co.uk/service-covers/sew-in.jpg",
+        "alt": "Sew-In Extensions"
+      },
+      "basePrice": 40,
+      "priceType": "fixed",
+      "priceMax": null,
+      "durationMinutes": 120,
+      "isAddOn": false,
+      "family": null,
+      "optionLabel": null,
+      "categories": [
+        "sew-in",
+        "womens-braids"
+      ],
+      "tags": [
+        "womens-braids",
+        "sew in",
+        "weave"
+      ],
+      "optionGroups": [],
+      "addons": []
+    },
+    {
+      "slug": "dread-interlock",
+      "bookableHere": false,
+      "name": "Dreadlocks",
       "category": "locs",
       "categoryName": "Locs & Dreadlocks",
-      "description": "Retwist and grooming for healthy-looking locs, clean roots and an easy finish.",
-      "whatsIncluded": [
-        "Consultation",
-        "Wash",
-        "Retwist",
-        "Styling"
-      ],
-      "shortDescription": "",
+      "description": "Dreadlock maintenance and interlocking.",
+      "whatsIncluded": [],
+      "shortDescription": "Dreadlock maintenance and interlocking.",
       "cover": {
         "image": "https://booking.eandbhair.co.uk/service-covers/locs.jpg",
         "alt": "Healthy locs being groomed"
       },
-      "basePrice": 45,
-      "priceType": "from",
+      "basePrice": 40,
+      "priceType": "fixed",
       "priceMax": null,
-      "durationMinutes": 75,
+      "durationMinutes": 150,
       "isAddOn": false,
       "family": null,
       "optionLabel": null,
       "categories": [
         "locs"
       ],
-      "tags": [],
-      "optionGroups": [
-        {
-          "slug": "size",
-          "name": "Size",
-          "helpText": "How large the finished style is.",
-          "values": [
-            {
-              "slug": "small",
-              "label": "Small",
-              "priceDelta": 0,
-              "durationDelta": 0
-            },
-            {
-              "slug": "medium",
-              "label": "Medium",
-              "priceDelta": 20,
-              "durationDelta": 30
-            },
-            {
-              "slug": "large",
-              "label": "Large",
-              "priceDelta": 45,
-              "durationDelta": 60
-            }
-          ]
-        },
-        {
-          "slug": "length",
-          "name": "Length",
-          "helpText": "How long you want the finished style.",
-          "values": [
-            {
-              "slug": "shoulder",
-              "label": "Shoulder",
-              "priceDelta": 0,
-              "durationDelta": 0
-            },
-            {
-              "slug": "mid-back",
-              "label": "Mid-back",
-              "priceDelta": 15,
-              "durationDelta": 20
-            },
-            {
-              "slug": "waist",
-              "label": "Waist",
-              "priceDelta": 35,
-              "durationDelta": 45
-            }
-          ]
-        }
+      "tags": [
+        "dreadlocks",
+        "interlock"
       ],
-      "addons": [
-        {
-          "slug": "wash",
-          "name": "Wash",
-          "description": "Cleansing wash before your style.",
-          "priceDelta": 10,
-          "durationDelta": 15
-        },
-        {
-          "slug": "blow-dry",
-          "name": "Blow dry",
-          "description": "Blow dry and prep.",
-          "priceDelta": 15,
-          "durationDelta": 20
-        },
-        {
-          "slug": "take-down",
-          "name": "Take down",
-          "description": "Removal of an existing protective style.",
-          "priceDelta": 25,
-          "durationDelta": 45
-        },
-        {
-          "slug": "hair-included",
-          "name": "Hair included",
-          "description": "Hair provided by the salon.",
-          "priceDelta": 30,
-          "durationDelta": 0
-        },
-        {
-          "slug": "extra-length",
-          "name": "Extra length",
-          "description": "Additional hair length.",
-          "priceDelta": 25,
-          "durationDelta": 15
-        },
-        {
-          "slug": "braid-accessories",
-          "name": "Braid accessories",
-          "description": "Beads, cuffs and finishing accessories.",
-          "priceDelta": 5,
-          "durationDelta": 10
-        }
-      ]
+      "optionGroups": [],
+      "addons": []
+    },
+    {
+      "slug": "starter-lock",
+      "bookableHere": false,
+      "name": "Starter Locs",
+      "category": "locs",
+      "categoryName": "Locs & Dreadlocks",
+      "description": "New starter locs. Price and time depend on the length and thickness of your hair: pricing typically varies from £85–£180.",
+      "whatsIncluded": [],
+      "shortDescription": "Pricing typically varies from £85–£180 depending on hair length and thickness.",
+      "cover": {
+        "image": "https://booking.eandbhair.co.uk/service-covers/locs.jpg",
+        "alt": "Healthy locs being groomed"
+      },
+      "basePrice": 85,
+      "priceType": "range",
+      "priceMax": 180,
+      "durationMinutes": 330,
+      "isAddOn": false,
+      "family": null,
+      "optionLabel": null,
+      "categories": [
+        "locs"
+      ],
+      "tags": [
+        "dreadlocks",
+        "starter"
+      ],
+      "optionGroups": [],
+      "addons": []
+    },
+    {
+      "slug": "single-braids-lock-crochet",
+      "bookableHere": false,
+      "name": "Single Braids Lock Crochet",
+      "category": "crochet-braids",
+      "categoryName": "Crochet Braids",
+      "description": "Loc-style crochet braids that give the appearance of faux locs without the weight.",
+      "whatsIncluded": [],
+      "shortDescription": "",
+      "cover": {
+        "image": "https://booking.eandbhair.co.uk/service-covers/crochet-braids.jpg",
+        "alt": "Single Braids Lock Crochet"
+      },
+      "basePrice": 70,
+      "priceType": "from",
+      "priceMax": null,
+      "durationMinutes": 180,
+      "isAddOn": false,
+      "family": null,
+      "optionLabel": null,
+      "categories": [
+        "crochet-braids",
+        "womens-braids"
+      ],
+      "tags": [
+        "womens-braids"
+      ],
+      "optionGroups": [],
+      "addons": []
+    },
+    {
+      "slug": "half-cornrow-back-crochet",
+      "bookableHere": false,
+      "name": "Half Cornrow With Back Crochet",
+      "category": "crochet-braids",
+      "categoryName": "Crochet Braids",
+      "description": "Stylish cornrows at the front with crochet braids at the back for a versatile combination look.",
+      "whatsIncluded": [],
+      "shortDescription": "",
+      "cover": {
+        "image": "https://booking.eandbhair.co.uk/service-covers/crochet-braids.jpg",
+        "alt": "Half Cornrow With Back Crochet"
+      },
+      "basePrice": 55,
+      "priceType": "from",
+      "priceMax": null,
+      "durationMinutes": 120,
+      "isAddOn": false,
+      "family": null,
+      "optionLabel": null,
+      "categories": [
+        "crochet-braids",
+        "womens-braids"
+      ],
+      "tags": [
+        "womens-braids"
+      ],
+      "optionGroups": [],
+      "addons": []
+    },
+    {
+      "slug": "invisible-sew-in",
+      "bookableHere": false,
+      "name": "Invisible Sew In",
+      "category": "sew-in",
+      "categoryName": "Sew-In Extensions",
+      "description": "Advanced sew-in technique that creates a completely undetectable weave. No leave-out required, with flat, invisible tracks for the most natural appearance.",
+      "whatsIncluded": [],
+      "shortDescription": "",
+      "cover": {
+        "image": "https://booking.eandbhair.co.uk/service-covers/sew-in.jpg",
+        "alt": "Invisible Sew In"
+      },
+      "basePrice": 45,
+      "priceType": "from",
+      "priceMax": null,
+      "durationMinutes": 120,
+      "isAddOn": false,
+      "family": null,
+      "optionLabel": null,
+      "categories": [
+        "sew-in",
+        "womens-braids"
+      ],
+      "tags": [
+        "womens-braids"
+      ],
+      "optionGroups": [],
+      "addons": []
     },
     {
       "slug": "kids-cornrow",
+      "bookableHere": true,
       "name": "Kids Cornrows Without Extensions",
       "category": "childrens",
       "categoryName": "Kids Styles",
@@ -3355,6 +2698,7 @@
     },
     {
       "slug": "kids-box-braid-extension",
+      "bookableHere": true,
       "name": "Kids Under 10 — Box Braids with Extensions",
       "category": "childrens",
       "categoryName": "Kids Styles",
@@ -3386,6 +2730,7 @@
     },
     {
       "slug": "kids-boho-braids",
+      "bookableHere": true,
       "name": "Kids Boho Braids",
       "category": "childrens",
       "categoryName": "Kids Styles",
@@ -3417,132 +2762,8 @@
       "addons": []
     },
     {
-      "slug": "kids-box-braids",
-      "name": "Kids Box Braids",
-      "category": "childrens",
-      "categoryName": "Kids Styles",
-      "description": "Gentle, fun box braids for children using patient care and safe, comfortable techniques.",
-      "whatsIncluded": [
-        "Consultation",
-        "Gentle wash",
-        "Braiding",
-        "Child-friendly finish"
-      ],
-      "shortDescription": "",
-      "cover": {
-        "image": "https://booking.eandbhair.co.uk/service-covers/childrens.jpg",
-        "alt": "Gentle children's braids"
-      },
-      "basePrice": 35,
-      "priceType": "from",
-      "priceMax": null,
-      "durationMinutes": 90,
-      "isAddOn": false,
-      "family": null,
-      "optionLabel": null,
-      "categories": [
-        "childrens"
-      ],
-      "tags": [],
-      "optionGroups": [
-        {
-          "slug": "size",
-          "name": "Size",
-          "helpText": "How large the finished style is.",
-          "values": [
-            {
-              "slug": "small",
-              "label": "Small",
-              "priceDelta": 0,
-              "durationDelta": 0
-            },
-            {
-              "slug": "medium",
-              "label": "Medium",
-              "priceDelta": 20,
-              "durationDelta": 30
-            },
-            {
-              "slug": "large",
-              "label": "Large",
-              "priceDelta": 45,
-              "durationDelta": 60
-            }
-          ]
-        },
-        {
-          "slug": "length",
-          "name": "Length",
-          "helpText": "How long you want the finished style.",
-          "values": [
-            {
-              "slug": "shoulder",
-              "label": "Shoulder",
-              "priceDelta": 0,
-              "durationDelta": 0
-            },
-            {
-              "slug": "mid-back",
-              "label": "Mid-back",
-              "priceDelta": 15,
-              "durationDelta": 20
-            },
-            {
-              "slug": "waist",
-              "label": "Waist",
-              "priceDelta": 35,
-              "durationDelta": 45
-            }
-          ]
-        }
-      ],
-      "addons": [
-        {
-          "slug": "wash",
-          "name": "Wash",
-          "description": "Cleansing wash before your style.",
-          "priceDelta": 10,
-          "durationDelta": 15
-        },
-        {
-          "slug": "blow-dry",
-          "name": "Blow dry",
-          "description": "Blow dry and prep.",
-          "priceDelta": 15,
-          "durationDelta": 20
-        },
-        {
-          "slug": "take-down",
-          "name": "Take down",
-          "description": "Removal of an existing protective style.",
-          "priceDelta": 25,
-          "durationDelta": 45
-        },
-        {
-          "slug": "hair-included",
-          "name": "Hair included",
-          "description": "Hair provided by the salon.",
-          "priceDelta": 30,
-          "durationDelta": 0
-        },
-        {
-          "slug": "extra-length",
-          "name": "Extra length",
-          "description": "Additional hair length.",
-          "priceDelta": 25,
-          "durationDelta": 15
-        },
-        {
-          "slug": "braid-accessories",
-          "name": "Braid accessories",
-          "description": "Beads, cuffs and finishing accessories.",
-          "priceDelta": 5,
-          "durationDelta": 10
-        }
-      ]
-    },
-    {
       "slug": "kids-box-braids-natural-hair",
+      "bookableHere": true,
       "name": "Box Braids With Natural Hair",
       "category": "childrens",
       "categoryName": "Kids Styles",
@@ -3569,6 +2790,7 @@
     },
     {
       "slug": "kids-design-cornrow-natural-hair",
+      "bookableHere": true,
       "name": "Design Cornrow With Natural Hair",
       "category": "childrens",
       "categoryName": "Kids Styles",
@@ -3595,6 +2817,7 @@
     },
     {
       "slug": "kids-design-cornrow-extension",
+      "bookableHere": true,
       "name": "Design Cornrow With Extension",
       "category": "childrens",
       "categoryName": "Kids Styles",
@@ -3621,6 +2844,7 @@
     },
     {
       "slug": "kids-beads-installation",
+      "bookableHere": true,
       "name": "Beads Installation",
       "category": "childrens",
       "categoryName": "Kids Styles",
@@ -3646,7 +2870,67 @@
       "addons": []
     },
     {
+      "slug": "hair-straightening",
+      "bookableHere": false,
+      "name": "Hair Straightening",
+      "category": "treatments",
+      "categoryName": "Hair Care & Finishing",
+      "description": "Straightening for natural hair.",
+      "whatsIncluded": [],
+      "shortDescription": "Straightening for natural hair.",
+      "cover": {
+        "image": "https://booking.eandbhair.co.uk/service-covers/treatments.jpg",
+        "alt": "Scalp treatment for textured hair"
+      },
+      "basePrice": 25,
+      "priceType": "from",
+      "priceMax": null,
+      "durationMinutes": 90,
+      "isAddOn": false,
+      "family": null,
+      "optionLabel": null,
+      "categories": [
+        "treatments"
+      ],
+      "tags": [
+        "straighten"
+      ],
+      "optionGroups": [],
+      "addons": []
+    },
+    {
+      "slug": "hair-colour",
+      "bookableHere": false,
+      "name": "Hair Colour",
+      "category": "treatments",
+      "categoryName": "Hair Care & Finishing",
+      "description": "Colour service — final price depends on length and colour.",
+      "whatsIncluded": [],
+      "shortDescription": "Colour service — final price depends on length and colour.",
+      "cover": {
+        "image": "https://booking.eandbhair.co.uk/service-covers/treatments.jpg",
+        "alt": "Scalp treatment for textured hair"
+      },
+      "basePrice": 95,
+      "priceType": "from",
+      "priceMax": null,
+      "durationMinutes": 320,
+      "isAddOn": false,
+      "family": null,
+      "optionLabel": null,
+      "categories": [
+        "treatments"
+      ],
+      "tags": [
+        "color",
+        "dye"
+      ],
+      "optionGroups": [],
+      "addons": []
+    },
+    {
       "slug": "take-out-braids",
+      "bookableHere": true,
       "name": "Take Out Braids",
       "category": "treatments",
       "categoryName": "Hair Care & Finishing",
@@ -3676,6 +2960,7 @@
     },
     {
       "slug": "mens-wash-and-dry",
+      "bookableHere": true,
       "name": "Wash & Dry",
       "category": "treatments",
       "categoryName": "Hair Care & Finishing",
@@ -3705,7 +2990,71 @@
       "addons": []
     },
     {
+      "slug": "curling-perm",
+      "bookableHere": false,
+      "name": "Curling Perm",
+      "category": "treatments",
+      "categoryName": "Hair Care & Finishing",
+      "description": "Professional curling perm for defined curls. Price: £85 · approx. 1h+.",
+      "whatsIncluded": [],
+      "shortDescription": "",
+      "cover": {
+        "image": "https://booking.eandbhair.co.uk/service-covers/treatments.jpg",
+        "alt": "Scalp treatment for textured hair"
+      },
+      "basePrice": 65,
+      "priceType": "from",
+      "priceMax": null,
+      "durationMinutes": 150,
+      "isAddOn": false,
+      "family": null,
+      "optionLabel": null,
+      "categories": [
+        "treatments",
+        "mens-braids"
+      ],
+      "tags": [
+        "mens-braids",
+        "perm",
+        "curls"
+      ],
+      "optionGroups": [],
+      "addons": []
+    },
+    {
+      "slug": "hair-straightening-wash",
+      "bookableHere": false,
+      "name": "Wash, Blow Dry & Straighten",
+      "category": "treatments",
+      "categoryName": "Hair Care & Finishing",
+      "description": "Professional hair straightening with a thorough wash included. Perfect for a sleek, polished look for any occasion.",
+      "whatsIncluded": [],
+      "shortDescription": "",
+      "cover": {
+        "image": "https://booking.eandbhair.co.uk/service-covers/treatments.jpg",
+        "alt": "Scalp treatment for textured hair"
+      },
+      "basePrice": 30,
+      "priceType": "fixed",
+      "priceMax": null,
+      "durationMinutes": 90,
+      "isAddOn": false,
+      "family": null,
+      "optionLabel": null,
+      "categories": [
+        "treatments"
+      ],
+      "tags": [
+        "wash",
+        "blow dry",
+        "straighten"
+      ],
+      "optionGroups": [],
+      "addons": []
+    },
+    {
       "slug": "silk-ponytail",
+      "bookableHere": true,
       "name": "Silk Ponytail",
       "category": "treatments",
       "categoryName": "Hair Care & Finishing",
@@ -3735,132 +3084,8 @@
       "addons": []
     },
     {
-      "slug": "deep-treatment",
-      "name": "Deep Moisture Treatment",
-      "category": "treatments",
-      "categoryName": "Hair Care & Finishing",
-      "description": "A restorative moisture and scalp-care reset to leave textured hair feeling nourished and refreshed.",
-      "whatsIncluded": [
-        "Hair and scalp check",
-        "Moisture treatment",
-        "Scalp massage",
-        "Finish"
-      ],
-      "shortDescription": "",
-      "cover": {
-        "image": "https://booking.eandbhair.co.uk/service-covers/treatments.jpg",
-        "alt": "Scalp treatment for textured hair"
-      },
-      "basePrice": 40,
-      "priceType": "from",
-      "priceMax": null,
-      "durationMinutes": 45,
-      "isAddOn": false,
-      "family": null,
-      "optionLabel": null,
-      "categories": [
-        "treatments"
-      ],
-      "tags": [],
-      "optionGroups": [
-        {
-          "slug": "size",
-          "name": "Size",
-          "helpText": "How large the finished style is.",
-          "values": [
-            {
-              "slug": "small",
-              "label": "Small",
-              "priceDelta": 0,
-              "durationDelta": 0
-            },
-            {
-              "slug": "medium",
-              "label": "Medium",
-              "priceDelta": 20,
-              "durationDelta": 30
-            },
-            {
-              "slug": "large",
-              "label": "Large",
-              "priceDelta": 45,
-              "durationDelta": 60
-            }
-          ]
-        },
-        {
-          "slug": "length",
-          "name": "Length",
-          "helpText": "How long you want the finished style.",
-          "values": [
-            {
-              "slug": "shoulder",
-              "label": "Shoulder",
-              "priceDelta": 0,
-              "durationDelta": 0
-            },
-            {
-              "slug": "mid-back",
-              "label": "Mid-back",
-              "priceDelta": 15,
-              "durationDelta": 20
-            },
-            {
-              "slug": "waist",
-              "label": "Waist",
-              "priceDelta": 35,
-              "durationDelta": 45
-            }
-          ]
-        }
-      ],
-      "addons": [
-        {
-          "slug": "wash",
-          "name": "Wash",
-          "description": "Cleansing wash before your style.",
-          "priceDelta": 10,
-          "durationDelta": 15
-        },
-        {
-          "slug": "blow-dry",
-          "name": "Blow dry",
-          "description": "Blow dry and prep.",
-          "priceDelta": 15,
-          "durationDelta": 20
-        },
-        {
-          "slug": "take-down",
-          "name": "Take down",
-          "description": "Removal of an existing protective style.",
-          "priceDelta": 25,
-          "durationDelta": 45
-        },
-        {
-          "slug": "hair-included",
-          "name": "Hair included",
-          "description": "Hair provided by the salon.",
-          "priceDelta": 30,
-          "durationDelta": 0
-        },
-        {
-          "slug": "extra-length",
-          "name": "Extra length",
-          "description": "Additional hair length.",
-          "priceDelta": 25,
-          "durationDelta": 15
-        },
-        {
-          "slug": "braid-accessories",
-          "name": "Braid accessories",
-          "description": "Beads, cuffs and finishing accessories.",
-          "priceDelta": 5,
-          "durationDelta": 10
-        }
-      ]
-    },
-    {
       "slug": "hair-treatment",
+      "bookableHere": true,
       "name": "Hair Treatment",
       "category": "treatments",
       "categoryName": "Hair Care & Finishing",
@@ -3884,494 +3109,6 @@
       "tags": [],
       "optionGroups": [],
       "addons": []
-    },
-    {
-      "slug": "wash-condition",
-      "name": "Wash & Condition",
-      "category": "add-ons",
-      "categoryName": "Add-ons",
-      "description": "A cleansing, conditioning preparation service before your chosen style.",
-      "whatsIncluded": [
-        "Cleanse",
-        "Condition",
-        "Detangle"
-      ],
-      "shortDescription": "",
-      "cover": {
-        "image": "https://booking.eandbhair.co.uk/service-covers/treatments.jpg",
-        "alt": "Braid-care accessories and add-ons"
-      },
-      "basePrice": 10,
-      "priceType": "from",
-      "priceMax": null,
-      "durationMinutes": 30,
-      "isAddOn": true,
-      "family": null,
-      "optionLabel": null,
-      "categories": [
-        "add-ons"
-      ],
-      "tags": [],
-      "optionGroups": [
-        {
-          "slug": "size",
-          "name": "Size",
-          "helpText": "How large the finished style is.",
-          "values": [
-            {
-              "slug": "small",
-              "label": "Small",
-              "priceDelta": 0,
-              "durationDelta": 0
-            },
-            {
-              "slug": "medium",
-              "label": "Medium",
-              "priceDelta": 20,
-              "durationDelta": 30
-            },
-            {
-              "slug": "large",
-              "label": "Large",
-              "priceDelta": 45,
-              "durationDelta": 60
-            }
-          ]
-        },
-        {
-          "slug": "length",
-          "name": "Length",
-          "helpText": "How long you want the finished style.",
-          "values": [
-            {
-              "slug": "shoulder",
-              "label": "Shoulder",
-              "priceDelta": 0,
-              "durationDelta": 0
-            },
-            {
-              "slug": "mid-back",
-              "label": "Mid-back",
-              "priceDelta": 15,
-              "durationDelta": 20
-            },
-            {
-              "slug": "waist",
-              "label": "Waist",
-              "priceDelta": 35,
-              "durationDelta": 45
-            }
-          ]
-        }
-      ],
-      "addons": [
-        {
-          "slug": "wash",
-          "name": "Wash",
-          "description": "Cleansing wash before your style.",
-          "priceDelta": 10,
-          "durationDelta": 15
-        },
-        {
-          "slug": "blow-dry",
-          "name": "Blow dry",
-          "description": "Blow dry and prep.",
-          "priceDelta": 15,
-          "durationDelta": 20
-        },
-        {
-          "slug": "take-down",
-          "name": "Take down",
-          "description": "Removal of an existing protective style.",
-          "priceDelta": 25,
-          "durationDelta": 45
-        },
-        {
-          "slug": "hair-included",
-          "name": "Hair included",
-          "description": "Hair provided by the salon.",
-          "priceDelta": 30,
-          "durationDelta": 0
-        },
-        {
-          "slug": "extra-length",
-          "name": "Extra length",
-          "description": "Additional hair length.",
-          "priceDelta": 25,
-          "durationDelta": 15
-        },
-        {
-          "slug": "braid-accessories",
-          "name": "Braid accessories",
-          "description": "Beads, cuffs and finishing accessories.",
-          "priceDelta": 5,
-          "durationDelta": 10
-        }
-      ]
-    },
-    {
-      "slug": "braid-take-down",
-      "name": "Braid Take-down",
-      "category": "add-ons",
-      "categoryName": "Add-ons",
-      "description": "Careful removal of an existing protective style with gentle detangling.",
-      "whatsIncluded": [
-        "Safe removal",
-        "Detangle",
-        "Hair assessment"
-      ],
-      "shortDescription": "",
-      "cover": {
-        "image": "https://booking.eandbhair.co.uk/service-covers/addons.jpg",
-        "alt": "Braid-care accessories and add-ons"
-      },
-      "basePrice": 25,
-      "priceType": "from",
-      "priceMax": null,
-      "durationMinutes": 45,
-      "isAddOn": true,
-      "family": null,
-      "optionLabel": null,
-      "categories": [
-        "add-ons"
-      ],
-      "tags": [],
-      "optionGroups": [
-        {
-          "slug": "size",
-          "name": "Size",
-          "helpText": "How large the finished style is.",
-          "values": [
-            {
-              "slug": "small",
-              "label": "Small",
-              "priceDelta": 0,
-              "durationDelta": 0
-            },
-            {
-              "slug": "medium",
-              "label": "Medium",
-              "priceDelta": 20,
-              "durationDelta": 30
-            },
-            {
-              "slug": "large",
-              "label": "Large",
-              "priceDelta": 45,
-              "durationDelta": 60
-            }
-          ]
-        },
-        {
-          "slug": "length",
-          "name": "Length",
-          "helpText": "How long you want the finished style.",
-          "values": [
-            {
-              "slug": "shoulder",
-              "label": "Shoulder",
-              "priceDelta": 0,
-              "durationDelta": 0
-            },
-            {
-              "slug": "mid-back",
-              "label": "Mid-back",
-              "priceDelta": 15,
-              "durationDelta": 20
-            },
-            {
-              "slug": "waist",
-              "label": "Waist",
-              "priceDelta": 35,
-              "durationDelta": 45
-            }
-          ]
-        }
-      ],
-      "addons": [
-        {
-          "slug": "wash",
-          "name": "Wash",
-          "description": "Cleansing wash before your style.",
-          "priceDelta": 10,
-          "durationDelta": 15
-        },
-        {
-          "slug": "blow-dry",
-          "name": "Blow dry",
-          "description": "Blow dry and prep.",
-          "priceDelta": 15,
-          "durationDelta": 20
-        },
-        {
-          "slug": "take-down",
-          "name": "Take down",
-          "description": "Removal of an existing protective style.",
-          "priceDelta": 25,
-          "durationDelta": 45
-        },
-        {
-          "slug": "hair-included",
-          "name": "Hair included",
-          "description": "Hair provided by the salon.",
-          "priceDelta": 30,
-          "durationDelta": 0
-        },
-        {
-          "slug": "extra-length",
-          "name": "Extra length",
-          "description": "Additional hair length.",
-          "priceDelta": 25,
-          "durationDelta": 15
-        },
-        {
-          "slug": "braid-accessories",
-          "name": "Braid accessories",
-          "description": "Beads, cuffs and finishing accessories.",
-          "priceDelta": 5,
-          "durationDelta": 10
-        }
-      ]
-    },
-    {
-      "slug": "dentagling",
-      "name": "Detangling",
-      "category": "add-ons",
-      "categoryName": "Add-ons",
-      "description": "It starts from £15.00 and it entirely depends on the condition of the hair and we will decide with accuracy how much it will cost upon your arrival.",
-      "whatsIncluded": [],
-      "shortDescription": "",
-      "cover": {
-        "image": "https://booking.eandbhair.co.uk/service-covers/addons.jpg",
-        "alt": "Detangling"
-      },
-      "basePrice": 15,
-      "priceType": "from",
-      "priceMax": null,
-      "durationMinutes": 30,
-      "isAddOn": false,
-      "family": null,
-      "optionLabel": null,
-      "categories": [
-        "add-ons"
-      ],
-      "tags": [],
-      "optionGroups": [
-        {
-          "slug": "size",
-          "name": "Size",
-          "helpText": "How large the finished style is.",
-          "values": [
-            {
-              "slug": "small",
-              "label": "Small",
-              "priceDelta": 0,
-              "durationDelta": 0
-            },
-            {
-              "slug": "medium",
-              "label": "Medium",
-              "priceDelta": 20,
-              "durationDelta": 30
-            },
-            {
-              "slug": "large",
-              "label": "Large",
-              "priceDelta": 45,
-              "durationDelta": 60
-            }
-          ]
-        },
-        {
-          "slug": "length",
-          "name": "Length",
-          "helpText": "How long you want the finished style.",
-          "values": [
-            {
-              "slug": "shoulder",
-              "label": "Shoulder",
-              "priceDelta": 0,
-              "durationDelta": 0
-            },
-            {
-              "slug": "mid-back",
-              "label": "Mid-back",
-              "priceDelta": 15,
-              "durationDelta": 20
-            },
-            {
-              "slug": "waist",
-              "label": "Waist",
-              "priceDelta": 35,
-              "durationDelta": 45
-            }
-          ]
-        }
-      ],
-      "addons": [
-        {
-          "slug": "wash",
-          "name": "Wash",
-          "description": "Cleansing wash before your style.",
-          "priceDelta": 10,
-          "durationDelta": 15
-        },
-        {
-          "slug": "blow-dry",
-          "name": "Blow dry",
-          "description": "Blow dry and prep.",
-          "priceDelta": 15,
-          "durationDelta": 20
-        },
-        {
-          "slug": "take-down",
-          "name": "Take down",
-          "description": "Removal of an existing protective style.",
-          "priceDelta": 25,
-          "durationDelta": 45
-        },
-        {
-          "slug": "hair-included",
-          "name": "Hair included",
-          "description": "Hair provided by the salon.",
-          "priceDelta": 30,
-          "durationDelta": 0
-        },
-        {
-          "slug": "extra-length",
-          "name": "Extra length",
-          "description": "Additional hair length.",
-          "priceDelta": 25,
-          "durationDelta": 15
-        },
-        {
-          "slug": "braid-accessories",
-          "name": "Braid accessories",
-          "description": "Beads, cuffs and finishing accessories.",
-          "priceDelta": 5,
-          "durationDelta": 10
-        }
-      ]
-    },
-    {
-      "slug": "steam-hair-treatment",
-      "name": "Steam Hair Treatment",
-      "category": "add-ons",
-      "categoryName": "Add-ons",
-      "description": "",
-      "whatsIncluded": [],
-      "shortDescription": "",
-      "cover": {
-        "image": "https://booking.eandbhair.co.uk/service-covers/addons.jpg",
-        "alt": "Steam Hair Treatment"
-      },
-      "basePrice": 15,
-      "priceType": "from",
-      "priceMax": null,
-      "durationMinutes": 30,
-      "isAddOn": false,
-      "family": null,
-      "optionLabel": null,
-      "categories": [
-        "add-ons"
-      ],
-      "tags": [],
-      "optionGroups": [
-        {
-          "slug": "size",
-          "name": "Size",
-          "helpText": "How large the finished style is.",
-          "values": [
-            {
-              "slug": "small",
-              "label": "Small",
-              "priceDelta": 0,
-              "durationDelta": 0
-            },
-            {
-              "slug": "medium",
-              "label": "Medium",
-              "priceDelta": 20,
-              "durationDelta": 30
-            },
-            {
-              "slug": "large",
-              "label": "Large",
-              "priceDelta": 45,
-              "durationDelta": 60
-            }
-          ]
-        },
-        {
-          "slug": "length",
-          "name": "Length",
-          "helpText": "How long you want the finished style.",
-          "values": [
-            {
-              "slug": "shoulder",
-              "label": "Shoulder",
-              "priceDelta": 0,
-              "durationDelta": 0
-            },
-            {
-              "slug": "mid-back",
-              "label": "Mid-back",
-              "priceDelta": 15,
-              "durationDelta": 20
-            },
-            {
-              "slug": "waist",
-              "label": "Waist",
-              "priceDelta": 35,
-              "durationDelta": 45
-            }
-          ]
-        }
-      ],
-      "addons": [
-        {
-          "slug": "wash",
-          "name": "Wash",
-          "description": "Cleansing wash before your style.",
-          "priceDelta": 10,
-          "durationDelta": 15
-        },
-        {
-          "slug": "blow-dry",
-          "name": "Blow dry",
-          "description": "Blow dry and prep.",
-          "priceDelta": 15,
-          "durationDelta": 20
-        },
-        {
-          "slug": "take-down",
-          "name": "Take down",
-          "description": "Removal of an existing protective style.",
-          "priceDelta": 25,
-          "durationDelta": 45
-        },
-        {
-          "slug": "hair-included",
-          "name": "Hair included",
-          "description": "Hair provided by the salon.",
-          "priceDelta": 30,
-          "durationDelta": 0
-        },
-        {
-          "slug": "extra-length",
-          "name": "Extra length",
-          "description": "Additional hair length.",
-          "priceDelta": 25,
-          "durationDelta": 15
-        },
-        {
-          "slug": "braid-accessories",
-          "name": "Braid accessories",
-          "description": "Beads, cuffs and finishing accessories.",
-          "priceDelta": 5,
-          "durationDelta": 10
-        }
-      ]
     }
   ],
   "popular": [

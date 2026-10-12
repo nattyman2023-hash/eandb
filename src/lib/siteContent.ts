@@ -78,7 +78,7 @@ export const BOROUGHS: Borough[] = [
     faqs: [
       { q: "Where is the salon?", a: `We're at ${where}.` },
       bookingFaq,
-      { q: "What are your opening hours?", a: "Available times are shown when you book online. For anything else, call or message us." },
+      { q: "What are your opening hours?", a: "Monday 9 am–8 pm, Tuesday to Saturday 10 am–8 pm and Sunday 10:30 am–6 pm. Live times are shown when you book online." },
     ],
   },
   {

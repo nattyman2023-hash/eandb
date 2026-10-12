@@ -79,6 +79,19 @@ function cover(value, fallbackAlt) {
 
 // Only fields the public marketing site needs. Deposits, buffers, internal ids,
 // timestamps and anything staff-related are deliberately dropped.
+const DAY_KEYS = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
+const CLOCK = /^([01]\d|2[0-3]):[0-5]\d$/;
+function openingHours(raw) {
+  if (!raw || typeof raw !== 'object') return null;
+  const out = {};
+  for (const day of DAY_KEYS) {
+    const v = raw[day];
+    out[day] = v && CLOCK.test(String(v.open || '').slice(0, 5)) && CLOCK.test(String(v.close || '').slice(0, 5))
+      ? { open: String(v.open).slice(0, 5), close: String(v.close).slice(0, 5) }
+      : null;
+  }
+  return DAY_KEYS.some((day) => out[day]) ? out : null;
+}
 function sanitiseCatalogue(raw) {
   if (!raw || typeof raw !== 'object' || !Array.isArray(raw.services)) {
     throw new Error('WubSync catalogue response is missing services');
@@ -88,10 +101,13 @@ function sanitiseCatalogue(raw) {
   }
 
   const services = raw.services
-    .filter((service) => service && service.active !== false && service.bookable !== false)
+    // Both branches offer the same menu: every active service is listed, even one
+    // this branch cannot staff yet (WubSync offers the other branch for it).
+    .filter((service) => service && service.active !== false)
     .filter((service) => SLUG_PATTERN.test(service.slug) && SLUG_PATTERN.test(service.category || ''))
     .map((service) => ({
       slug: service.slug,
+      bookableHere: service.bookable !== false,
       name: text(service.name, 200),
       category: service.category,
       categoryName: text(service.category_name, 200),
@@ -154,6 +170,9 @@ function sanitiseCatalogue(raw) {
       email: nullableText(business.general_email, 320),
       website: nullableText(business.website, 300),
     },
+    // The salon's authoritative weekly hours from WubSync (Business Settings →
+    // Opening hours); null when WubSync has none — never typed into this site.
+    openingHours: openingHours(raw.opening_hours),
     location: {
       addressLine1: nullableText(location.address_line1, 200),
       addressLine2: nullableText(location.address_line2, 200),

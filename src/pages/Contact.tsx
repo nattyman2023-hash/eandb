@@ -1,6 +1,8 @@
 import { Phone, MessageCircle, Mail, MapPin, CalendarCheck } from "lucide-react";
 import SEOHead from "@/components/SEOHead";
 import BookNow from "@/components/BookNow";
+import OpeningHours from "@/components/OpeningHours";
+import { OTHER_BRANCH } from "@/lib/booking";
 import { BUSINESS, whatsappLink } from "@/lib/siteContent";
 import { breadcrumbJsonLd, BUSINESS_ID } from "@/lib/seo";
 
@@ -71,7 +73,12 @@ const Contact = () => {
               <p className="text-muted-foreground mt-1">Choose your service, options, date and time online. Your price is confirmed before you book.</p>
             </div>
           </div>
+          <div>
+            <p className="eyebrow mb-2">Opening hours</p>
+            <OpeningHours />
+          </div>
           <BookNow size="lg" className="w-full sm:w-auto sm:self-start" />
+          <a href={OTHER_BRANCH.bookingUrl} className="text-sm underline underline-offset-4 hover:text-primary">Or book at our nearby {OTHER_BRANCH.name} branch — just a 1-minute walk away</a>
         </div>
       </section>
 
