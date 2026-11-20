@@ -40,7 +40,10 @@ const PublicLayout = ({ children }: { children: React.ReactNode }) => {
       <div className="hidden md:block border-b border-border">
         <div className="container flex items-center justify-between py-2 text-[11px] uppercase tracking-[0.22em] text-muted-foreground">
           <span>{BUSINESS.name} · {BUSINESS.address}</span>
-          <a href={BUSINESS.phoneHref} className="hover:text-foreground transition-colors">{BUSINESS.phone}</a>
+          <span className="flex items-center gap-4">
+            <a href={BUSINESS.phoneHref} className="hover:text-foreground transition-colors">{BUSINESS.phone}</a>
+            <a href={BUSINESS.landlineHref} className="hover:text-foreground transition-colors">{BUSINESS.landline}</a>
+          </span>
         </div>
       </div>
 
@@ -107,6 +110,7 @@ const PublicLayout = ({ children }: { children: React.ReactNode }) => {
             </div>
             <div className="flex flex-wrap justify-between gap-4 text-[11px] uppercase tracking-[0.22em] text-muted-foreground">
               <a href={BUSINESS.phoneHref}>{BUSINESS.phone}</a>
+              <a href={BUSINESS.landlineHref}>{BUSINESS.landline}</a>
               <a href={whatsappLink()} target="_blank" rel="noopener noreferrer">WhatsApp enquiries</a>
             </div>
           </nav>
@@ -158,6 +162,7 @@ const PublicLayout = ({ children }: { children: React.ReactNode }) => {
                 <div>{BUSINESS.streetAddress}</div>
                 <div>{BUSINESS.city} {BUSINESS.postcode}</div>
                 <div className="pt-2"><a href={BUSINESS.phoneHref} className="hover:text-primary">{BUSINESS.phone}</a></div>
+                <div><a href={BUSINESS.landlineHref} className="hover:text-primary">{BUSINESS.landline}</a></div>
                 <div><a href={`mailto:${BUSINESS.email}`} className="hover:text-primary break-all">{BUSINESS.email}</a></div>
                 <div><a href={BUSINESS.mapsUrl} target="_blank" rel="noopener noreferrer" className="hover:text-primary">Open in Google Maps</a></div>
                 <OpeningHours className="pt-3" />

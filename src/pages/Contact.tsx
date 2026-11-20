@@ -14,6 +14,7 @@ const Contact = () => {
     { href: `mailto:${BUSINESS.email}?subject=${encodeURIComponent("Enquiry for E & B Hair")}`, icon: Mail, title: "Email", detail: BUSINESS.email, action: "Write an email" },
     { href: whatsappLink(), icon: MessageCircle, title: "WhatsApp", detail: BUSINESS.phone, action: "Send a message", external: true },
     { href: BUSINESS.phoneHref, icon: Phone, title: "Phone", detail: BUSINESS.phone, action: "Call us" },
+    { href: BUSINESS.landlineHref, icon: Phone, title: "Landline", detail: BUSINESS.landline, action: "Call the salon" },
     { href: BUSINESS.mapsUrl, icon: MapPin, title: "Find the salon", detail: BUSINESS.address, action: "Directions", external: true },
   ];
 

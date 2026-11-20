@@ -175,6 +175,7 @@ const HomePage = () => {
               </p>
               <ul className="space-y-3 text-sm">
                 <li><a href={BUSINESS.phoneHref} className="inline-flex items-center gap-3 hover:text-primary"><Phone className="h-4 w-4 text-primary" aria-hidden="true" /> {BUSINESS.phone}</a></li>
+                <li><a href={BUSINESS.landlineHref} className="inline-flex items-center gap-3 hover:text-primary"><Phone className="h-4 w-4 text-primary" aria-hidden="true" /> {BUSINESS.landline}</a></li>
                 <li><a href={whatsappLink()} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-3 hover:text-primary"><MessageCircle className="h-4 w-4 text-primary" aria-hidden="true" /> WhatsApp a question</a></li>
                 <li><a href={`mailto:${BUSINESS.email}`} className="inline-flex items-center gap-3 hover:text-primary break-all"><Mail className="h-4 w-4 text-primary shrink-0" aria-hidden="true" /> {BUSINESS.email}</a></li>
               </ul>

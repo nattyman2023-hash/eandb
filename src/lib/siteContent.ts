@@ -15,17 +15,22 @@ const city = crm.location.city || "Manchester";
 const postcode = crm.location.postcode || "";
 
 // Address and email come from the E & B business/location records in WubSync. The
-// CRM has no phone number for E & B; the number below was confirmed by the owner as
-// E & B's own phone and WhatsApp number (it is not WUB's).
-const phoneDisplay = "07472 397993";
-const phoneE164 = "+447472397993";
+// CRM has no phone number for E & B; the numbers below were confirmed by the owner.
+// The mobile is the main phone and WhatsApp number; the landline is a secondary number.
+const phoneDisplay = "07423 482898";
+const phoneE164 = "+447423482898";
+const landlineDisplay = "0161 399 2419";
+const landlineE164 = "+441613992419";
 
 export const BUSINESS = {
   name: "E & B Hair",
   phone: phoneDisplay,
   phoneE164,
   phoneHref: `tel:${phoneE164}`,
-  whatsappNumber: "447472397993",
+  landline: landlineDisplay,
+  landlineE164,
+  landlineHref: `tel:${landlineE164}`,
+  whatsappNumber: "447423482898",
   email: crm.location.email || crm.business.email || "contact@eandbhair.co.uk",
   streetAddress,
   city,
